@@ -17,19 +17,26 @@ class UserReview extends Model
         'comment',
     ];
 
-    function user(){
+    protected $appends = ['posted_at_human'];
+
+    public  function user(){
         return $this->belongsTo(User::class);
     }
 
-    function location(){
+    public  function location(){
         return $this->belongsTo(Location::class);
     }
 
-    function likes(){
+    public  function likes(){
         return  $this->hasMany(Like::class);
     }
 
-    function images(){
+    public   function images(){
         return $this->hasMany(ReviewImage::class);
+    }
+
+    public function getPostedAtHumanAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 }

@@ -44,7 +44,9 @@ class LocationSeeder extends Seeder
         foreach ($locations as $location) {
             Location::factory()
             ->has(Amenity::factory())
-            ->has(UserReview::factory(4)->has(ReviewImage::factory(3))->count(3))
+            ->has(UserReview::factory(4)
+                ->has(ReviewImage::factory(3))->count(3)
+            )
             ->create($location);
         }
     }
