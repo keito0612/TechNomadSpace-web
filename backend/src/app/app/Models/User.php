@@ -47,11 +47,17 @@ class User extends Authenticatable
         ];
     }
 
-    function likes(){
+    public  function likes(){
         return $this->hasMany(Like::class);
     }
 
-    function review(){
+    public function reviews(){
         return $this->hasMany(UserReview::class);
+    }
+
+    public function likedReviews(){
+        return $this->hasMany(UserReview::class)->whereHas('likes', function($query) {
+            $query->where('user_id', '!=', $this->id);
+        });
     }
 }

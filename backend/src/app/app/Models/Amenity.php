@@ -19,7 +19,7 @@ class Amenity extends Model
         'wifi_speed_avg'
     ];
 
-    function location() {
+    public  function location() {
         return $this->belongsTo(Location::class);
     }
 }
