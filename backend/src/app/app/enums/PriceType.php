@@ -2,9 +2,9 @@
 
 namespace App\Enums;
 
-enum PriceType: string
+enum PriceType: int
 {
-    case TotallyFree = 'totally_free';
-    case DrinkOnly = 'drink_only';
-    case Paid = 'paid';
+    case TotallyFree = 0;
+    case DrinkOnly = 1;
+    case Paid = 2;
 }

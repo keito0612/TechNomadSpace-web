@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserEditRequest;
 use App\Models\User;
+use App\Services\FileService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +12,16 @@ use Illuminate\Support\Facades\DB;
 use League\Uri\Http;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class UserController extends Controller
 {
+    private FileService $fileService;
+
+    public function __construct(FileService $fileService)
+    {
+        $this->fileService = $fileService;
+    }
+
     private function userId(){
         return optional(Auth::guard('api')->user())->id;
     }
@@ -47,7 +57,8 @@ class UserController extends Controller
         ], Response::HTTP_OK);
     }
 
-    function profile(){
+    function profile()
+    {
         if(is_null($this->userId())){
             return response()->json(['error' => 'User not authenticated'], Response::HTTP_UNAUTHORIZED);
         }
@@ -77,14 +88,32 @@ class UserController extends Controller
         ], Response::HTTP_OK);
     }
 
-    function edit($id)
+    function edit(UserEditRequest $request)
     {
         DB::beginTransaction();
         try{
-            $user = User::find($id);
-            if(is_null($user)){
-                return response(['message' => 'User Not Found'],Response::HTTP_NOT_FOUND);
+            $user = User::find( $this->userId());
+            if (!$user) {
+                return response()->json(['error' => 'user not found'], 404);
             }
+            if ($request->hasFile('userImage')) {
+                if(!is_null($user->image_path)){
+                    if($this->fileService->exists($user->image_path)){
+                        $this->fileService->delete($user->image_path);
+                    }
+                }
+                $image = $request->file("userImage");
+                $extension = $image->getClientOriginalExtension();
+                // 英数字＋タイムスタンプのファイル名生成
+                $fileName = time() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
+                $directory = 'profileImage';
+                $path = $this->fileService->upload($image, $directory,$fileName);
+                $url  = $this->fileService->getUrl($path);
+                $user->image_path = $url;
+            }
+            $user->name = $request->name;
+            $user->comment = $request->comment;
+            $user->save();
             DB::commit();
         }catch(Exception $e){
             DB::rollBack();
@@ -94,11 +123,11 @@ class UserController extends Controller
         }
     }
 
-    function delete($id)
+    function delete()
     {
         DB::beginTransaction();
         try{
-            $user = User::find($id);
+            $user = User::find($this->userId());
             if(is_null($user)){
                 return response(['message' => 'User Not Found'],Response::HTTP_NOT_FOUND);
             }
