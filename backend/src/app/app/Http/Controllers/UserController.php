@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends Controller
 {
     private FileService $fileService;
+    private $reviewRelations = ['user', 'images', 'location', 'likes'];
 
     public function __construct(FileService $fileService)
     {
@@ -28,30 +29,13 @@ class UserController extends Controller
     function getUser($id)
     {
         $user = User::with([
-            'reviews' => function($query) {
-                $query->with([
-                    'user',
-                    'images',
-                    'location',
-                    'likes',
-                    'images',
-                ]);
-            },
-            'likedReviews' => function($query){
-                $query->with([
-                    'user',
-                    'images',
-                    'location',
-                    'likes',
-                    'images'
-                ]);
-            }
+            'reviews' => fn($query) => $query->with($this->reviewRelations),
+            'likedReviews' => fn($query) => $query->with($this->reviewRelations),
         ])->find($id);
 
         if(is_null($user)){
             return response(['message' => 'User Not Found'],Response::HTTP_NOT_FOUND);
         }
-
         return response()->json([
             'user' => $user
         ], Response::HTTP_OK);
@@ -63,24 +47,8 @@ class UserController extends Controller
             return response()->json(['error' => 'User not authenticated'], Response::HTTP_UNAUTHORIZED);
         }
         $user = User::with([
-            'reviews' => function($query) {
-                $query->with([
-                    'user',
-                    'images',
-                    'location',
-                    'likes',
-                    'images',
-                ]);
-            },
-            'likedReviews' => function($query){
-                $query->with([
-                    'user',
-                    'images',
-                    'location',
-                    'likes',
-                    'images'
-                ]);
-            }
+            'reviews' => fn($query) => $query->with($this->reviewRelations),
+            'likedReviews' => fn($query) => $query->with($this->reviewRelations),
         ])->find($this->userId());
 
         return response()->json([
