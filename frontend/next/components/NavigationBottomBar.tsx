@@ -55,7 +55,7 @@ const NavItem = ({ item, isActive }: { item: NavItemData; isActive: boolean }) =
 // --- Main Component ---
 
 const NAV_ITEMS: NavItemData[] = [
-    { label: "検索", href: "/home", icon: Search },
+    { label: "検索", href: "/", icon: Search },
     { label: "お気に入り", href: "/favorites", icon: Heart },
     { label: "プロフィール", href: "/profile", icon: User },
     { label: "設定", href: "/setting", icon: Settings },

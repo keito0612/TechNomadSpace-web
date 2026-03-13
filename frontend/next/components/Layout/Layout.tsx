@@ -15,7 +15,7 @@ const LayoutConteiner = ({ children, className }: { children: ReactNode, classNa
 const LayoutBody = ({ children }: { children: ReactNode }) => {
     return (
         <main className="flex flex-col items-start justify-center">
-            <div className="w-full pb-20 px-4">
+            <div className="w-full pb-16 lg:pb-0">
                 {children}
             </div>
             <NavigationBottomBar />
