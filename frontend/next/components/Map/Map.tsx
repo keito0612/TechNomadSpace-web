@@ -2,17 +2,22 @@
 
 import dynamic from "next/dynamic";
 import { LatLngExpression } from "leaflet";
+import { LocationData } from "@/types/location";
 
 interface MapProps {
   center?: LatLngExpression;
   zoom?: number;
   className?: string;
+  locations?: LocationData[];
+  onSheetOpenChange?: (isOpen: boolean) => void;
 }
 
 interface MapInnerProps {
   center: LatLngExpression;
   zoom: number;
   className: string;
+  locations: LocationData[];
+  onSheetOpenChange?: (isOpen: boolean) => void;
 }
 
 const MapInner = dynamic<MapInnerProps>(
@@ -29,10 +34,12 @@ const MapInner = dynamic<MapInnerProps>(
 
 const Map = ({
   center = [33.5902, 130.4017],
-  zoom = 13,
+  zoom = 17,
   className = "h-full w-full",
+  locations = [],
+  onSheetOpenChange,
 }: MapProps) => {
-  return <MapInner center={center} zoom={zoom} className={className} />;
+  return <MapInner center={center} zoom={zoom} className={className} locations={locations} onSheetOpenChange={onSheetOpenChange} />;
 };
 
 export default Map;

@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import NavigationBottomBar from "../NavigationBottomBar";
+import NavBar from "../Navbar";
 
 
 
