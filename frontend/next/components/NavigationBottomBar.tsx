@@ -6,8 +6,6 @@ import { Search, Heart, User, Settings, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-
-
 interface NavItemData {
     label: string;
     href: string;
@@ -15,7 +13,7 @@ interface NavItemData {
 }
 
 const NavContainer = ({ children }: { children: ReactNode }) => (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur-md lg:hidden">
+    <nav className="fixed  bottom-0 left-0 right-0 z-[1005] border-t border-border bg-background/95 backdrop-blur-md lg:hidden">
         {children}
     </nav>
 );
@@ -36,8 +34,8 @@ const NavItem = ({ item, isActive }: { item: NavItemData; isActive: boolean }) =
                 className={cn(
                     "flex flex-col items-center rounded-xl px-3 py-1 text-xs font-medium transition-all duration-200",
                     isActive
-                        ? "scale-105 bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground active:scale-95"
+                        ? "text-blue-800"
+                        : "text-muted-foreground hover:text-blue-800 active:scale-110"
                 )}
             >
                 <Icon
@@ -48,14 +46,14 @@ const NavItem = ({ item, isActive }: { item: NavItemData; isActive: boolean }) =
                 />
                 <span>{item.label}</span>
             </Link>
-        </li>
+        </li >
     );
 };
 
 // --- Main Component ---
 
 const NAV_ITEMS: NavItemData[] = [
-    { label: "検索", href: "/home", icon: Search },
+    { label: "検索", href: "/", icon: Search },
     { label: "お気に入り", href: "/favorites", icon: Heart },
     { label: "プロフィール", href: "/profile", icon: User },
     { label: "設定", href: "/setting", icon: Settings },
