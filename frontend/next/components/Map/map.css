@@ -13,3 +13,14 @@
   left: auto !important;
   right: 10px !important;
 }
+
+/* Attributionを非表示 */
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+/* カスタムマップピン */
+.custom-map-pin {
+  background: transparent;
+  border: none;
+}

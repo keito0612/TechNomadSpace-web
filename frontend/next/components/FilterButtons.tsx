@@ -4,18 +4,19 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Star, Coffee, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { PriceType } from '@/types/types';
 
-export type FilterType = 'free' | 'drink' | 'dropin' | null;
+
 
 interface FilterButtonsProps {
-    onFilterChange?: (filter: FilterType) => void;
+    onFilterChange?: (filter: PriceType | null) => void;
     className?: string;
 }
 
 export default function FilterButtons({ onFilterChange, className }: FilterButtonsProps) {
-    const [activeFilter, setActiveFilter] = useState<FilterType>(null);
+    const [activeFilter, setActiveFilter] = useState<PriceType | null>(null);
 
-    const handleFilterClick = (filter: FilterType) => {
+    const handleFilterClick = (filter: PriceType | null) => {
         const newFilter = activeFilter === filter ? null : filter;
         setActiveFilter(newFilter);
         onFilterChange?.(newFilter);

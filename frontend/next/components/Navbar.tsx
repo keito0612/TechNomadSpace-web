@@ -2,21 +2,13 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ResultType, User } from "@/types";
+
 
 import Modal from "./Modal";
 import { useRouter } from "next/navigation";
 
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
-import {
-    Sheet,
-    SheetTrigger,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-    SheetClose,
-} from "@/components/ui/sheet";
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -28,6 +20,7 @@ import ProfileImage from "./Profile/ProfileImage";
 import { AuthService } from "@/services/AuthService";
 import { UtilApi } from "@/lib/utilApi";
 import NotificationBell from "./NotificationBell";
+import { ResultType, User } from "@/types/types";
 
 interface NavBarProps {
     rightButton?: React.ReactNode;
@@ -50,6 +43,42 @@ const navigationBarTitles = [
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
 }
+
+const NavigationLink = ({ pathname, navigations }: { pathname: string, navigations: { name: string, href: string }[] }) => {
+    return (
+        <div className="hidden lg:ml-8 lg:block">
+            <div className="flex space-x-2">
+                {navigations.map((item) => {
+                    const isCurrent = pathname === item.href;
+                    return (
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            aria-current={isCurrent ? "page" : undefined}
+                            className={classNames(
+                                isCurrent
+                                    ? "bg-blue-800 text-white shadow-md"
+                                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+                                "rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200"
+                            )}
+                        >
+                            {item.name}
+                        </Link>
+                    );
+                })}
+            </div>
+        </div>
+    );
+}
+
+const Logo = () => {
+    return (
+        <div className="hidden lg:block">
+            <span className="text-white font-bold text-lg">TechNomadSpace</span>
+        </div>
+    );
+}
+
 
 function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBarProps) {
     const pathname = usePathname();
@@ -166,12 +195,7 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
                             <div className="flex items-center justify-between w-full relative">
                                 {/* 左側：ロゴまたは戻るボタン */}
                                 <div className="flex items-center min-w-[40px]">
-
-                                    {/* PCのみロゴ表示 */}
-                                    <div className="hidden lg:block">
-                                        <span className="text-white font-bold text-lg">TechNomadSpace</span>
-                                    </div>
-
+                                    <Logo />
                                     {/* モバイル・タブレットのみ戻るボタン表示 */}
                                     {onBack && (
                                         <button
@@ -200,36 +224,15 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
                                 </div>
 
                                 {/* PC用ナビゲーション */}
-                                <div className="hidden lg:ml-8 lg:block">
-                                    <div className="flex space-x-2">
-                                        {filteredNavigation.map((item) => {
-                                            const isCurrent = pathname === item.href;
-                                            return (
-                                                <Link
-                                                    key={item.name}
-                                                    href={item.href}
-                                                    aria-current={isCurrent ? "page" : undefined}
-                                                    className={classNames(
-                                                        isCurrent
-                                                            ? "bg-green-500 text-white shadow-md"
-                                                            : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
-                                                        "rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200"
-                                                    )}
-                                                >
-                                                    {item.name}
-                                                </Link>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
+                                <NavigationLink pathname={pathname} navigations={filteredNavigation} />
                             </div>
 
                             {/* 右側のユーザー情報（PCのみ） */}
                             <div className="hidden lg:flex absolute inset-y-0 right-0 items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
-                                <div className="flex flex-row items-center justify-center gap-2">
+                                <div className="flex flex-row items-center justify-center gap-3">
                                     <NotificationBell />
                                     <DropdownMenu>
-                                        <DropdownMenuTrigger className="relative flex rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 overflow-hidden transition-transform hover:scale-105">
+                                        <DropdownMenuTrigger className="relative flex rounded-xl text-sm  overflow-hidden transition-transform hover:scale-105">
                                             <ProfileImage
                                                 imageUrl={user?.image_path ?? null}
                                                 sizes={40}
@@ -265,39 +268,6 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
                         </div>
                     </div>
                 </div>
-
-                {/* モバイル・タブレット用メニュー（Sheet） */}
-                <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-                    <SheetTrigger className="lg:hidden fixed top-4 right-4 p-2 rounded-xl bg-green-600 hover:bg-green-700 transition-all duration-200 hidden">
-                        <Menu className="text-white w-6 h-6" />
-                    </SheetTrigger>
-                    <SheetContent side="left" className="bg-green-600 border-green-700">
-                        <SheetHeader>
-                            <SheetTitle className="text-white text-lg font-bold">メニュー</SheetTitle>
-                        </SheetHeader>
-                        <div className="px-3 py-2 space-y-1">
-                            {filteredNavigation.map((item) => {
-                                const isCurrent = pathname === item.href;
-                                return (
-                                    <SheetClose key={item.name}>
-                                        <Link
-                                            href={item.href}
-                                            aria-current={isCurrent ? "page" : undefined}
-                                            className={classNames(
-                                                isCurrent
-                                                    ? "bg-green-700 text-white"
-                                                    : "text-green-100 hover:bg-green-700 hover:text-white",
-                                                "block rounded-xl px-4 py-3 text-base font-medium transition-all duration-200"
-                                            )}
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    </SheetClose>
-                                );
-                            })}
-                        </div>
-                    </SheetContent>
-                </Sheet>
             </nav>
             {/* ログアウト確認用モーダル */}
             <Modal
