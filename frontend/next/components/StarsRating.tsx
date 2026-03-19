@@ -1,7 +1,10 @@
+import { cn } from "@/lib/utils";
+
 interface StarsRatingsProps {
     rating: number;
     size?: number;
     isScore?: boolean;
+    className?: string;
 }
 
 const StarIcon = ({ fillPercent, size, index }: { fillPercent: number; size: number; index: number }) => {
@@ -25,7 +28,7 @@ const StarIcon = ({ fillPercent, size, index }: { fillPercent: number; size: num
     );
 };
 
-const StarsRatings: React.FC<StarsRatingsProps> = ({ rating, size = 35, isScore = true }: StarsRatingsProps) => {
+const StarsRatings: React.FC<StarsRatingsProps> = ({ rating, size = 35, isScore = true, className = "" }: StarsRatingsProps) => {
     const stars = [];
 
     for (let i = 1; i <= 5; i++) {
@@ -45,9 +48,9 @@ const StarsRatings: React.FC<StarsRatingsProps> = ({ rating, size = 35, isScore 
     }
 
     return (
-        <div className="flex justify-start items-center">
-            <div className="flex">{stars}</div>
-            {isScore && <span className="text-4xl pl-3 text-black">{rating} / 5</span>}
+        <div className={cn("flex justify-start items-center", className)}>
+            <div className="flex gap-2">{stars}</div>
+            {isScore && <span className="text-2xl pl-3 text-white">{rating} / 5</span>}
         </div>
     );
 };

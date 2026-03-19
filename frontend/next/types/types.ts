@@ -1,6 +1,5 @@
 export type ResultType = "Normal" | "Success" | "Error" | "Warning";
 export type MenuAction = "edit" | "delete";
-export type RatingProperty = 'safety' | 'public_transportation' | 'child_rearing' | 'city_policies' | 'livability' | 'average_rating';
 export const NotificationType = {
     POST: "post",
     LIKE: "like",
@@ -9,6 +8,8 @@ export const NotificationType = {
 
 export type NotificationType =
     (typeof NotificationType)[keyof typeof NotificationType];
+
+export type PriceType = 'free' | 'drink' | 'dropin';
 
 export interface Profile {
     id: number;
@@ -21,6 +22,16 @@ export interface Profile {
     reviews: Review[];
     liked_reviews: Review[];
     likes: unknown[];
+}
+
+export interface Amenity {
+    locationId: number;
+    hasWifi: boolean;
+    hasPower: boolean;
+    hasMonitor: boolean;
+    hasPrivateBooth: boolean;
+    hasFreeDrink: boolean;
+    wifiSpeedAvg: number;
 }
 
 export interface UserSetting {
@@ -81,8 +92,6 @@ export interface Review {
     prefecture_id: number;
     good_comment: string;
     bad_comment: string;
-    created_at: string;
-    updated_at: string;
     city: City;
     posted_at_human: string;
     prefecture: Prefecture;
@@ -90,8 +99,8 @@ export interface Review {
     photos: Photo[];
     likes: unknown[];
     user: User;
-    is_liked: boolean;
-    likes_count: number;
+    created_at: string;
+    updated_at: string;
 };
 
 export interface Notification {

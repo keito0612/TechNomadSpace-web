@@ -8,18 +8,22 @@ import L from "leaflet";
 import "./map.css";
 import LocationDetailSheet from "./LocationDetailSheet";
 import { LocationData } from "@/types/location";
+import { renderToString } from "react-dom/server";
+import MapPin from "./MapPin";
+import { PriceType } from "@/types/types";
 
-// Leafletのデフォルトアイコンの問題を修正
-const icon = L.icon({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
+// カスタムピンアイコンを作成する関数
+const createCustomIcon = (priceType: PriceType, isSelected: boolean = false) => {
+  const html = renderToString(<MapPin priceType={priceType} isSelected={isSelected} />);
+  const size: [number, number] = isSelected ? [48, 72] : [30, 56];
+  const anchor: [number, number] = isSelected ? [24, 72] : [15, 56];
+  return L.divIcon({
+    html: html,
+    className: "custom-map-pin",
+    iconSize: size,
+    iconAnchor: anchor,
+  });
+};
 
 interface MapInnerProps {
   center: LatLngExpression;
@@ -65,7 +69,7 @@ const MapInner = ({ center, zoom, className, locations, onSheetOpenChange }: Map
           <Marker
             key={location.id}
             position={location.position}
-            icon={icon}
+            icon={createCustomIcon(location.priceType, selectedLocation?.id === location.id)}
             eventHandlers={{
               click: () => handleMarkerClick(location),
             }}
