@@ -9,7 +9,7 @@ import { Amenity, LocationTabType } from '@/types/types';
 import InformationBody from '../Body/InformationBody';
 import TabsContainer from '../TabsContainer';
 import ReviewBody from '../Body/ReviewBody';
-import { ReviewImageBody } from '../Body/ReviewImageBody';
+import { PhotosBody } from '../Body/PhotosBody';
 
 interface LocationDetailSheetProps {
     location: LocationData | null;
@@ -79,7 +79,7 @@ export default function LocationDetailSheet({ location, isOpen, onClose }: Locat
             )}>
                 <SheetHeader name={location.name} onClose={onClose} />
                 <div className="flex-1 min-h-0 overflow-hidden">
-                    <TabsContainer defalutValue={'info'} tabs={tabs} bodys={[<InformationBody key='info' location={location} />, <ReviewBody key='review' reviews={location.reviews} />, <ReviewImageBody key='photo' reviewImages={[]} />]} />
+                    <TabsContainer defalutValue={'info'} tabs={tabs} bodys={[<InformationBody key='info' location={location} />, <ReviewBody key='review' reviews={location.reviews} />, <PhotosBody key='photo' photos={location.photos} />]} />
                 </div>
             </div>
         </>
