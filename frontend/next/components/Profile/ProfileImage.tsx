@@ -15,7 +15,7 @@ export function ProfileImage({ imageUrl, sizes = 100 }: ProfileImageProps) {
 
     return (
         <div
-            className="relative rounded-full overflow-hidden border-2 border-blue-700 shadow-md"
+            className="relative rounded-full overflow-hidden border-2 border-blue-700 shadow-md shrink-0"
             style={{ width: responsiveSize, height: responsiveSize }}
         >
             {isValidSrc ? (

@@ -83,6 +83,9 @@ class UserController extends Controller
             $user->comment = $request->comment;
             $user->save();
             DB::commit();
+            return response()->json([
+                'message' => "User Edit Success"
+            ],Response::HTTP_OK);
         }catch(Exception $e){
             DB::rollBack();
             return response()->json([

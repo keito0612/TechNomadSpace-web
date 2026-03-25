@@ -1,4 +1,4 @@
-import { Amenity, PriceType } from "./types";
+import { Amenity, OpeningHour, Photo, PriceType, Review } from "./types";
 
 export interface LocationData {
     id: number;
@@ -6,11 +6,13 @@ export interface LocationData {
     image: string;
     rating: number;
     address: string;
-    phone: string;
+    phoneNumber: string;
     price: string;
     priceType: PriceType;
-    closedDay: string;
-    hours: string;
+    photos: Photo[];
+    websiteUrl: string | null;
+    openingHours: OpeningHour[];
     amenity: Amenity;
+    reviews: Review[];
     position: [number, number];
 }

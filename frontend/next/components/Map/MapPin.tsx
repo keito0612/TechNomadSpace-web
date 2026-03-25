@@ -9,11 +9,11 @@ interface MapPinProps {
 
 const getIconColor = (priceType: PriceType) => {
     switch (priceType) {
-        case "free":
+        case 0: // TotallyFree
             return "text-yellow-400"
-        case "drink":
+        case 1: // DrinkOnly
             return "text-amber-600"
-        case "dropin":
+        case 2: // Paid
             return "text-[#01C4FF]"
     }
 }
@@ -22,11 +22,11 @@ const PinIcon = ({ priceType, className, isSelected }: { priceType: PriceType, c
     const iconColor = getIconColor(priceType);
     const size = isSelected ? "size-9" : "size-7";
     switch (priceType) {
-        case "free":
+        case 0: // TotallyFree
             return (<Star className={cn(size, iconColor, className)} />);
-        case "drink":
+        case 1: // DrinkOnly
             return (<Coffee className={cn(size, iconColor, className)} />);
-        case "dropin":
+        case 2: // Paid
             return (<Zap className={cn(size, iconColor, className)} />);
     }
 }

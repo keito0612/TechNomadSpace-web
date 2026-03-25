@@ -35,7 +35,7 @@ export class AuthService {
         }
     }
 
-    static async register<T>({ url, param, success, failure }: { url: string, param: T, success: (message: string, token: string) => void, failure: (error: string) => void }) {
+    static async register<T>({ url, param, success, failure }: { url: string, param: T, success: (message: string, token: string) => void, failure: (error: [string] | string) => void }) {
         try {
             const res = await fetch(url, {
                 method: 'POST',
@@ -50,7 +50,7 @@ export class AuthService {
             if (res.ok) {
                 success("新規登録が完了しました。", token);
             } else {
-                failure(UtilApi.selectedErrorMessage(["name", "email", "password"], data["errors"]));
+                failure(data["errors"]);
             }
         } catch (error) {
             failure('想定外のエラーが発生しました。');
