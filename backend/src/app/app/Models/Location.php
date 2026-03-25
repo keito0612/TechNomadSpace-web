@@ -17,7 +17,6 @@ class Location extends Model
         'lat',
         'lng',
         'price_type',
-        'display_opening_hours',
         'closed_days',
         'website_url',
         'phone_number'
@@ -25,7 +24,6 @@ class Location extends Model
 
     protected $casts = [
         'price_type' => PriceType::class,
-        'display_opening_hours' => 'array'
     ];
 
     public function amenity() {
@@ -34,5 +32,15 @@ class Location extends Model
 
     public function reviews() {
         return $this->hasMany(UserReview::class);
+    }
+
+    public function openingHours()
+    {
+        return $this->hasMany(OpeningHour::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ReviewImage::class);
     }
 }

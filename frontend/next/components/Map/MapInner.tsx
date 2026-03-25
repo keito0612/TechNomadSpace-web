@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -11,6 +11,9 @@ import { LocationData } from "@/types/location";
 import { renderToString } from "react-dom/server";
 import MapPin from "./MapPin";
 import { PriceType } from "@/types/types";
+
+// マップの操作を制御するコンポーネント
+
 
 // カスタムピンアイコンを作成する関数
 const createCustomIcon = (priceType: PriceType, isSelected: boolean = false) => {

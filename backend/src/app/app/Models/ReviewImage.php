@@ -12,12 +12,18 @@ class ReviewImage extends Model
     protected $table = "review_images";
     protected $fillable = [
         'user_review_id',
+        'location_id',
         'image_name',
         'image_path',
     ];
 
+    public function review()
+    {
+        return $this->belongsTo(UserReview::class);
+    }
 
-    public function review(){
-        return  $this->belongsTo(UserReview::class);
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 }

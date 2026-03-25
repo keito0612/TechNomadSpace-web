@@ -9,7 +9,10 @@ export const NotificationType = {
 export type NotificationType =
     (typeof NotificationType)[keyof typeof NotificationType];
 
-export type PriceType = 'free' | 'drink' | 'dropin';
+export type PriceType = 0 | 1 | 2; // 0: TotallyFree, 1: DrinkOnly, 2: Paid
+
+export type LocationTabType = 'info' | 'review' | 'photo';
+export type ProfileTabType = 'post' | 'like';
 
 export interface Profile {
     id: number;
@@ -34,6 +37,15 @@ export interface Amenity {
     wifiSpeedAvg: number;
 }
 
+export interface OpeningHour {
+    id: number;
+    locationId: number;
+    dayOfWeek: number; // 0=日, 1=月, ..., 6=土
+    openTime: string | null;
+    closeTime: string | null;
+    isClosed: boolean;
+}
+
 export interface UserSetting {
     email_notification: boolean;
 }
@@ -50,6 +62,14 @@ export interface City {
     prefecture_id: number;
 }
 
+export interface Photo {
+    id: number;
+    reviewId: number;
+    locationId: number;
+    name: string;
+    photoUrl: string;
+}
+
 
 export interface User {
     id: number;
@@ -63,20 +83,9 @@ export interface Prefecture {
     name: string;
 };
 
-export interface Rating {
-    id: number;
-    review_id: number;
-    safety: number;
-    public_transportation: number;
-    child_rearing: number;
-    city_policies: number;
-    livability: number;
-    average_rating: number;
-    created_at: string;
-    updated_at: string;
-};
 
-export interface Photo {
+
+export interface ReviewImage {
     id: number;
     review_id: number;
     review: Review | null;
@@ -88,15 +97,12 @@ export interface Photo {
 export interface Review {
     id: number;
     user_id: number;
-    city_id: number;
-    prefecture_id: number;
-    good_comment: string;
-    bad_comment: string;
-    city: City;
+    Notification_id: number;
+    comment: string;
     posted_at_human: string;
     prefecture: Prefecture;
-    rating: Rating;
-    photos: Photo[];
+    rating: number;
+    photos: ReviewImage[];
     likes: unknown[];
     user: User;
     created_at: string;

@@ -28,10 +28,10 @@ export default function FilterButtons({ onFilterChange, className }: FilterButto
             <Button
                 variant="outline"
                 size="sm"
-                onClick={() => handleFilterClick('free')}
+                onClick={() => handleFilterClick(0)}
                 className={cn(
                     'rounded-full border-yellow-500 px-4 py-2 font-medium transition-all shrink-0',
-                    activeFilter === 'free'
+                    activeFilter === 0
                         ?
                         'border-yellow-300  bg-[#FFFB08]/40 text-yellow-400 hover:bg-[#FFFB08]/40 hover:text-yellow-400 hover:border-yellow-300'
                         : 'border-white/20 bg-white/10 text-white hover:bg-[#FFFB08]/40 hover:text-yellow-400 hover:border-yellow-300'
@@ -45,10 +45,10 @@ export default function FilterButtons({ onFilterChange, className }: FilterButto
             <Button
                 variant="outline"
                 size="sm"
-                onClick={() => handleFilterClick('drink')}
+                onClick={() => handleFilterClick(1)}
                 className={cn(
                     'rounded-full border px-4 py-2 font-medium transition-all backdrop-blur-md shrink-0',
-                    activeFilter === 'drink'
+                    activeFilter === 1
                         ? 'border-amber-600/40 bg-amber-700/40 text-amber-600'
                         : 'border-white/20 bg-white/10 text-white hover:border-amber-600/40 hover:bg-amber-700/40'
                 )}
@@ -61,10 +61,10 @@ export default function FilterButtons({ onFilterChange, className }: FilterButto
             <Button
                 variant="outline"
                 size="sm"
-                onClick={() => handleFilterClick('dropin')}
+                onClick={() => handleFilterClick(2)}
                 className={cn(
                     'rounded-full border px-4 py-2 font-medium transition-all backdrop-blur-md shrink-0',
-                    activeFilter === 'dropin'
+                    activeFilter === 2
                         ? 'bg-[#01C4FF]/20 text-[#01C4FF] border-[#01C4FF] hover:bg-[#01C4FF]/20 hover:text-[#01C4FF] hover:border-[#01C4FF]'
                         : 'border-white/20 bg-white/10  hover:bg-white/20 hover:bg-[#01C4FF]/20 hover:text-[#01C4FF] hover:border-[#01C4FF]'
                 )}

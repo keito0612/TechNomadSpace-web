@@ -20,7 +20,7 @@ export default function MapClientWrapper({ locations }: MapClientWrapperProps) {
             <div className={cn(
                 "fixed top-[4.5rem] lg:top-[5.5rem] right-3 z-[1000] flex flex-col lg:flex-row items-start lg:items-center gap-2 lg:gap-3 transition-all duration-300",
                 // シートが開いている場合は右にずらす（PC版のみ）
-                isSheetOpen ? "left-3 lg:left-[calc(33.333%+1rem)]" : "left-3 lg:left-14"
+                isSheetOpen ? "left-3 lg:left-[calc(37.333%+7rem)]" : "left-3 lg:left-4"
             )}>
                 <SearchBar className="w-full lg:flex-1 lg:max-w-md" />
                 <div className="w-full lg:w-auto overflow-x-auto scrollbar-hide">
