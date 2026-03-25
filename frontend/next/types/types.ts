@@ -102,7 +102,7 @@ export interface Review {
     posted_at_human: string;
     prefecture: Prefecture;
     rating: number;
-    photos: ReviewImage[];
+    photos: Photo[];
     likes: unknown[];
     user: User;
     created_at: string;
