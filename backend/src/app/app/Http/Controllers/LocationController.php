@@ -16,7 +16,7 @@ class LocationController extends Controller
         $locations = Location::with([
             'amenity',
             'openingHours',
-            'images',
+            'images.review.user',
             'reviews' => function ($query) {
                 $query->with([
                     'images',
