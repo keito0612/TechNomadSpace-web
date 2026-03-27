@@ -10,16 +10,26 @@ import { ChevronDown, ChevronUp, Monitor, Wifi } from 'lucide-react';
 import StarsRatings from '../StarsRating';
 import Link from 'next/link';
 import { getAllHours } from '@/utils/openingHour';
+import ImageModal from '../Image/ImagesModal';
 
 interface InformationBodyProps {
     location: LocationData;
 }
 
 
-const ImageSection = ({ location }: { location: LocationData }) => {
+const ImageSection = ({
+    location,
+    onImageClick,
+}: {
+    location: LocationData;
+    onImageClick: () => void;
+}) => {
     const firstPhoto = location.photos[0];
     return (
-        <div className="relative h-48 w-full shrink-0">
+        <div
+            className="relative h-48 w-full shrink-0 cursor-pointer"
+            onClick={onImageClick}
+        >
             <Image
                 src={firstPhoto.photoUrl}
                 alt={firstPhoto.name}
@@ -35,10 +45,10 @@ const ImageSection = ({ location }: { location: LocationData }) => {
 
 const AmenityStatus = ({ amenity }: { amenity: Amenity }) => {
     return (
-        <div className="p-3 border-gray-700 flex gap-3 shrink-0">
+        <div className="lg:pt-5 p-3 border-gray-700 grid grid-cols-2 gap-3 shrink-0">
             <Button
                 variant="outline"
-                className="flex-1 rounded-xl border-blue-500 bg-blue-500/20 text-blue-400 hover:bg-blue-500/30"
+                className={cn("flex-1 rounded-xl", amenity.hasMonitor === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}
             >
                 <Monitor className="mr-2 h-4 w-4" />
                 モニター
@@ -47,13 +57,34 @@ const AmenityStatus = ({ amenity }: { amenity: Amenity }) => {
             {amenity.hasWifi === true && (
                 <Button
                     variant="outline"
-                    className="flex-1 rounded-xl border-blue-500 bg-blue-500/20 text-blue-400 hover:bg-blue-500/30"
+                    className={cn("flex-1 rounded-xl", amenity.hasWifi === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}
                 >
                     <Wifi className="mr-2 h-4 w-4" />
                     Wifi
                 </Button>
-            )}
-        </div>
+            )
+            }
+
+            <Button
+                variant="outline"
+                className={cn("flex-1 rounded-xl", amenity.hasFreeDrink === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}
+            >
+                <Monitor className="mr-2 h-4 w-4" />
+                モニター
+            </Button>
+
+            {
+                amenity.hasWifi === true && (
+                    <Button
+                        variant="outline"
+                        className={cn("flex-1 rounded-xl", amenity.hasPrivateBooth === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}
+                    >
+                        <Wifi className="mr-2 h-4 w-4" />
+                        Wifi
+                    </Button>
+                )
+            }
+        </div >
     );
 }
 
@@ -122,13 +153,26 @@ const LocationInformation = ({ location, className }: { location: LocationData, 
     );
 }
 export const InformationBody = (props: InformationBodyProps) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
-        <>
-            <ImageSection location={props.location} />
+        <div className='lg:pb-0 pb-24'>
+            <ImageSection
+                location={props.location}
+                onImageClick={() => setIsModalOpen(true)}
+            />
             <StarsRatings className='pl-3 pt-3' rating={props.location.rating} size={24} />
-            <LocationInformation location={props.location} className={'px-3 py-2 pb-11 lg:pb-0'} />
+            <LocationInformation location={props.location} className={'px-3 py-2'} />
             <AmenityStatus amenity={props.location.amenity} />
-        </>
+
+            <ImageModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                selectImageIndex={0}
+                title={props.location.name}
+                images={props.location.photos}
+            />
+        </div>
     )
 }
 

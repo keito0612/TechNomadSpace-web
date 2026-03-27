@@ -75,7 +75,7 @@ export default function LocationDetailSheet({ location, isOpen, onClose }: Locat
                 // モバイル: ボトムシート
                 "inset-x-0 bottom-0 h-[80vh] max-h-[80vh] rounded-t-3xl animate-in slide-in-from-bottom duration-300",
                 // PC: 左サイドパネル
-                "lg:inset-y-0 lg:left-0 lg:right-auto lg:top-16 lg:bottom-0 lg:w-5/12 lg:h-auto lg:max-h-none lg:rounded-none lg:rounded-r-2xl lg:animate-in lg:slide-in-from-left"
+                "lg:inset-y-0 lg:left-0 lg:right-auto lg:top-16 lg:bottom-0 lg:w-1/3 lg:h-auto lg:max-h-none lg:rounded-none lg:rounded-r-2xl lg:animate-in lg:slide-in-from-left"
             )}>
                 <SheetHeader name={location.name} onClose={onClose} />
                 <div className="flex-1 min-h-0 overflow-hidden">

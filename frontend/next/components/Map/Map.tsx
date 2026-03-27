@@ -33,8 +33,8 @@ const MapInner = dynamic<MapInnerProps>(
 );
 
 const Map = ({
-  center = [33.5902, 130.4017],
-  zoom = 17,
+  center = [35.6762, 139.6503], // 東京
+  zoom = 13,
   className = "h-full w-full",
   locations = [],
   onSheetOpenChange,

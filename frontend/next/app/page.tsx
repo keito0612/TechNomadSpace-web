@@ -14,7 +14,6 @@ async function getLocations(): Promise<LocationData[]> {
       return data.data as LocationData[];
     }
   } catch (error) {
-
     console.error('Failed to fetch locations:', error);
   }
 

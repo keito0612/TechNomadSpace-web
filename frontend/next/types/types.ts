@@ -66,6 +66,7 @@ export interface Photo {
     id: number;
     reviewId: number;
     locationId: number;
+    review: Review;
     name: string;
     photoUrl: string;
 }

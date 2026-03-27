@@ -59,7 +59,7 @@ const StarsRatings: React.FC<StarsRatingsProps> = ({ rating, size = 35, isScore 
     return (
         <div className={cn("flex justify-start items-center", className)}>
             <div className="flex gap-2">{stars}</div>
-            {isScore && <span className={cn("pl-3 text-white", fontSize(size))}>{rating} / 5</span>}
+            {isScore && <span className={cn("pl-3 text-white", fontSize(size))}>{rating.toFixed(1)} / 5</span>}
         </div>
     );
 };
