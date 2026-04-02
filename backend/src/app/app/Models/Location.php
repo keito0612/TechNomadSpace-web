@@ -43,4 +43,14 @@ class Location extends Model
     {
         return $this->hasMany(ReviewImage::class);
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(LocationFavorite::class);
+    }
+
+    public function isFavoritedBy($userId)
+    {
+        return $this->favorites()->where('user_id', $userId)->exists();
+    }
 }

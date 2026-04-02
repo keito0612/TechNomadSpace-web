@@ -14,6 +14,8 @@ class LocationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $userId = $request->user()?->id;
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -27,6 +29,7 @@ class LocationResource extends JsonResource
             'amenity' => new AmenityResource($this->amenity),
             'reviews' => ReviewResource::collection($this->reviews),
             'position' => [$this->lat, $this->lng],
+            'isFavorited' => $userId ? $this->isFavoritedBy($userId) : false,
         ];
     }
 }

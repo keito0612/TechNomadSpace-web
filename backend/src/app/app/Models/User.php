@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'provider',
+        'provider_id',
     ];
 
     /**
@@ -59,5 +61,10 @@ class User extends Authenticatable
         return $this->hasMany(UserReview::class)->whereHas('likes', function($query) {
             $query->where('user_id', '!=', $this->id);
         });
+    }
+
+    public function favoriteLocations()
+    {
+        return $this->belongsToMany(Location::class, 'location_favorites');
     }
 }

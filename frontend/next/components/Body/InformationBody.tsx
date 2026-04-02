@@ -1,16 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { ForwardRefExoticComponent, RefAttributes, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { LocationData } from '@/types/location';
 import Image from 'next/image';
 import { Amenity, OpeningHour } from '@/types/types';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp, Monitor, Wifi } from 'lucide-react';
+import { ChevronDown, ChevronUp, Coffee, DoorClosed, LucideProps, Monitor, Plug, Wifi } from 'lucide-react';
 import StarsRatings from '../StarsRating';
 import Link from 'next/link';
 import { getAllHours } from '@/utils/openingHour';
 import ImageModal from '../Image/ImagesModal';
+import FavoriteButton from '../FavoriteButton';
 
 interface InformationBodyProps {
     location: LocationData;
@@ -43,47 +44,24 @@ const ImageSection = ({
     );
 }
 
+const AmenityStatusConteiner = ({ hasStatus, name, icon }: { hasStatus: boolean, name: string, icon: React.ReactNode }) => {
+    return (
+        <div
+            className={cn("flex-1 rounded-xl inline-flex items-center justify-center h-8 gap-1.5 px-2.5 text-sm font-medium border", hasStatus === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}>
+            {icon}
+            {name}
+        </div>
+    );
+}
+
 const AmenityStatus = ({ amenity }: { amenity: Amenity }) => {
     return (
         <div className="lg:pt-5 p-3 border-gray-700 grid grid-cols-2 gap-3 shrink-0">
-            <Button
-                variant="outline"
-                className={cn("flex-1 rounded-xl", amenity.hasMonitor === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}
-            >
-                <Monitor className="mr-2 h-4 w-4" />
-                モニター
-            </Button>
-
-            {amenity.hasWifi === true && (
-                <Button
-                    variant="outline"
-                    className={cn("flex-1 rounded-xl", amenity.hasWifi === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}
-                >
-                    <Wifi className="mr-2 h-4 w-4" />
-                    Wifi
-                </Button>
-            )
-            }
-
-            <Button
-                variant="outline"
-                className={cn("flex-1 rounded-xl", amenity.hasFreeDrink === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}
-            >
-                <Monitor className="mr-2 h-4 w-4" />
-                モニター
-            </Button>
-
-            {
-                amenity.hasWifi === true && (
-                    <Button
-                        variant="outline"
-                        className={cn("flex-1 rounded-xl", amenity.hasPrivateBooth === true ? 'border-blue-500 bg-blue-500/20 text-blue-400' : 'border-gray-800 bg-gray-900 text-black')}
-                    >
-                        <Wifi className="mr-2 h-4 w-4" />
-                        Wifi
-                    </Button>
-                )
-            }
+            <AmenityStatusConteiner hasStatus={amenity.hasMonitor} name={'モニター'} icon={<Monitor className="mr-2 h-4 w-4" />} />
+            <AmenityStatusConteiner hasStatus={amenity.hasWifi} name={'Wifi'} icon={<Wifi className="mr-2 h-4 w-4" />} />
+            <AmenityStatusConteiner hasStatus={amenity.hasPrivateBooth} name={'個室ブース'} icon={<DoorClosed className="mr-2 h-4 w-4" />} />
+            <AmenityStatusConteiner hasStatus={amenity.hasPower} name={'電源'} icon={<Plug className="mr-2 h-4 w-4" />} />
+            <AmenityStatusConteiner hasStatus={amenity.hasFreeDrink} name={'フリードリンク'} icon={<Coffee className="mr-2 h-4 w-4" />} />
         </div >
     );
 }
@@ -161,7 +139,13 @@ export const InformationBody = (props: InformationBodyProps) => {
                 location={props.location}
                 onImageClick={() => setIsModalOpen(true)}
             />
-            <StarsRatings className='pl-3 pt-3' rating={props.location.rating} size={24} />
+            <div className="flex items-center justify-between px-3 pt-3">
+                <StarsRatings rating={props.location.rating} size={24} />
+                <FavoriteButton
+                    locationId={props.location.id}
+                    initialIsFavorited={props.location.isFavorited}
+                />
+            </div>
             <LocationInformation location={props.location} className={'px-3 py-2'} />
             <AmenityStatus amenity={props.location.amenity} />
 
