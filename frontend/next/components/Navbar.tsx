@@ -30,12 +30,16 @@ interface NavBarProps {
 
 const navigation = [
     { name: "検索", href: "/" },
+    { name: "ログイン", href: "/login" },
+    { name: "新規登録", href: "/register" },
     { name: "お気に入り", href: "/favorite" },
     { name: '設定', href: "/setting" }
 ];
 
 const navigationBarTitles = [
     { name: "検索", href: "/" },
+    { name: "ログイン", href: "/login" },
+    { name: "新規登録", href: "/register" },
     { name: "お気に入り", href: "/favorite" },
     { name: '設定', href: "/setting" }
 ];

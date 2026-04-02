@@ -7,7 +7,7 @@ const TOKEN_EXPIRY_DAYS = 7;
 
 export class AuthService {
 
-    static async login<T>({ url, param, success, validetionMessage, failure }: { url: string, param: T, success: (token: string) => void, validetionMessage: (message: string) => void, failure: (error: string) => void }) {
+    static async login<T>({ url, param, success, validetionError, failure }: { url: string, param: T, success: (token: string) => void, validetionError: (error: { key: string, value: string } | null) => void, failure: (error: string) => void }) {
         try {
             const res = await fetch(url, {
                 method: 'POST',
@@ -24,7 +24,7 @@ export class AuthService {
                 success(token);
             } else {
                 if (data.errors) {
-                    validetionMessage(UtilApi.selectedErrorMessage(['email', 'password'], data.errors));
+                    validetionError(UtilApi.selectedError(data.errors));
                 } else if (data.message) {
                     failure(data.message);
                 }
@@ -35,7 +35,7 @@ export class AuthService {
         }
     }
 
-    static async register<T>({ url, param, success, failure }: { url: string, param: T, success: (message: string, token: string) => void, failure: (error: [string] | string) => void }) {
+    static async register<T>({ url, param, success, validetionError, failure }: { url: string, param: T, success: (token: string) => void, validetionError: (error: { key: string, value: string } | null) => void, failure: (error: string) => void }) {
         try {
             const res = await fetch(url, {
                 method: 'POST',
@@ -48,9 +48,13 @@ export class AuthService {
             const data = await res.json();
             const token = data.token as string;
             if (res.ok) {
-                success("新規登録が完了しました。", token);
+                success(token);
             } else {
-                failure(data["errors"]);
+                if (data.errors) {
+                    validetionError(UtilApi.selectedError(data.errors));
+                } else if (data.message) {
+                    failure(data.message);
+                }
             }
         } catch (error) {
             failure('想定外のエラーが発生しました。');

@@ -14,6 +14,14 @@ export type PriceType = 0 | 1 | 2; // 0: TotallyFree, 1: DrinkOnly, 2: Paid
 export type LocationTabType = 'info' | 'review' | 'photo';
 export type ProfileTabType = 'post' | 'like';
 
+export type ProviderType = 'google' | 'twitter';
+
+
+export interface AuthForm {
+    email: string;
+    password: string;
+}
+
 export interface Profile {
     id: number;
     name: string;

@@ -350,8 +350,7 @@ export default function ImageModal({
 }: ImageModalProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(selectImageIndex ?? 0);
 
-    const currentIndex = selectImageIndex ?? selectedImageIndex;
-    const selectedImage = images[currentIndex];
+    const selectedImage = images[selectedImageIndex];
 
     if (!images.length) return null;
 
@@ -373,7 +372,7 @@ export default function ImageModal({
                 {/* PC用サムネイル */}
                 <DesktopThumbnails
                     images={images}
-                    selectedIndex={currentIndex}
+                    selectedIndex={selectedImageIndex}
                     onSelect={setSelectedImageIndex}
                 />
 

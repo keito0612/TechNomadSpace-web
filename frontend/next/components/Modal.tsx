@@ -49,8 +49,8 @@ export default function Modal({
                 );
             case 'Warning':
                 return (
-                    <div className="bg-amber-100 rounded-full flex items-center justify-center w-16 h-16">
-                        <AlertCircle className="w-10 h-10 text-amber-500" />
+                    <div className="rounded-full flex items-center justify-center">
+                        <AlertCircle className="w-16 h-16 text-yellow-400" />
                     </div>
                 );
             default:
@@ -61,15 +61,15 @@ export default function Modal({
     const getButtonVariant = () => {
         switch (type) {
             case 'Success':
-                return 'bg-green-500 hover:bg-green-600 text-white';
+                return 'bg-blue-700 hover:bg-blue-400 text-white';
             case 'Error':
                 return 'bg-red-500 hover:bg-red-400 text-white';
             case 'Warning':
-                return 'bg-red-600 hover:bg-red-500 text-white';
+                return 'bg-blue-700 hover:bg-blue-400 text-white';
             case 'Normal':
-                return 'bg-green-600 hover:bg-green-500 text-white';
+                return 'bg-blue-700 hover:bg-blue-400 text-white';
             default:
-                return 'bg-blue-500 hover:bg-blue-400 text-white';
+                return 'bg-blue-500 hover:bg-blue-400';
         }
     };
 
@@ -87,12 +87,12 @@ export default function Modal({
                 showCloseButton={false}
             >
                 <DialogHeader className="items-center">
-                    <div className="flex justify-center items-center mb-2">{getIcon()}</div>
-                    <DialogTitle className="text-lg sm:text-xl font-bold text-gray-900">
+                    <div className="flex justify-center items-center">{getIcon()}</div>
+                    <DialogTitle className="text-lg sm:text-xl font-bold text-white">
                         {title}
                     </DialogTitle>
                     {message && (
-                        <DialogDescription className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                        <DialogDescription className="text-sm sm:text-base text-white leading-relaxed">
                             {message}
                         </DialogDescription>
                     )}

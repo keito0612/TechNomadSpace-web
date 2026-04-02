@@ -15,4 +15,5 @@ export interface LocationData {
     amenity: Amenity;
     reviews: Review[];
     position: [number, number];
+    isFavorited: boolean;
 }
