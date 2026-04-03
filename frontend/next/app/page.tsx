@@ -3,7 +3,6 @@ import NavBar from "@/components/Navbar";
 import MapClientWrapper from "@/components/Map/MapClientWrapper";
 import { LocationData } from "@/types/location";
 
-// SSRでロケーションデータを取得
 async function getLocations(): Promise<LocationData[]> {
   try {
     const res = await fetch(`${process.env.API_URL}/api/locations`, {
@@ -22,7 +21,6 @@ async function getLocations(): Promise<LocationData[]> {
 
 export default async function Home() {
   const locations = await getLocations();
-  console.log(locations);
   return (
     <Layout className="relative">
       <NavBar />

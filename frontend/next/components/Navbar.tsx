@@ -83,6 +83,14 @@ const Logo = () => {
     );
 }
 
+const UserName = ({ name }: { name: string }) => {
+    return (
+        <p className="font-semibold text-gray-700 ml-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
+            {name}
+        </p>
+    );
+}
+
 
 function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBarProps) {
     const pathname = usePathname();
@@ -167,7 +175,6 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
             setModalTitle('ログアウトに失敗しました。');
             setModalMessage('もう一度お試しください。問題が続く場合は、ページを再読み込みしてください。');
             setIsConfirmModalOpen(true);
-            console.error("Failed to fetch user:", error);
         }
     };
 
@@ -234,6 +241,9 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
                             {/* 右側のユーザー情報（PCのみ） */}
                             <div className="hidden lg:flex absolute inset-y-0 right-0 items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
                                 <div className="flex flex-row items-center justify-center gap-3">
+                                    {user?.name && (
+                                        <UserName name={user.name} />
+                                    )}
                                     <NotificationBell />
                                     <DropdownMenu>
                                         <DropdownMenuTrigger className="relative flex rounded-xl text-sm  overflow-hidden transition-transform hover:scale-105">
@@ -262,11 +272,6 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
                                             )}
                                         </DropdownMenuContent>
                                     </DropdownMenu>
-                                    {user?.name && (
-                                        <p className="font-semibold text-gray-700 ml-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
-                                            {user.name}
-                                        </p>
-                                    )}
                                 </div>
                             </div>
                         </div>

@@ -15,7 +15,7 @@ export type LocationTabType = 'info' | 'review' | 'photo';
 export type ProfileTabType = 'post' | 'like';
 
 export type ProviderType = 'google' | 'twitter';
-
+export type UserType = 'user' | 'admin';
 
 export interface AuthForm {
     email: string;
@@ -83,6 +83,7 @@ export interface Photo {
 export interface User {
     id: number;
     name: string;
+    type: UserType;
     image_path: string | null;
     commment: string;
 }

@@ -28,10 +28,14 @@ class UserController extends Controller
     }
     function getUser($id)
     {
-        $user = User::with([
-            'reviews' => fn($query) => $query->with($this->reviewRelations),
-            'likedReviews' => fn($query) => $query->with($this->reviewRelations),
-        ])->find($id);
+        if(is_null($id)){
+            $user = User::find($this->userId());
+        }else{
+            $user = User::with([
+                'reviews' => fn($query) => $query->with($this->reviewRelations),
+                'likedReviews' => fn($query) => $query->with($this->reviewRelations),
+            ])->find($id);
+        }
 
         if(is_null($user)){
             return response(['message' => 'User Not Found'],Response::HTTP_NOT_FOUND);

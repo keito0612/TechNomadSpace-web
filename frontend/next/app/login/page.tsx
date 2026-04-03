@@ -38,6 +38,9 @@ export default function LoginPage() {
 
     const onClose = () => {
         setIsModal(false);
+        if (modalType === 'Success') {
+            router.back();
+        }
     }
 
     const onSubmit = async (dataSet: AuthForm) => {
@@ -46,8 +49,11 @@ export default function LoginPage() {
             url: `${process.env.NEXT_PUBLIC_API_URL}/api/login`,
             param: dataSet,
             success: (token) => {
+                setIsLoading(false);
                 AuthService.setSesstion(token);
-                router.push('/');
+                setModalType('Success');
+                setTitleModal('ログインが完了しました。');
+                setIsModal(true);
             },
             validetionError: (error: { key: string, value: string } | null) => {
                 if (error !== null) {
@@ -56,12 +62,13 @@ export default function LoginPage() {
                         message: error.value,
                     });
                 }
+                setIsLoading(false);
             },
             failure: (errorMessage) => {
-                setError("root.serverError", {
-                    type: "manual",
-                    message: errorMessage,
-                });
+                setModalType('Error');
+                setTitleModal('エラーが発生しました。');
+                setMessageModal(errorMessage);
+                setIsModal(true);
                 setIsLoading(false);
             },
         });
@@ -76,7 +83,7 @@ export default function LoginPage() {
                 </h1>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    <TextField type='text' className='space-y-2' title='メールアドレス' placeholder='' errorMessage={errors.email?.message} register={register("email", {
+                    <TextField id='email' type='text' className='space-y-2' title='メールアドレス' placeholder='' errorMessage={errors.email?.message} register={register("email", {
                         required: "メールアドレスは必須です",
                         pattern: {
                             value: /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/,
@@ -84,7 +91,7 @@ export default function LoginPage() {
                         },
                     })} />
 
-                    <TextField type='password' className='space-y-2' placeholder='８文字以上１２文字以内' title='パスワード' register={
+                    <TextField id='password' type='password' className='space-y-2' placeholder='８文字以上１２文字以内' title='パスワード' register={
                         register("password", {
                             required: "パスワードは必須です",
                             minLength: {

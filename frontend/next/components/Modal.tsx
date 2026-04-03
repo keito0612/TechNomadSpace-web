@@ -37,7 +37,7 @@ export default function Modal({
         switch (type) {
             case 'Success':
                 return (
-                    <div className="bg-green-100 rounded-full flex items-center justify-center w-16 h-16">
+                    <div className="border-green-600 border-2 rounded-full flex items-center justify-center w-16 h-16">
                         <CheckCircle className="w-10 h-10 text-green-600" />
                     </div>
                 );

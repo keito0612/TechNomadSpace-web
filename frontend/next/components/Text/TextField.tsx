@@ -5,6 +5,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import { Input } from "../ui/input";
 
 interface TextFieldProps {
+    id: string;
     title?: string;
     type: HTMLInputTypeAttribute;
     className?: string;
@@ -14,11 +15,11 @@ interface TextFieldProps {
 }
 
 
-const TitleLavel = ({ title }: { title: string }) => {
+const TitleLavel = ({ id, title }: { id: string, title: string }) => {
     return (
-        <div className="w-16 h-8 mb-2 sm:w-20 sm:h-10 md:w-24 md:h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-semibold text-xs sm:text-sm md:text-base shadow-sm">
+        <label id={id} className="w-full mb-2 text-blue-600 font-semibold text-sm sm:text-sm md:text-base">
             {title}
-        </div>
+        </label>
     );
 }
 
@@ -29,6 +30,7 @@ const ErrorMessage = ({ errorMessage }: { errorMessage: string }) => {
 }
 
 const TextField: FC<TextFieldProps> = ({
+    id,
     title = "",
     className = "",
     placeholder = "",
@@ -39,20 +41,20 @@ const TextField: FC<TextFieldProps> = ({
     return (
         <div className={`flex flex-col justify-start ${className}`}>
             {title && (
-                <TitleLavel title={title} />
+                <TitleLavel title={title} id={id} />
             )}
             <Input
+                id={id}
                 {...register}
                 type={type}
-                className={`h-12 md:h-14 px-4 py-3 ml-4 border text-gray-900 rounded-xl transition-all duration-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${errorMessage ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-gray-50 hover:border-gray-300 focus:bg-white'
-                    }`}
+                className={`h-12 md:h-14 border text-gray-900 rounded-xl transition-all duration-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent ${errorMessage ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-gray-50 hover:border-gray-300 focus:bg-white'}`}
                 placeholder={placeholder}
             />
-            <div className="pt-1.5 ml-4 min-h-[1.5rem]">
-                {errorMessage && (
+            {errorMessage && (
+                <div className="pt-1.5 min-h-[1.5rem]">
                     <ErrorMessage errorMessage={errorMessage} />
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 };

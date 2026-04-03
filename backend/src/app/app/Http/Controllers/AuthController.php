@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Consts\UserType;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Mail\WelcomeMail;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request): JsonResponse
@@ -22,6 +25,7 @@ class AuthController extends Controller
         try{
             $user = User::create([
                 'name' => $request->input('name'),
+                'type' => UserType::USER,
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
             ]);
