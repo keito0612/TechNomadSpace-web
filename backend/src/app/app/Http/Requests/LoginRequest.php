@@ -19,8 +19,6 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => '名前は必須です。',
-            'name.max' => '名前は最大255文字までです。',
             'email.required' => 'メールアドレスは必須です。',
             'email.email' => '正しいメールアドレスの形式で入力してください。',
             'email.unique' => 'このメールアドレスは既に登録されています。',
