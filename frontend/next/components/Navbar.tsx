@@ -85,7 +85,7 @@ const Logo = () => {
 
 const UserName = ({ name }: { name: string }) => {
     return (
-        <p className="font-semibold text-gray-700 ml-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
+        <p className="font-semibold text-white ml-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
             {name}
         </p>
     );
@@ -107,7 +107,7 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
 
 
     const getUser = async () => {
-        const url = `${UtilApi.API_URL}/api/user`;
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/api/user`;
         try {
             const res = await fetch(url, {
                 method: "GET",
@@ -117,7 +117,7 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
                 },
             });
             const data = await res.json();
-            const user: User = data["user"] as User;
+            const user: User = data['user'] as User;
             setUser(user);
         } catch (error) {
             console.error("Failed to fetch user:", error);
