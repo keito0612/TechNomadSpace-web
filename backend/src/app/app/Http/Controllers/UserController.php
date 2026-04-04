@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use League\Uri\Http;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,23 +27,12 @@ class UserController extends Controller
     private function userId(){
         return optional(Auth::guard('api')->user())->id;
     }
-    function getUser($id)
+    function getUser()
     {
-        if(is_null($id)){
-            $user = User::find($this->userId());
-        }else{
-            $user = User::with([
-                'reviews' => fn($query) => $query->with($this->reviewRelations),
-                'likedReviews' => fn($query) => $query->with($this->reviewRelations),
-            ])->find($id);
-        }
-
-        if(is_null($user)){
-            return response(['message' => 'User Not Found'],Response::HTTP_NOT_FOUND);
-        }
+        $user = Auth::user();
         return response()->json([
             'user' => $user
-        ], Response::HTTP_OK);
+        ], 201);
     }
 
     function profile()
