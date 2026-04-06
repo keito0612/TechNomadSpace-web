@@ -7,29 +7,15 @@ use App\Models\Location;
 use App\Models\LocationFavorite;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class LocationFavoriteController extends Controller
 {
-    private function userId(){
-        return optional(Auth::guard('api')->user())->id;
-    }
-
-    public function toggle(Location $location)
+    public function toggle(Request $request, Location $location)
     {
         try{
-            if(!($location->exists())){
-                return response()->json(
-                    [
-                        'message' => 'location not found'
-                    ]
-                    ,Response::HTTP_NOT_FOUND
-                );
-            }
-
-            $userId = $this->userId();
+            $userId = $request->user()->id;
 
             $favorite = LocationFavorite::where('user_id', $userId)
                 ->where('location_id', $location->id)
@@ -59,7 +45,7 @@ class LocationFavoriteController extends Controller
 
     public function index(Request $request)
     {
-        $userId = $this->userId();
+        $userId = $request->user()->id;
 
         $favoriteLocations = Location::whereHas('favorites', function ($query) use ($userId) {
             $query->where('user_id', $userId);

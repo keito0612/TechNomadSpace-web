@@ -41,6 +41,7 @@ const navigationBarTitles = [
     { name: "ログイン", href: "/login" },
     { name: "新規登録", href: "/register" },
     { name: "お気に入り", href: "/favorite" },
+    { name: "プロフィール", href: "/profile" },
     { name: '設定', href: "/setting" }
 ];
 
