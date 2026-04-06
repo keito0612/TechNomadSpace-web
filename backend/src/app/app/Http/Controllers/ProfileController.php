@@ -9,13 +9,12 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use League\Uri\Http;
 use Symfony\Component\HttpFoundation\Response;
 
-
-class UserController extends Controller
+class ProfileController extends Controller
 {
+    private $reviewRelations = ['user', 'images', 'location', 'likes'];
+
     private FileService $fileService;
 
     public function __construct(FileService $fileService)
@@ -23,34 +22,41 @@ class UserController extends Controller
         $this->fileService = $fileService;
     }
 
-    private function userId(){
-        return optional(Auth::guard('api')->user())->id;
+    private function userId(): string{
+        return Auth::id();
     }
-    function getUser()
+
+    function profile()
     {
-        $user = Auth::user();
+        $user = User::with([
+            'reviews' => fn($query) => $query->with($this->reviewRelations),
+            'likedReviews' => fn($query) => $query->with($this->reviewRelations),
+        ])->find($this->userId());
+
         return response()->json([
-            'user' => $user
-        ], 201);
+            'profile' => $user
+        ], Response::HTTP_OK);
     }
 
     function edit(UserEditRequest $request)
     {
         DB::beginTransaction();
         try{
-            $user = User::find( $this->userId());
+            $user = User::find($this->userId());
+
             if (!$user) {
                 return response()->json(['error' => 'user not found'], 404);
             }
-            if ($request->hasFile('userImage')) {
-                if(!is_null($user->image_path)){
-                    if($this->fileService->exists($user->image_path)){
-                        $this->fileService->delete($user->image_path);
-                    }
+
+            if(!is_null($user->image_path)){
+                if($this->fileService->exists($user->image_path)){
+                    $this->fileService->delete($user->image_path);
                 }
+            }
+
+            if ($request->hasFile('userImage')) {
                 $image = $request->file("userImage");
                 $extension = $image->getClientOriginalExtension();
-                // 英数字＋タイムスタンプのファイル名生成
                 $fileName = time() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
                 $directory = 'profileImage';
                 $path = $this->fileService->upload($image, $directory,$fileName);
@@ -72,23 +78,20 @@ class UserController extends Controller
         }
     }
 
-    function delete()
+    function detail($id)
     {
-        DB::beginTransaction();
-        try{
-            $user = User::find($this->userId());
-            if(is_null($user)){
-                return response(['message' => 'User Not Found'],Response::HTTP_NOT_FOUND);
-            }
-            $user->delete();
-            return response(['mesaage' => 'User Delete Success'],Response::HTTP_OK);
-        }catch(Exception $e){
-            DB::rollBack();
+        $user = User::with([
+            'reviews' => fn($query) => $query->with($this->reviewRelations),
+            'likedReviews' => fn($query) => $query->with($this->reviewRelations),
+        ])->find($id);
+
+        if(is_null($user)){
             return response()->json([
-                'message' => $e->getMessage()
-            ],Response::HTTP_INTERNAL_SERVER_ERROR);
+                'message' => 'User Not Found',
+            ],Response::HTTP_NOT_FOUND);
         }
+        return response()->json([
+            'profile' => $user
+        ], Response::HTTP_OK);
     }
-
-
 }

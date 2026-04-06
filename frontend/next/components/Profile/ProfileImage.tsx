@@ -1,17 +1,16 @@
-"use client";
-import Image from "next/image";
-import { User } from "lucide-react";
+import Image from 'next/image';
+import { User } from 'lucide-react';
 
 interface ProfileImageProps {
     imageUrl: string | null;
-    sizes?: number; // 基準サイズ（px）
+    sizes?: number;
 }
 
-export function ProfileImage({ imageUrl, sizes = 100 }: ProfileImageProps) {
-    // 最小 40px、最大 sizes px、中央は 10vw（適度に伸縮）
-    const responsiveSize = `clamp(${sizes - 10}px, 10vw, ${sizes}px)`;
+const ProfileImage = ({ imageUrl, sizes = 100 }: ProfileImageProps) => {
+    const minSize = Math.max(sizes - 10, 30);
+    const responsiveSize = `clamp(${minSize}px, 10vw, ${sizes}px)`;
 
-    const isValidSrc = typeof imageUrl === "string" && imageUrl.trim() !== "";
+    const isValidSrc = imageUrl !== null && imageUrl !== '';
 
     return (
         <div
@@ -24,18 +23,15 @@ export function ProfileImage({ imageUrl, sizes = 100 }: ProfileImageProps) {
                     src={imageUrl}
                     alt="プロフィール写真"
                     fill
-                    className="object-cover rounded-full"
+                    className="object-cover"
                 />
             ) : (
                 <div className="w-full h-full bg-black rounded-full flex items-center justify-center">
-                    <User
-                        className="text-blue-800 w-[70%] h-[70%]"
-                    />
+                    <User className="text-blue-800 w-3/5 h-3/5" />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default ProfileImage;
-
