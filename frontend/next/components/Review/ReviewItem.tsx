@@ -70,7 +70,7 @@ const ReviewImages = ({ photos, className, onImageClick }: { photos: Photo[], cl
 
 const ReviewUser = ({ name, postedAtHuman }: { name: string, postedAtHuman: string }) => {
     return (
-        <div className="flex flex-row justify-between">
+        <div className="w-full flex flex-row justify-between">
             <div className="text-white break-all">
                 {name}
             </div>

@@ -43,13 +43,13 @@ export default function Modal({
                 );
             case 'Error':
                 return (
-                    <div className="bg-red-100 rounded-full flex items-center justify-center w-16 h-16">
+                    <div className="flex items-center justify-center w-16 h-16">
                         <AlertTriangle className="w-10 h-10 text-red-500" />
                     </div>
                 );
             case 'Warning':
                 return (
-                    <div className="rounded-full flex items-center justify-center">
+                    <div className="flex items-center justify-center">
                         <AlertCircle className="w-16 h-16 text-yellow-400" />
                     </div>
                 );

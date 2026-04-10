@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'type' => $this->type,
             'imagePath' => $this->image_path ?? null,
+            'backgroundImagePath' => $this->background_image_path ?? null
         ];
     }
 }

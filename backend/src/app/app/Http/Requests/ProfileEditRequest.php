@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-class UserEditRequest extends FormRequest
+class ProfileEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,8 @@ class UserEditRequest extends FormRequest
         return [
             'name' => 'required|string|max:100',
             'comment' => 'nullable|string|max:300|',
-            'profileImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'profileImage' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'backgroundImage' => 'image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 
@@ -38,8 +39,11 @@ class UserEditRequest extends FormRequest
             'name.max' => '名前は100文字以内で入力してください。',
             'comment.max' =>'コメントは300文字以内で入力して下さい。',
             'profileImage.image' => '画像ファイルを選択してください。',
-            'profileImage.mimes' => '画像の形式はjpeg、png、jpg、gifのいずれかにしてください。',
+            'profileImage.mimes' => '画像の形式はjpeg、png、jpgのいずれかにしてください。',
             'profileImage.max' => '画像のサイズは2MB以内にしてください。',
+            'backgroundImage.image' => '画像ファイルを選択してください。',
+            'backgroundImage.mimes' => '画像の形式はjpeg、png、jpgのいずれかにしてください。',
+            'backgroundImage.max' => '画像のサイズは2MB以内にしてください。',
         ];
     }
 

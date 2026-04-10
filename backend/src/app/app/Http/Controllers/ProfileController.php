@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserEditRequest;
+use App\Http\Requests\ProfileEditBackgroundImage;
+use App\Http\Requests\ProfileEditRequest;
 use App\Models\User;
 use App\Services\FileService;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProfileController extends Controller
@@ -22,11 +23,12 @@ class ProfileController extends Controller
         $this->fileService = $fileService;
     }
 
-    private function userId(): string{
+    private function userId(): string
+    {
         return Auth::id();
     }
 
-    function profile()
+    public function profile()
     {
         $user = User::with([
             'reviews' => fn($query) => $query->with($this->reviewRelations),
@@ -38,47 +40,51 @@ class ProfileController extends Controller
         ], Response::HTTP_OK);
     }
 
-    function edit(UserEditRequest $request)
+    public function edit(ProfileEditRequest $request)
     {
         DB::beginTransaction();
-        try{
+        try {
             $user = User::find($this->userId());
 
             if (!$user) {
-                return response()->json(['error' => 'user not found'], 404);
+                return response()->json(['error' => 'user not found'], Response::HTTP_NOT_FOUND);
             }
 
-            if(!is_null($user->image_path)){
-                if($this->fileService->exists($user->image_path)){
-                    $this->fileService->delete($user->image_path);
-                }
+            if ($request->hasFile('profileImage')) {
+                $user->image_path = $this->fileService->replaceImage(
+                    $user->image_path,
+                    $request->file('profileImage'),
+                    'profileImage'
+                );
             }
 
-            if ($request->hasFile('userImage')) {
-                $image = $request->file("userImage");
-                $extension = $image->getClientOriginalExtension();
-                $fileName = time() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
-                $directory = 'profileImage';
-                $path = $this->fileService->upload($image, $directory,$fileName);
-                $url  = $this->fileService->getUrl($path);
-                $user->image_path = $url;
+            if ($request->hasFile('backgroundImage')) {
+                $user->background_image_path = $this->fileService->replaceImage(
+                    $user->background_image_path,
+                    $request->file('backgroundImage'),
+                    'backgroundImage'
+                );
             }
+
             $user->name = $request->name;
             $user->comment = $request->comment;
             $user->save();
             DB::commit();
+
             return response()->json([
-                'message' => "User Edit Success"
-            ],Response::HTTP_OK);
-        }catch(Exception $e){
+                'message' => 'User Edit Success'
+            ], Response::HTTP_OK);
+
+        } catch (Exception $e) {
+            Log::debug($e);
             DB::rollBack();
             return response()->json([
-                'message' => $e->getMessage()
-            ],Response::HTTP_INTERNAL_SERVER_ERROR);
+                'message' => 'プロフィールの更新に失敗しました'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    function detail($id)
+    public function detail($id)
     {
         $user = User::with([
             'reviews' => fn($query) => $query->with($this->reviewRelations),
@@ -87,7 +93,7 @@ class ProfileController extends Controller
 
         if(is_null($user)){
             return response()->json([
-                'message' => 'User Not Found',
+                'message' => 'Profile Not Found',
             ],Response::HTTP_NOT_FOUND);
         }
         return response()->json([
