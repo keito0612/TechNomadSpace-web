@@ -30,7 +30,7 @@ const ProfileSkeleton = () => {
             </div>
             {/* レビューリスト */}
             <div className="mt-4 px-4 space-y-4">
-                {[1, 2, 3].map((i) => (
+                {[1, 2, 3, 4, 5, 6, 7].map((i) => (
                     <div key={i} className="flex gap-3">
                         <div className="w-9 h-9 bg-gray-700 rounded-full shrink-0" />
                         <div className="flex-1">

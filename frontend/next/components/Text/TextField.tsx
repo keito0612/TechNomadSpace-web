@@ -15,11 +15,11 @@ interface TextFieldProps {
 }
 
 
-const TitleLavel = ({ id, title }: { id: string, title: string }) => {
+const TitleLavel = ({ htmlFor, title }: { htmlFor: string | undefined, title: string }) => {
     return (
-        <label id={id} className="w-full mb-2 text-blue-600 font-semibold text-sm sm:text-sm md:text-base">
+        <label htmlFor={htmlFor} className="w-full mb-2 text-white text-sm sm:text-sm md:text-base" >
             {title}
-        </label>
+        </label >
     );
 }
 
@@ -41,13 +41,13 @@ const TextField: FC<TextFieldProps> = ({
     return (
         <div className={`flex flex-col justify-start ${className}`}>
             {title && (
-                <TitleLavel title={title} id={id} />
+                <TitleLavel htmlFor={id} title={title} />
             )}
             <Input
                 id={id}
                 {...register}
                 type={type}
-                className={`h-12 md:h-14 border text-gray-900 rounded-xl transition-all duration-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent ${errorMessage ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-gray-50 hover:border-gray-300 focus:bg-white'}`}
+                className={`h-12 md:h-14 border  rounded-xl transition-all duration-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent bg-gray-800 text-white ${errorMessage ? 'border-red-400' : 'border-gray-600'}`}
                 placeholder={placeholder}
             />
             {errorMessage && (

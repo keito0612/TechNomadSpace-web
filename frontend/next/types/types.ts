@@ -27,6 +27,7 @@ export interface Profile {
     name: string;
     email: string;
     image_path: string | null;
+    background_image_path: string | null;
     comment: string;
     liked_reviews_count: number;
     reviews_count: number;

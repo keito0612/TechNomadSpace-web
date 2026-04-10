@@ -59,6 +59,28 @@ class FileService
     }
 
     /**
+     * 画像をアップロードしてURLを返す
+     */
+    public function uploadImage(UploadedFile $image, string $directory): string
+    {
+        $extension = $image->getClientOriginalExtension();
+        $fileName = time() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
+        $path = $this->upload($image, $directory, $fileName);
+        return $this->getUrl($path);
+    }
+
+    /**
+     * 古い画像を削除して新しい画像をアップロードする
+     */
+    public function replaceImage(?string $oldPath, UploadedFile $newImage, string $directory): string
+    {
+        if ($oldPath && $this->exists($oldPath)) {
+            $this->delete($oldPath);
+        }
+        return $this->uploadImage($newImage, $directory);
+    }
+
+    /**
      * Storageインスタンスを取得する
      */
     protected function getStorage()
