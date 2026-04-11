@@ -7,7 +7,6 @@ use App\Models\Location;
 use App\Models\LocationFavorite;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class LocationFavoriteController extends Controller
@@ -17,12 +16,14 @@ class LocationFavoriteController extends Controller
         try{
             $userId = $request->user()->id;
 
-            $favorite = LocationFavorite::where('user_id', $userId)
+            $exists = LocationFavorite::where('user_id', $userId)
                 ->where('location_id', $location->id)
-                ->first();
+                ->exists();
 
-            if ($favorite) {
-                $favorite->delete();
+            if ($exists) {
+                LocationFavorite::where('user_id', $userId)
+                    ->where('location_id', $location->id)
+                    ->delete();
                 $isFavorited = false;
             } else {
                 LocationFavorite::create([
@@ -46,11 +47,18 @@ class LocationFavoriteController extends Controller
     public function index(Request $request)
     {
         $userId = $request->user()->id;
+        $keyword = $request->input('keyword');
+        $query = Location::whereHas('favorites', function ($q) use ($userId) {
+            $q->where('user_id', $userId);
+        });
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'LIKE', "%$keyword%")
+                ->orWhere('address', 'LIKE', "%$keyword%");
+            });
+        }
 
-        $favoriteLocations = Location::whereHas('favorites', function ($query) use ($userId) {
-            $query->where('user_id', $userId);
-        })->get();
-
+        $favoriteLocations = $query->get();
         return LocationResource::collection($favoriteLocations)
         ->response()
         ->setStatusCode(Response::HTTP_OK);

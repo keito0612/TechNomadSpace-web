@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { SocialLoginButtons } from '@/components/SocialLoginButtons';
 import { AuthService } from '@/services/AuthService';
 import AuthBodyConteiner from '@/components/AuthBodyConteiner';
