@@ -55,7 +55,7 @@ const ProfileContent = async () => {
     }
 
     return (
-        <div className="max-w-2xl bg-black mx-auto w-full min-h-screen pt-16">
+        <div className="max-w-5xl bg-black mx-auto w-full min-h-screen pt-16">
             <ProfileHeader profile={result.profile} />
             <div className="mt-4">
                 <ProfileReviewTabs profile={result.profile} />

@@ -1,6 +1,6 @@
 const ProfileSkeleton = () => {
     return (
-        <div className="animate-pulse max-w-2xl bg-black mx-auto w-full pt-16">
+        <div className="animate-pulse max-w-5xl bg-black mx-auto w-full pt-16">
             {/* 背景画像エリア */}
             <div className="w-full h-28 bg-gray-700" />
             {/* プロフィール画像（重なり） */}

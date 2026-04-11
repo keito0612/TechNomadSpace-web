@@ -171,8 +171,9 @@ export default function ProfileEditModal({
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && !isSubmitting && onClose()}>
             <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
-                <Loading isSubmitting={isSubmitting} message={"保存中..."} />
-
+                {isSubmitting && (
+                    <Loading message={"保存中..."} />
+                )}
                 <DialogHeader>
                     <DialogTitle className="text-lg font-bold text-white">
                         プロフィール編集
