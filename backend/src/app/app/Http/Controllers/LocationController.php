@@ -11,11 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LocationController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $token = $request->bearerToken();
-        Log::debug('LocationController index: Bearer Token: ' . ($token ? substr($token, 0, 20) . '...' : 'null'));
-
         $locations = Location::with([
             'amenity',
             'openingHours',
