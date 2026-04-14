@@ -61,10 +61,13 @@ class User extends Authenticatable
         return $this->hasMany(UserReview::class);
     }
 
+    public function setting()
+    {
+        return $this->hasOne(UserSetting::class);
+    }
+
     public function likedReviews(){
-        return $this->hasMany(UserReview::class)->whereHas('likes', function($query) {
-            $query->where('user_id', '!=', $this->id);
-        });
+        return $this->belongsToMany(UserReview::class, 'likes', 'user_id', 'user_review_id');
     }
 
     public function favoriteLocations()

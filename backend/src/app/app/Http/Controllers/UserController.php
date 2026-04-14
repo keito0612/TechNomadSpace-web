@@ -18,7 +18,7 @@ class UserController extends Controller
 {
 
     private function userId(){
-        return optional(Auth::guard('api')->user())->id;
+        return Auth::id();
     }
     function getUser()
     {
@@ -45,6 +45,4 @@ class UserController extends Controller
             ],Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }

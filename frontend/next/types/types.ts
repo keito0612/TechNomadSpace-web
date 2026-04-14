@@ -114,7 +114,8 @@ export interface Review {
     prefecture: Prefecture;
     rating: number;
     photos: Photo[];
-    likes: unknown[];
+    likeCount: number;
+    isLiked: boolean;
     user: User;
     created_at: string;
     updated_at: string;

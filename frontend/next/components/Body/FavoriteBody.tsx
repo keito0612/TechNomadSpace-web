@@ -51,7 +51,7 @@ const FavoriteItemImage = ({ imagePath, name }: { imagePath: string; name: strin
 };
 const FavoriteItem = ({ location }: { location: LocationData }) => {
     return (
-        <Link href={`/location/${location.id}`}>
+        <Link href={`/locations/${location.id}`}>
             <div className="flex gap-3 p-3 bg-gray-900 rounded-xl hover:bg-gray-800 transition-colors">
                 {location.image ? (
                     <FavoriteItemImage imagePath={location.image} name={location.name} />
@@ -96,7 +96,7 @@ const FavoriteList = ({ locations }: { locations: LocationData[] }) => {
 
 const FavoriteBody = ({ locations }: FavoriteBodyProps) => {
     const hasLocations = Array.isArray(locations) && locations.length > 0;
-    const router = useRouter()
+    const router = useRouter();
 
     const search = async (query: string) => {
         router.replace(`/favorite/?keyword=${query.trim()}`);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileEditBackgroundImage;
 use App\Http\Requests\ProfileEditRequest;
+use App\Http\Resources\ProfileResource;
 use App\Models\User;
 use App\Services\FileService;
 use Exception;
@@ -34,10 +35,9 @@ class ProfileController extends Controller
             'reviews' => fn($query) => $query->with($this->reviewRelations),
             'likedReviews' => fn($query) => $query->with($this->reviewRelations),
         ])->find($this->userId());
-
-        return response()->json([
-            'profile' => $user
-        ], Response::HTTP_OK);
+        return ProfileResource::make($user)
+        ->response()
+        ->setStatusCode(Response::HTTP_OK);
     }
 
     public function edit(ProfileEditRequest $request)
@@ -96,8 +96,8 @@ class ProfileController extends Controller
                 'message' => 'Profile Not Found',
             ],Response::HTTP_NOT_FOUND);
         }
-        return response()->json([
-            'profile' => $user
-        ], Response::HTTP_OK);
+        return ProfileResource::make($user)
+        ->response()
+        ->setStatusCode(Response::HTTP_OK);
     }
 }

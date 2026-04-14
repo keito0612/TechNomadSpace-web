@@ -39,4 +39,9 @@ class UserReview extends Model
     {
         return $this->created_at->diffForHumans();
     }
+
+    public function isLikedBy($userId): bool
+    {
+        return $this->likes()->where('user_id', $userId)->exists();
+    }
 }

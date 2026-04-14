@@ -5,7 +5,6 @@ import { Profile, ProfileTabType, Review } from '@/types/types';
 import ReviewItem from '@/components/Review/ReviewItem';
 import ImageModal from '@/components/Image/ImagesModal';
 import TabsContainer from '@/components/TabsContainer';
-import { ThumbsUp } from 'lucide-react';
 
 interface ProfileReviewTabsProps {
     profile: Profile;
@@ -30,12 +29,8 @@ const ReviewListItem = ({ review }: { review: Review }) => {
 
     return (
         <>
-            <div className="border-b border-gray-800">
+            <div className="border-b border-gray-800 pb-3">
                 <ReviewItem review={review} onImageClick={handleImageClick} />
-                <div className="px-2 pb-3 flex items-center gap-1 text-gray-400">
-                    <ThumbsUp className="w-4 h-4" />
-                    <span className="text-sm">{review.likes?.length ?? 0}</span>
-                </div>
             </div>
             {review.photos && review.photos.length > 0 && (
                 <ImageModal

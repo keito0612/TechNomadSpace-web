@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import LikeButton from "./LikeButton";
 
 interface ReviewItemProps {
     review: Review;
@@ -90,6 +91,13 @@ const ReviewItem = (props: ReviewItemProps) => {
                 <StarsRatings className="py-1" size={18} rating={props.review.rating} />
                 <ReviewComment comment={props.review.comment} />
                 <ReviewImages className="pt-2" photos={props.review.photos} onImageClick={props.onImageClick} />
+                <div className="mt-2">
+                    <LikeButton
+                        reviewId={props.review.id}
+                        initialIsLiked={props.review.isLiked}
+                        initialLikeCount={props.review.likeCount}
+                    />
+                </div>
             </div>
         </div>
     );
