@@ -3,17 +3,17 @@ import { Amenity, OpeningHour, Photo, PriceType, Review } from "./types";
 export interface LocationData {
     id: number;
     name: string;
-    image: string;
-    rating: number;
     address: string;
     phoneNumber: string;
-    price: string;
     priceType: PriceType;
-    photos: Photo[];
     websiteUrl: string | null;
+    photos: Photo[];
+    rating: number;
     openingHours: OpeningHour[];
     amenity: Amenity;
     reviews: Review[];
     position: [number, number];
     isFavorited: boolean;
+    image?: string;
+    price?: string;
 }

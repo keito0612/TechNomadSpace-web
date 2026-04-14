@@ -7,7 +7,6 @@ interface LoadingProps {
 const Loading = ({ message }: LoadingProps) => {
     return (
         <>
-
             <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/50 rounded-xl">
                 <div className="flex flex-col items-center gap-3">
                     <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />

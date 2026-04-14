@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class LocationResource extends JsonResource
 {
@@ -14,7 +15,7 @@ class LocationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $userId = $request->user()?->id;
+        $userId = $this->getUserIdFromRequest($request);
 
         return [
             'id' => $this->id,
@@ -31,5 +32,26 @@ class LocationResource extends JsonResource
             'position' => [$this->lat, $this->lng],
             'isFavorited' => $userId ? $this->isFavoritedBy($userId) : false,
         ];
+    }
+
+    private function getUserIdFromRequest(Request $request): ?int
+    {
+        // まず通常の認証を試す
+        if ($request->user()) {
+            return $request->user()->id;
+        }
+
+        // Bearerトークンを直接パース
+        $token = $request->bearerToken();
+        if (!$token) {
+            return null;
+        }
+
+        $accessToken = PersonalAccessToken::findToken($token);
+        if (!$accessToken) {
+            return null;
+        }
+
+        return $accessToken->tokenable_id;
     }
 }

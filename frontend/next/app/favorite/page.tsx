@@ -44,7 +44,6 @@ const FavoriteContent = async ({ keyword }: { keyword: string }) => {
 export default async function FavoritePage({ searchParams }: {
     searchParams: Promise<{ keyword?: string }>;
 }) {
-
     const { keyword } = await searchParams;
     return (
         <Layout>

@@ -20,6 +20,7 @@ type ModalProps = {
     type: ResultType;
     onConfirm?: () => void | Promise<void>;
     confirmLabel?: string;
+    onCloneLabel?: string;
     cancelLabel?: string;
 };
 
@@ -30,6 +31,7 @@ export default function Modal({
     message,
     type,
     onConfirm,
+    onCloneLabel = '閉じる',
     confirmLabel = 'はい',
     cancelLabel = 'キャンセル',
 }: ModalProps) {
@@ -120,7 +122,7 @@ export default function Modal({
                             className={`rounded-xl font-semibold px-6 py-3 ${getButtonVariant()}`}
                             onClick={onClose}
                         >
-                            閉じる
+                            {onCloneLabel}
                         </Button>
                     )}
                 </DialogFooter>

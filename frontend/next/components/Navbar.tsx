@@ -8,14 +8,12 @@ import Modal from "./Modal";
 import { useRouter } from "next/navigation";
 
 import { ArrowLeft } from "lucide-react";
-import Image from "next/image";
 import {
     DropdownMenu,
     DropdownMenuTrigger,
     DropdownMenuContent,
     DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
 import ProfileImage from "./Profile/ProfileImage";
 import { AuthService } from "@/services/AuthService";
 import { UtilApi } from "@/lib/utilApi";
@@ -23,6 +21,7 @@ import NotificationBell from "./NotificationBell";
 import { ResultType, User } from "@/types/types";
 
 interface NavBarProps {
+    title?: string | null;
     rightButton?: React.ReactNode;
     onBackClick?: () => void;
     onBack?: boolean;
@@ -93,7 +92,7 @@ const UserName = ({ name }: { name: string }) => {
 }
 
 
-function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBarProps) {
+function NavBar({ title, rightButton, onBackClick = () => { }, onBack = false }: NavBarProps) {
     const pathname = usePathname();
     const router = useRouter();
     const [user, setUser] = useState<User | null>(null);
@@ -211,7 +210,7 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
                                     {/* モバイル・タブレットのみ戻るボタン表示 */}
                                     {onBack && (
                                         <button
-                                            className="lg:hidden p-2 rounded-xl hover:bg-green-600 transition-all duration-200 active:scale-95"
+                                            className="lg:hidden p-2 rounded-xl hover:bg-blue-700 transition-all duration-200 active:scale-95"
                                             onClick={backClick}
                                             aria-label="戻る"
                                         >
@@ -223,7 +222,7 @@ function NavBar({ rightButton, onBackClick = () => { }, onBack = false }: NavBar
                                 {/* 中央：タイトル（モバイル・タブレット） */}
                                 <div className="absolute left-1/2 transform -translate-x-1/2 lg:hidden">
                                     <span className="text-white text-lg font-bold whitespace-nowrap">
-                                        {getTitle()}
+                                        {title === undefined ? getTitle() : title}
                                     </span>
                                 </div>
 

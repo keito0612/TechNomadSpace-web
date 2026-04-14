@@ -32,8 +32,8 @@ const getProfile = async (token: string | undefined): Promise<ProfileResult> => 
             return { success: false, isAuthError: false };
         }
 
-        const data = await res.json();
-        const profile = data.profile;
+        const json = await res.json();
+        const profile = json.data;
         if (!profile) {
             return { success: false, isAuthError: false };
         }
