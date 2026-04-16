@@ -40,6 +40,8 @@ const navigationBarTitles = [
     { name: "ログイン", href: "/login" },
     { name: "新規登録", href: "/register" },
     { name: "お気に入り", href: "/favorite" },
+    { name: "利用規約", href: "/terms" },
+    { name: "プライバシーポリシー", href: "/privacy" },
     { name: "プロフィール", href: "/profile" },
     { name: '設定', href: "/setting" }
 ];
@@ -171,7 +173,7 @@ function NavBar({ title, rightButton, onBackClick = () => { }, onBack = false }:
             setIsConfirmModalOpen(true);
             AuthService.deleteSesstion();
         } catch (error) {
-            setModalType('Success');
+            setModalType('Error');
             setModalTitle('ログアウトに失敗しました。');
             setModalMessage('もう一度お試しください。問題が続く場合は、ページを再読み込みしてください。');
             setIsConfirmModalOpen(true);
