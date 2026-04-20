@@ -36,6 +36,7 @@ const PhotoGridItem = ({
         >
             {isLoading && <LoadingSpinner />}
             <Image
+                unoptimized
                 src={photo.photoUrl}
                 alt={photo.name}
                 fill

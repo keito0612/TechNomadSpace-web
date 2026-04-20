@@ -14,7 +14,7 @@ const TextAreaLabel = ({ htmlFor, label }: { htmlFor: string, label: string }) =
     return (
         <label
             htmlFor={htmlFor}
-            className="block text-sm font-medium text-gray-300 mb-1"
+            className="block text-sm font-medium text-gray-300 mb-2"
         >
             {label}
         </label>
