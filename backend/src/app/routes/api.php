@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LocationFavoriteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewLikeController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SocialAuthController;
@@ -44,5 +45,11 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::post('locations/{location}/favorite', [LocationFavoriteController::class, 'toggle']);
     Route::get('favorite_locations', [LocationFavoriteController::class, 'index']);
-    Route::post('reviews/{review}/like', [ReviewLikeController::class, 'toggle']);
+    Route::prefix('reviews')->group(function(){
+        Route::post('/{review}/like', [ReviewLikeController::class, 'toggle']);
+        Route::post('/store', [ReviewController::class, 'store']);
+        Route::get('/{id}', [ReviewController::class, 'show']);
+        Route::post('/update/{review}', [ReviewController::class, 'update']);
+        Route::delete('/destroy/{review}', [ReviewController::class, 'destroy']);
+    });
 });

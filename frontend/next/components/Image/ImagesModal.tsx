@@ -81,6 +81,7 @@ const ThumbnailItem = ({
         >
             {isLoading && <LoadingSpinner />}
             <Image
+                unoptimized
                 src={img.photoUrl}
                 alt={`thumb-${index}`}
                 fill
@@ -225,6 +226,7 @@ const MainImage = ({ photoUrl }: { photoUrl: string }) => {
                 onMouseLeave={handleMouseUp}
             >
                 <Image
+                    unoptimized
                     src={photoUrl}
                     alt="メイン画像"
                     fill
@@ -307,6 +309,7 @@ const MobileSlideItem = ({
             <div className="flex-1 relative bg-background min-h-0 overflow-hidden">
                 {isLoading && <LoadingSpinner />}
                 <Image
+                    unoptimized
                     src={img.photoUrl}
                     alt={`image-${index}`}
                     fill

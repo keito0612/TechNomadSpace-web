@@ -108,6 +108,7 @@ export interface ReviewImage {
 export interface Review {
     id: number;
     user_id: number;
+    locationId: number;
     Notification_id: number;
     comment: string;
     posted_at_human: string;
