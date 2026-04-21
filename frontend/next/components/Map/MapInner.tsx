@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { LatLngExpression } from "leaflet";
+import { useState, useEffect, useRef } from "react";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { LatLngExpression, Map as LeafletMap } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./map.css";
@@ -11,8 +11,6 @@ import { LocationData } from "@/types/location";
 import { renderToString } from "react-dom/server";
 import MapPin from "./MapPin";
 import { PriceType } from "@/types/types";
-
-// マップの操作を制御するコンポーネント
 
 
 // カスタムピンアイコンを作成する関数
@@ -34,11 +32,22 @@ interface MapInnerProps {
   className: string;
   locations: LocationData[];
   onSheetOpenChange?: (isOpen: boolean) => void;
+  flyTo?: LatLngExpression | null;
+  onFlyToComplete?: () => void;
 }
 
-const MapInner = ({ center, zoom, className, locations, onSheetOpenChange }: MapInnerProps) => {
+const MapInner = ({ center, zoom, className, locations, onSheetOpenChange, flyTo, onFlyToComplete }: MapInnerProps) => {
   const [selectedLocation, setSelectedLocation] = useState<LocationData | null>(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const mapRef = useRef<LeafletMap | null>(null);
+
+  // flyToが変更されたらマップを移動
+  useEffect(() => {
+    if (flyTo && mapRef.current) {
+      mapRef.current.flyTo(flyTo, 15, { duration: 1 });
+      onFlyToComplete?.();
+    }
+  }, [flyTo, onFlyToComplete]);
 
   const handleMarkerClick = (location: LocationData) => {
     setSelectedLocation(location);
@@ -62,6 +71,7 @@ const MapInner = ({ center, zoom, className, locations, onSheetOpenChange }: Map
         preferCanvas={true}
         minZoom={3}
         maxZoom={19}
+        ref={mapRef}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
