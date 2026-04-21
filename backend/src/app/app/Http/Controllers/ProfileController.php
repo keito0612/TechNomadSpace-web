@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProfileController extends Controller
 {
-    private $reviewRelations = ['user', 'images', 'location', 'likes'];
+    private $reviewRelations = ['user', 'images.review.user', 'location', 'likes'];
 
     private FileService $fileService;
 
@@ -84,7 +84,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function detail($id)
+    public function show($id)
     {
         $user = User::with([
             'reviews' => fn($query) => $query->with($this->reviewRelations),

@@ -108,9 +108,10 @@ const EditProfileButton = ({ onClick, className }: { onClick: () => void, classN
 
 interface ProfileHeaderProps {
     profile: Profile;
+    isOwnProfile?: boolean;
 }
 
-export default function ProfileHeader({ profile }: ProfileHeaderProps) {
+export default function ProfileHeader({ profile, isOwnProfile = false }: ProfileHeaderProps) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const router = useRouter();
 
@@ -126,9 +127,11 @@ export default function ProfileHeader({ profile }: ProfileHeaderProps) {
             <div className="px-4 mt-2">
                 <ProfileName name={profile.name} />
                 <ProfileComment comment={profile.comment} />
-                <EditProfileButton onClick={() => {
-                    setIsEditModalOpen(true);
-                }} className={'pt-3'} />
+                {isOwnProfile && (
+                    <EditProfileButton onClick={() => {
+                        setIsEditModalOpen(true);
+                    }} className={'pt-3'} />
+                )}
                 <ProfileStatus
                     reviewCount={profile.reviews_count}
                     likedReviewsCount={profile.liked_reviews_count}

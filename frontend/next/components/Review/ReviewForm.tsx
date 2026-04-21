@@ -13,7 +13,7 @@ import Loading from "../Loading";
 import Modal from "../Modal";
 import LocationSection from "./LocationSection";
 import RatingSection from "./RatingSection";
-import ImageUploader, { MAX_IMAGE_COUNT, MAX_FILE_SIZE } from "./ImageUploader";
+import ImageUploader, { MAX_IMAGE_COUNT } from "./ImageUploader";
 
 // Constants
 const MAX_RATING = 5;
@@ -70,7 +70,6 @@ const SubmitButton = ({ isSubmitting, isEditMode }: { isSubmitting: boolean; isE
     </button>
 );
 
-// Helper function to convert Photo[] to ExistingImage[]
 const convertPhotosToExistingImages = (photos: Photo[] | undefined): ExistingImage[] => {
     if (!photos) return [];
     return photos.map((photo) => ({
@@ -79,7 +78,6 @@ const convertPhotosToExistingImages = (photos: Photo[] | undefined): ExistingIma
     }));
 };
 
-// Main Component
 export default function ReviewForm({
     locationId,
     review,
@@ -104,6 +102,7 @@ export default function ReviewForm({
         watch,
         setValue,
         setError,
+        clearErrors,
         formState: { errors },
     } = useForm<ReviewFormData>({
         defaultValues: {
@@ -120,43 +119,13 @@ export default function ReviewForm({
     const existingImages = watch("existingImages");
     const deleteImageIds = watch("deleteImageIds");
 
-    // Total image count (existing + new)
-    const totalImageCount = existingImages.length + newImages.length;
-
     const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (!files) return;
 
+        clearErrors("newImages");
         const selectedFiles = Array.from(files);
-        const totalAfterAdd = totalImageCount + selectedFiles.length;
-
-        if (totalAfterAdd > MAX_IMAGE_COUNT) {
-            setError("newImages", {
-                message: `画像は${MAX_IMAGE_COUNT}枚まで投稿できます`,
-            });
-            return;
-        }
-
-        const validFiles = selectedFiles.filter((file) => {
-            if (file.size > MAX_FILE_SIZE) {
-                setError("newImages", {
-                    message: `画像は1枚あたり${MAX_FILE_SIZE / 1024 / 1024}MB以内にしてください`,
-                });
-                return false;
-            }
-            return true;
-        });
-
-        if (validFiles.length === 0) return;
-
-        const compressedImages = await compressImages(validFiles);
-
-        if (compressedImages.length < validFiles.length) {
-            setError("newImages", {
-                message: "一部の画像の圧縮に失敗しました",
-            });
-        }
-
+        const compressedImages = await compressImages(selectedFiles);
         setValue("newImages", [...newImages, ...compressedImages]);
 
         if (fileInputRef.current) {
@@ -165,6 +134,7 @@ export default function ReviewForm({
     };
 
     const handleRemoveExistingImage = (index: number) => {
+        clearErrors("newImages");
         const imageToRemove = existingImages[index];
         setValue("deleteImageIds", [...deleteImageIds, imageToRemove.id]);
         setValue(
@@ -174,6 +144,7 @@ export default function ReviewForm({
     };
 
     const handleRemoveNewImage = (index: number) => {
+        clearErrors("newImages");
         setValue(
             "newImages",
             newImages.filter((_, i) => i !== index)
@@ -196,17 +167,70 @@ export default function ReviewForm({
         setModalState((prev) => ({ ...prev, isOpen: false }));
         if (shouldRedirect) {
             router.back();
+            router.refresh();
         }
     };
 
     const onSubmit = async (data: ReviewFormData) => {
+        // 画像枚数のバリデーション
+        const totalImageCount = data.existingImages.length + data.newImages.length;
+        if (totalImageCount > MAX_IMAGE_COUNT) {
+            setError('newImages', { message: `画像は${MAX_IMAGE_COUNT}枚まで投稿できます` });
+            return;
+        }
+
+
         setIsSubmitting(true);
 
         const imageFiles = data.newImages.map((img) => img.file);
 
+        const handleFailure = (err: { message: string; isAuthError: boolean; fieldErrors?: Record<string, string[]> }) => {
+            // 画像のバリデーションエラーをフォームに設定
+            if (err.fieldErrors) {
+                const imageErrorKeys = Object.keys(err.fieldErrors).filter(
+                    key => key.startsWith('images')
+                );
+
+                const commentErrorKeys = Object.keys(err.fieldErrors).filter(
+                    key => key.startsWith('comment')
+                );
+                const ratingErrorKeys = Object.keys(err.fieldErrors).filter(
+                    key => key.startsWith('rating')
+                );
+
+                if (imageErrorKeys.length > 0) {
+                    const firstImageError = err.fieldErrors[imageErrorKeys[0]];
+                    if (firstImageError && firstImageError.length > 0) {
+                        setError('newImages', { message: firstImageError[0] });
+                    }
+                }
+
+                if (commentErrorKeys.length > 0) {
+                    const firstCommentError = err.fieldErrors[commentErrorKeys[0]];
+                    if (firstCommentError && firstCommentError.length > 0) {
+                        setError('comment', { message: firstCommentError[0] });
+                    }
+                }
+
+                if (ratingErrorKeys.length > 0) {
+                    const firstRatingError = err.fieldErrors[ratingErrorKeys[0]];
+                    if (firstRatingError && firstRatingError.length > 0) {
+                        setError('comment', { message: firstRatingError[0] });
+                    }
+                }
+            }
+
+            if (err.isAuthError) {
+                showModal("Error", "エラーが発生しました。", "セッションが切れました。\nログインをお願いします。");
+            } else if (!err.fieldErrors) {
+                showModal("Error", "エラーが発生しました。", err.message);
+            }
+        };
+
         if (isEditMode && review) {
             await ReviewService.update({
                 params: {
+                    locationId,
                     reviewId: review.id,
                     rating: data.rating,
                     comment: data.comment.trim(),
@@ -216,12 +240,7 @@ export default function ReviewForm({
                 success: () => {
                     showModal("Success", "更新が完了しました。");
                 },
-                failure: (err) => {
-                    const message = err.isAuthError
-                        ? "セッションが切れました。\nログインをお願いします。"
-                        : err.message;
-                    showModal("Error", "エラーが発生しました。", message);
-                },
+                failure: handleFailure,
             });
         } else {
             await ReviewService.create({
@@ -234,12 +253,7 @@ export default function ReviewForm({
                 success: () => {
                     showModal("Success", "投稿が完了しました。");
                 },
-                failure: (err) => {
-                    const message = err.isAuthError
-                        ? "セッションが切れました。\nログインをお願いします。"
-                        : err.message;
-                    showModal("Error", "エラーが発生しました。", message);
-                },
+                failure: handleFailure,
             });
         }
 
@@ -248,8 +262,8 @@ export default function ReviewForm({
 
     return (
         <>
-            <div className="w-full pt-2 max-w-5xl mx-auto flex justify-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div className="w-full p-4 pt-20 pb-20  max-w-4xl h-screen bg-black mx-auto flex justify-center">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
                     <LocationSection
                         name={locationName}
                         imagePath={locationImagePath}
@@ -258,7 +272,11 @@ export default function ReviewForm({
                     <RatingSection
                         rating={rating}
                         register={register("rating", {
-                            min: { value: 1, message: "評価を選択してください" },
+                            min: { value: 0, message: "評価の値は0から5までの範囲でお願いします。" },
+                            max: {
+                                value: 5,
+                                message: "評価の値は0から5までの範囲でお願いします。"
+                            }
                         })}
                         onPlusClick={() => handleRatingChange(1)}
                         onMinusClick={() => handleRatingChange(-1)}
@@ -269,9 +287,13 @@ export default function ReviewForm({
                         id="comment"
                         title="コメント"
                         rows={6}
-                        placeholder="この場所を教えてください。"
+                        placeholder="詳細な情報を教えてください。"
                         register={register("comment", {
-                            required: "コメントを入力してください",
+                            required: "コメントを入力してください。",
+                            maxLength: {
+                                value: 300,
+                                message: 'コメントは300文字以内にしてください。',
+                            },
                             validate: (value) =>
                                 value.trim().length > 0 || "コメントを入力してください",
                         })}
@@ -291,7 +313,7 @@ export default function ReviewForm({
                     <SubmitButton isSubmitting={isSubmitting} isEditMode={isEditMode} />
                 </form>
 
-                {isSubmitting && <Loading />}
+                {isSubmitting && <Loading message={isEditMode ? "更新中" : "投稿中"} />}
             </div>
 
             <Modal

@@ -7,6 +7,7 @@ import { MoreVertical, Loader2, Pencil, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import LikeButton from "./LikeButton";
+import Link from "next/link";
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -131,7 +132,9 @@ const ReviewItem = ({ review, onImageClick, onMenuAction, showMenu = false }: Re
 
     return (
         <div className="p-2 w-full flex flex-row justify-start items-start gap-3">
-            <ProfileImage sizes={36} imageUrl={review.user.image_path} />
+            <Link href={`profile/${review.user.id}`}>
+                <ProfileImage sizes={36} imageUrl={review.user.image_path} />
+            </Link>
             <div className="flex-1 flex flex-col justify-start items-start">
                 <div className="w-full flex flex-row justify-between items-center">
                     <div>
