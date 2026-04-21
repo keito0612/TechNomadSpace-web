@@ -13,7 +13,8 @@ import ProfileSkeleton from './skeleton';
 
 type ProfileResult =
     | { success: true; profile: Profile }
-    | { success: false; isAuthError: boolean };
+    | { success: false; isAuthError: boolean; isNotFound?: false }
+    | { success: false; isAuthError: false; isNotFound: true };
 
 const getProfile = async (token: string | undefined, id: string | undefined): Promise<ProfileResult> => {
     try {
@@ -35,12 +36,12 @@ const getProfile = async (token: string | undefined, id: string | undefined): Pr
             cache: 'no-store',
         });
 
-        if (res.status === 401) {
-            return { success: false, isAuthError: true };
+        if (res.status === 404) {
+            return { success: false, isAuthError: false, isNotFound: true };
         }
 
-        if (res.status === 404) {
-            notFound();
+        if (res.status === 401) {
+            return { success: false, isAuthError: true };
         }
 
         if (!res.ok) {
@@ -66,6 +67,9 @@ const ProfileContent = async ({ id }: { id: string | undefined }) => {
     const result = await getProfile(token, id);
 
     if (!result.success) {
+        if ('isNotFound' in result && result.isNotFound) {
+            notFound();
+        }
         return <ErrorView isAuthError={result.isAuthError} />;
     }
 

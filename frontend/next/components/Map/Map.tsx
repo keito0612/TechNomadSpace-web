@@ -10,6 +10,8 @@ interface MapProps {
   className?: string;
   locations?: LocationData[];
   onSheetOpenChange?: (isOpen: boolean) => void;
+  flyTo?: LatLngExpression | null;
+  onFlyToComplete?: () => void;
 }
 
 interface MapInnerProps {
@@ -18,6 +20,8 @@ interface MapInnerProps {
   className: string;
   locations: LocationData[];
   onSheetOpenChange?: (isOpen: boolean) => void;
+  flyTo?: LatLngExpression | null;
+  onFlyToComplete?: () => void;
 }
 
 const MapInner = dynamic<MapInnerProps>(
@@ -38,8 +42,20 @@ const Map = ({
   className = "h-full w-full",
   locations = [],
   onSheetOpenChange,
+  flyTo,
+  onFlyToComplete,
 }: MapProps) => {
-  return <MapInner center={center} zoom={zoom} className={className} locations={locations} onSheetOpenChange={onSheetOpenChange} />;
+  return (
+    <MapInner
+      center={center}
+      zoom={zoom}
+      className={className}
+      locations={locations}
+      onSheetOpenChange={onSheetOpenChange}
+      flyTo={flyTo}
+      onFlyToComplete={onFlyToComplete}
+    />
+  );
 };
 
 export default Map;
