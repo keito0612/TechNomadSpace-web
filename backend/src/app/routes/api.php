@@ -11,7 +11,7 @@ use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('profile/detail/{id}', [ProfileController::class, 'detail']);
+Route::get('profile/{id}', [ProfileController::class, 'show']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 

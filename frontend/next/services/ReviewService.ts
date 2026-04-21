@@ -10,6 +10,7 @@ interface CreateReviewParams {
 }
 
 interface UpdateReviewParams {
+    locationId: number;
     reviewId: number;
     rating: number;
     comment: string;
@@ -30,6 +31,16 @@ interface DeleteReviewResponse {
     message: string;
 }
 
+interface ValidationErrors {
+    [key: string]: string[];
+}
+
+interface FailureError {
+    message: string;
+    isAuthError: boolean;
+    fieldErrors?: ValidationErrors;
+}
+
 export class ReviewService {
     static async create({
         params,
@@ -38,7 +49,7 @@ export class ReviewService {
     }: {
         params: CreateReviewParams;
         success: (response: CreateReviewResponse) => void;
-        failure: (error: { message: string; isAuthError: boolean }) => void;
+        failure: (error: FailureError) => void;
     }): Promise<void> {
         try {
             const token = AuthService.getSesstion();
@@ -73,9 +84,10 @@ export class ReviewService {
                     failure({ message: 'ログインが必要です', isAuthError: true });
                 } else if (res.status === 422) {
                     const data = await res.json();
-                    const firstError = Object.values(data.errors || {})[0];
+                    const fieldErrors: ValidationErrors = data.errors || {};
+                    const firstError = Object.values(fieldErrors)[0];
                     const message = Array.isArray(firstError) ? firstError[0] : 'バリデーションエラー';
-                    failure({ message, isAuthError: false });
+                    failure({ message, isAuthError: false, fieldErrors });
                 } else {
                     failure({ message: 'レビューの投稿に失敗しました', isAuthError: false });
                 }
@@ -97,7 +109,7 @@ export class ReviewService {
     }: {
         params: UpdateReviewParams;
         success: (response: UpdateReviewResponse) => void;
-        failure: (error: { message: string; isAuthError: boolean }) => void;
+        failure: (error: FailureError) => void;
     }): Promise<void> {
         try {
             const token = AuthService.getSesstion();
@@ -108,6 +120,7 @@ export class ReviewService {
             }
 
             const formData = new FormData();
+            formData.append('location_id', params.locationId.toString());
             formData.append('rating', params.rating.toString());
             formData.append('comment', params.comment);
 
@@ -139,9 +152,10 @@ export class ReviewService {
                     failure({ message: '編集権限がありません', isAuthError: false });
                 } else if (res.status === 422) {
                     const data = await res.json();
-                    const firstError = Object.values(data.errors || {})[0];
+                    const fieldErrors: ValidationErrors = data.errors || {};
+                    const firstError = Object.values(fieldErrors)[0];
                     const message = Array.isArray(firstError) ? firstError[0] : 'バリデーションエラー';
-                    failure({ message, isAuthError: false });
+                    failure({ message, isAuthError: false, fieldErrors });
                 } else {
                     failure({ message: 'レビューの更新に失敗しました', isAuthError: false });
                 }

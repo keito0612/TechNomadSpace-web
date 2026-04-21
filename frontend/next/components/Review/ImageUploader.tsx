@@ -4,7 +4,7 @@ import { RefObject } from "react";
 import { X, ImagePlus } from "lucide-react";
 import Image from "next/image";
 
-export const MAX_IMAGE_COUNT = 5;
+export const MAX_IMAGE_COUNT = 4;
 export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 interface ExistingImageData {

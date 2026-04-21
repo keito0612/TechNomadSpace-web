@@ -1,10 +1,12 @@
 import Layout from "@/components/Layout/Layout";
+import Loading from "@/components/Loading";
 import NavBar from "@/components/Navbar";
 import ReviewForm from "@/components/Review/ReviewForm";
 import { AuthService } from "@/services/AuthService";
 import { Review } from "@/types/types";
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
+import { Suspense } from "react";
 
 interface LocationBasic {
     id: number;
@@ -81,15 +83,15 @@ export default async function ReviewEditPage({ params }: { params: Promise<{ id:
     const isEditMode = !!review;
 
     return (
-        <Layout>
-            <NavBar onBack title={isEditMode ? "編集" : "投稿"} />
-            <div className="p-4 pt-16 pb-20">
+        <Suspense fallback={<Loading message="読み込み中" />}>
+            <Layout>
+                <NavBar onBack title={isEditMode ? "編集" : "投稿"} />
                 <ReviewForm
                     locationId={location.id}
                     locationName={location.name}
                     review={review}
                 />
-            </div>
-        </Layout>
+            </Layout>
+        </Suspense>
     );
 }

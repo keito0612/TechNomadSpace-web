@@ -11,6 +11,7 @@ import { ReviewService } from '@/services/ReviewService';
 
 interface ProfileReviewTabsProps {
     profile: Profile;
+    isOwnProfile?: boolean;
 }
 
 interface ModalState {
@@ -92,7 +93,7 @@ const ReviewList = ({ reviews, emptyMessage, showMenu = false, onMenuAction }: R
     );
 };
 
-const ProfileReviewTabs = ({ profile }: ProfileReviewTabsProps) => {
+const ProfileReviewTabs = ({ profile, isOwnProfile = false }: ProfileReviewTabsProps) => {
     const router = useRouter();
     const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -173,8 +174,8 @@ const ProfileReviewTabs = ({ profile }: ProfileReviewTabsProps) => {
             key="post"
             reviews={profile.reviews}
             emptyMessage="投稿がありません"
-            showMenu={true}
-            onMenuAction={handleMenuAction}
+            showMenu={isOwnProfile}
+            onMenuAction={isOwnProfile ? handleMenuAction : undefined}
         />,
         <ReviewList
             key="like"
