@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FcmTokenController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LocationFavoriteController;
 use App\Http\Controllers\ProfileController;
@@ -51,5 +52,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [ReviewController::class, 'show']);
         Route::post('/update/{review}', [ReviewController::class, 'update']);
         Route::delete('/destroy/{review}', [ReviewController::class, 'destroy']);
+    });
+    Route::prefix('fcm')->group(function () {
+        Route::post('/token', [FcmTokenController::class, 'store']);
+        Route::delete('/token', [FcmTokenController::class, 'destroy']);
     });
 });

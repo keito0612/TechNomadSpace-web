@@ -54,7 +54,7 @@ class AuthController extends Controller
         $password = $request->input('password');
         $user = User::where('email', $email)->first();
 
-        if (!$user || !Hash::check($password, $user->password)) {
+        if (is_null($user)|| !Hash::check($password, $user->password)) {
             return response()->json([
                 'message' => 'メールアドレスまたはパスワードが正しくありません',
             ], Response::HTTP_UNAUTHORIZED);

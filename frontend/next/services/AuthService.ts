@@ -18,6 +18,12 @@ export class AuthService {
                 body: JSON.stringify(param),
             });
 
+            const contentType = res.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                failure('サーバーエラーが発生しました');
+                return;
+            }
+
             const data = await res.json();
             const token = data.token as string;
             if (res.ok) {
@@ -31,7 +37,6 @@ export class AuthService {
             }
         } catch (error) {
             failure("予期しないエラーが発生しました");
-            console.error('エラー発生', error);
         }
     }
 
@@ -45,6 +50,13 @@ export class AuthService {
                 },
                 body: JSON.stringify(param),
             });
+
+            const contentType = res.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                failure('サーバーエラーが発生しました');
+                return;
+            }
+
             const data = await res.json();
             const token = data.token as string;
             if (res.ok) {
