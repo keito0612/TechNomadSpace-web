@@ -1,9 +1,11 @@
 import { AuthService } from '@/services/AuthService';
+import { useSyncExternalStore } from 'react';
 import useSWR from 'swr';
-
 
 async function fetcher(url: string): Promise<{ unread_count: number }> {
     const token = AuthService.getSesstion();
+    if (!token) throw new Error('No token');
+
     const res = await fetch(url, {
         headers: {
             'Content-Type': 'application/json',
@@ -11,16 +13,24 @@ async function fetcher(url: string): Promise<{ unread_count: number }> {
         },
     });
 
-    if (!res.ok) {
-        throw new Error('Failed to fetch unread count');
-    }
-
+    if (!res.ok) throw new Error('Failed to fetch unread count');
     return res.json();
 }
 
+
+const subscribe = () => () => { };
+
 export function useUnreadCount() {
+    const token = useSyncExternalStore(
+        subscribe,
+        () => AuthService.getSesstion(),
+        () => null
+    );
+
     const { data, error, isLoading } = useSWR<{ unread_count: number }>(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/notifications/unread_count`,
+        token
+            ? `${process.env.NEXT_PUBLIC_API_URL}/api/notifications/unread_count`
+            : null,
         fetcher,
         {
             refreshInterval: 30_000,
@@ -29,7 +39,8 @@ export function useUnreadCount() {
 
     return {
         count: data?.unread_count ?? 0,
-        isLoading,
+        isLoading: !!token && isLoading,
         isError: !!error,
+        isLoggedIn: !!token,
     };
 }

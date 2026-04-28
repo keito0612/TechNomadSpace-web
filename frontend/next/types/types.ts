@@ -17,6 +17,13 @@ export type ProfileTabType = 'post' | 'like';
 export type ProviderType = 'google' | 'twitter';
 export type UserType = 'user' | 'admin';
 
+export interface ModalState {
+    isOpen: boolean;
+    type: ResultType;
+    title: string;
+    message: string;
+}
+
 export interface AuthForm {
     email: string;
     password: string;
@@ -123,11 +130,33 @@ export interface Review {
 };
 
 export interface Notification {
-    id: string;
-    type: string;
+    id: number;
+    user_id: number;
+    type: NotificationType;
     title: string;
     content: string;
-    time: string;
-    liked_by_user?: User | null;
+    from_user_id: number | null;
+    review_id: number | null;
+    is_read: boolean;
+    created_at: string;
+    updated_at: string;
+    from_user?: User | null;
+    review?: {
+        id: number;
+        location_id: number;
+    } | null;
+}
+
+export interface PaginationMeta {
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+    has_more: boolean;
+}
+
+export interface NotificationListResponse {
+    data: Notification[];
+    pagination: PaginationMeta;
 }
 

@@ -4,12 +4,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FcmTokenController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LocationFavoriteController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewLikeController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\UserController;
+use Google\Service\AndroidPublisher\Review;
 use Illuminate\Support\Facades\Route;
 
 Route::get('profile/{id}', [ProfileController::class, 'show']);
@@ -56,5 +58,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('fcm')->group(function () {
         Route::post('/token', [FcmTokenController::class, 'store']);
         Route::delete('/token', [FcmTokenController::class, 'destroy']);
+    });
+    Route::prefix('notifications')->group(function () {
+        Route::get('/', [NotificationController::class, 'index']);
+        Route::get('/unread_count', [NotificationController::class, 'unreadCount']);
+        Route::patch('/{notification}/read', [NotificationController::class, 'markAsRead']);
+        Route::patch('/read_all', [NotificationController::class, 'markAllAsRead']);
+        Route::delete('/delete_all', [NotificationController::class, 'deleteAll']);
+        Route::delete('/{id}', [NotificationController::class, 'delete']);
+        Route::get('/{id}', [NotificationController::class, 'detail']);
     });
 });

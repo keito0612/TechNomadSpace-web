@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Profile, ProfileTabType, Review, MenuAction, ResultType } from '@/types/types';
+import { Profile, ProfileTabType, Review, MenuAction, ResultType, ModalState } from '@/types/types';
 import ReviewItem from '@/components/Review/ReviewItem';
 import ImageModal from '@/components/Image/ImagesModal';
 import TabsContainer from '@/components/TabsContainer';
@@ -14,12 +14,7 @@ interface ProfileReviewTabsProps {
     isOwnProfile?: boolean;
 }
 
-interface ModalState {
-    isOpen: boolean;
-    type: ResultType;
-    title: string;
-    message: string;
-}
+
 
 const EmptyState = ({ message }: { message: string }) => {
     return (

@@ -43,7 +43,8 @@ const navigationBarTitles = [
     { name: "利用規約", href: "/terms" },
     { name: "プライバシーポリシー", href: "/privacy" },
     { name: "プロフィール", href: "/profile" },
-    { name: '設定', href: "/setting" }
+    { name: '設定', href: "/setting" },
+    { name: 'お知らせ', href: "/notifications" }
 ];
 
 function classNames(...classes: string[]) {
