@@ -6,8 +6,8 @@ import { useState } from 'react';
 interface SocialLoginButtonsProps {
     onError: (message: string) => void;
     disabled?: boolean;
+    from: 'login' | 'register';
 }
-
 
 const SocialGoogleButton = ({ isDisabled, onClick }: { isDisabled: boolean, onClick: () => void }) => {
     return (
@@ -42,34 +42,17 @@ const SocialGoogleButton = ({ isDisabled, onClick }: { isDisabled: boolean, onCl
     );
 }
 
-const SocialXButton = ({ isDisabled, onClick }: { isDisabled: boolean, onClick: () => void }) => {
-    return (
-        <button
-            type="button"
-            onClick={onClick}
-            disabled={isDisabled}
-            className="w-full flex items-center justify-center gap-3 h-11 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition-colors disabled:opacity-50"
-        >
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
-            <span className="text-sm font-medium text-gray-700">
-                Xでログイン
-            </span>
-        </button>
-    );
-}
-
-export const SocialLoginButtons = ({ onError, disabled = false }: SocialLoginButtonsProps) => {
+export const SocialLoginButtons = ({ onError, disabled = false, from }: SocialLoginButtonsProps) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSocialLogin = async (provider: ProviderType) => {
         setIsLoading(true);
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/${provider}/redirect`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/${provider}/redirect?from=${from}`);
             const data = await res.json();
             if (data.redirect_url) {
-                localStorage.setItem('oauth_provider', provider);
+                localStorage.setItem('oauth_provider', 'google');
+                localStorage.setItem('oauth_from', from);
                 window.location.href = data.redirect_url;
             } else {
                 onError(data.message || '認証URLの取得に失敗しました');
@@ -87,16 +70,15 @@ export const SocialLoginButtons = ({ onError, disabled = false }: SocialLoginBut
         <div className="mt-6">
             <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200" />
+                    <div className="w-full border-t border-gray-700" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-white text-gray-500">または</span>
+                    <span className="px-4 bg-gray-900 text-gray-400">または</span>
                 </div>
             </div>
 
-            <div className="mt-6 space-y-3">
-                <SocialGoogleButton isDisabled={isDisabled} onClick={() => handleSocialLogin('google')} />
-                <SocialXButton isDisabled={isDisabled} onClick={() => handleSocialLogin('twitter')} />
+            <div className="mt-6">
+                <SocialGoogleButton isDisabled={isDisabled} onClick={() => { handleSocialLogin('google') }} />
             </div>
         </div>
     );

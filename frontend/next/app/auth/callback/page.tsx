@@ -13,7 +13,22 @@ export default function AuthCallbackPage() {
     useEffect(() => {
         const processCallback = async () => {
             const code = searchParams.get('code');
-            const provider = searchParams.get('provider') || localStorage.getItem('oauth_provider');
+            const state = searchParams.get('state');
+            let provider = searchParams.get('provider') || localStorage.getItem('oauth_provider');
+            let from = localStorage.getItem('oauth_from') || 'login';
+
+            if (state) {
+                try {
+                    const stateData = JSON.parse(atob(state));
+                    if (!provider) provider = stateData.provider;
+                    if (stateData.from) from = stateData.from;
+                } catch {
+                    setError(`予想外のエラーが発生しました。\nお手数ですが、もう一度お試しください。`);
+                    setIsProcessing(false);
+                    return;
+                }
+            }
+
             const errorParam = searchParams.get('error');
 
             if (errorParam) {
@@ -23,7 +38,7 @@ export default function AuthCallbackPage() {
             }
 
             if (!code || !provider) {
-                setError('認証情報が不足しています');
+                setError(`認証情報が不足しています)`);
                 setIsProcessing(false);
                 return;
             }
@@ -37,7 +52,7 @@ export default function AuthCallbackPage() {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json',
                         },
-                        body: JSON.stringify({ code }),
+                        body: JSON.stringify({ code, state }),
                     }
                 );
 
@@ -45,8 +60,10 @@ export default function AuthCallbackPage() {
 
                 if (res.ok && data.token) {
                     localStorage.removeItem('oauth_provider');
+                    localStorage.removeItem('oauth_from');
                     AuthService.setSesstion(data.token);
-                    router.push('/');
+                    const redirectPath = from === 'register' ? '/register' : '/login';
+                    router.push(`${redirectPath}?social_success=true`);
                 } else {
                     setError(data.message || '認証に失敗しました');
                     setIsProcessing(false);
@@ -62,7 +79,7 @@ export default function AuthCallbackPage() {
 
     if (error) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+            <div className="min-h-screen flex items-center justify-center bg-blue-950 px-4">
                 <div className="w-full max-w-md">
                     <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
                         <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
@@ -86,10 +103,10 @@ export default function AuthCallbackPage() {
 
     if (isProcessing) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <div className="min-h-screen flex items-center justify-center bg-blue-950">
                 <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-                    <p className="text-gray-600">認証中...</p>
+                    <div className="w-12 h-12 mx-auto mb-4 border-4 border-white border-t-transparent rounded-full animate-spin" />
+                    <p className="text-white">認証中...</p>
                 </div>
             </div>
         );
