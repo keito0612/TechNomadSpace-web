@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Consts\UserType;
 use App\Exceptions\ProviderMismatchException;
 use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use InvalidArgumentException;
 use Laravel\Socialite\Facades\Socialite;
@@ -15,15 +17,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SocialAuthController extends Controller
 {
-    private const ALLOWED_PROVIDERS = ['google', 'twitter'];
+    private const ALLOWED_PROVIDERS = ['google'];
 
-    public function redirect(string $provider): JsonResponse
+    public function redirect(string $provider, Request $request): JsonResponse
     {
         try {
             $this->validateProvider($provider);
 
+            $from = $request->query('from', 'login');
+            $state = base64_encode(json_encode([
+                'provider' => $provider,
+                'from' => $from,
+            ]));
+
             $url = Socialite::driver($provider)
                 ->stateless()
+                ->with(['state' => $state])
                 ->redirect()
                 ->getTargetUrl();
 
@@ -34,6 +43,11 @@ class SocialAuthController extends Controller
             return response()->json([
                 'message' => $e->getMessage(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        } catch (\Exception $e) {
+            Log::error('Social auth redirect error: ' . $e->getMessage());
+            return response()->json([
+                'message' => '認証の開始に失敗しました。',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -46,9 +60,9 @@ class SocialAuthController extends Controller
         try {
             $this->validateProvider($provider);
 
-            $socialUser = Socialite::driver($provider)
-                ->stateless()
-                ->user();
+            $driver = Socialite::driver($provider)->stateless();
+            $tokenResponse = $driver->getAccessTokenResponse($request->input('code'));
+            $socialUser = $driver->userFromToken($tokenResponse['access_token']);
 
             $email = $socialUser->getEmail();
             $providerId = $socialUser->getId();
@@ -72,7 +86,7 @@ class SocialAuthController extends Controller
 
                 if ($existingUser) {
                     if ($existingUser->provider !== null && $existingUser->provider !== $provider) {
-                        throw new ProviderMismatchException($existingUser->provider);
+                        throw new ProviderMismatchException('既に別のソーシャルアカウントでアカウントを作成しています。');
                     }
 
                     $existingUser->update([
@@ -83,11 +97,16 @@ class SocialAuthController extends Controller
                     return ['user' => $existingUser, 'isNewUser' => false];
                 }
 
+                $name = $socialUser->getName()
+                    ?? $socialUser->getNickname()
+                    ?? explode('@', $email)[0];
+
                 $newUser = User::create([
-                    'name' => $socialUser->getNickname() ?? '',
+                    'name' => $name,
                     'email' => $email,
                     'provider' => $provider,
                     'provider_id' => $providerId,
+                    'type' => UserType::USER,
                 ]);
 
                 return ['user' => $newUser, 'isNewUser' => true];
@@ -113,7 +132,6 @@ class SocialAuthController extends Controller
             ], Response::HTTP_CONFLICT);
 
         } catch (InvalidArgumentException $e) {
-
             return response()->json([
                 'message' => $e->getMessage(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -128,7 +146,7 @@ class SocialAuthController extends Controller
     private function validateProvider(string $provider): void
     {
         if (!\in_array($provider, self::ALLOWED_PROVIDERS, true)) {
-            throw new InvalidArgumentException('Invalid provider');
+            throw new InvalidArgumentException('設定されていないログイン方法でログインしようとしています。');
         }
     }
 }

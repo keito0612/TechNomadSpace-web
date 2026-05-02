@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { SocialLoginButtons } from '@/components/SocialLoginButtons';
@@ -17,9 +17,9 @@ import Modal from '@/components/Modal';
 
 const SinInLink = () => {
     return (
-        <p className="mt-8 text-center text-sm text-gray-600">
+        <p className="mt-8 text-center text-sm text-gray-400">
             <span>アカウントをお持ちでない方は</span>
-            <Link href="/register" className="text-blue-600 hover:underline font-medium">
+            <Link href="/register" className="text-blue-400 hover:underline font-medium">
                 新規登録
             </Link>
         </p>
@@ -29,17 +29,19 @@ const SinInLink = () => {
 
 export default function LoginPage() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const isSocialSuccess = searchParams.get('social_success') === 'true';
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, formState: { errors }, setError } = useForm<AuthForm>();
-    const [isModal, setIsModal] = useState(false);
-    const [modalType, setModalType] = useState<ResultType>('Normal');
-    const [titleModal, setTitleModal] = useState("");
+    const [isModal, setIsModal] = useState(isSocialSuccess);
+    const [modalType, setModalType] = useState<ResultType>(isSocialSuccess ? 'Success' : 'Normal');
+    const [titleModal, setTitleModal] = useState(isSocialSuccess ? 'ログインが完了しました。' : '');
     const [messageModal, setMessageModal] = useState("");
 
     const onClose = () => {
         setIsModal(false);
         if (modalType === 'Success') {
-            router.back();
+            router.push('/');
         }
     }
 
@@ -78,7 +80,7 @@ export default function LoginPage() {
         <Layout className="relative" >
             <NavBar />
             <AuthBodyConteiner>
-                <h1 className="text-2xl font-bold text-center text-gray-900 mb-8">
+                <h1 className="text-2xl font-bold text-center text-white mb-8">
                     ログイン
                 </h1>
 
@@ -115,10 +117,12 @@ export default function LoginPage() {
                 </form>
 
                 <SocialLoginButtons
+                    from="login"
                     onError={(message: string) => {
                         setModalType('Error');
                         setTitleModal('エラー');
                         setMessageModal(message);
+                        setIsModal(true);
                     }}
                     disabled={isLoading}
                 />
