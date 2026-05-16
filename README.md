@@ -122,8 +122,12 @@ TechNomadSpace/
 ├── docker/                # Docker設定
 ├── docs/                  # ドキュメント
 │   └── SPECIFICATION.md   # 仕様書
+├── ER.dio                 # ER図（draw.io形式）
 └── docker-compose.yml
 ```
+
+## データベース設計
+ER図は `ER.dio` ファイルを [draw.io](https://app.diagrams.net/) で開いて確認できます。
 
 ## API
 
