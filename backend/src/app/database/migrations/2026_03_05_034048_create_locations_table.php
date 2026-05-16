@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('address')->unique();
-            $table->decimal('lat', 9, 6);
+            $table->string('thumbnail_image_path')->nullable(true)->comment('コアーキングスペースのサムネイル画像');
+            $table->decimal('lat', 10, 7);
             $table->decimal('lng', 10, 7);
             $table->integer('price_type')->comment('利用金額タイプ');
             $table->string('website_url')->nullable();

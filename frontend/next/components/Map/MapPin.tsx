@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { PriceType } from "@/types/types";
-import { Coffee, Star, Zap } from "lucide-react";
+import { Coffee, Star, JapaneseYen } from "lucide-react";
 
 interface MapPinProps {
     priceType: PriceType;
@@ -27,7 +27,7 @@ const PinIcon = ({ priceType, className, isSelected }: { priceType: PriceType, c
         case 1: // DrinkOnly
             return (<Coffee className={cn(size, iconColor, className)} />);
         case 2: // Paid
-            return (<Zap className={cn(size, iconColor, className)} />);
+            return (< JapaneseYen className={cn(size, iconColor, className)} />);
     }
 }
 

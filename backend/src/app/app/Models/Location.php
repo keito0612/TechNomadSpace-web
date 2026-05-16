@@ -14,12 +14,15 @@ class Location extends Model
     protected $fillable = [
         'name',
         'address',
+        'thumbnail_image_path',
         'lat',
         'lng',
         'price_type',
-        'closed_days',
+        'hourly_price',
+        'daily_price',
+        'minimum_price',
         'website_url',
-        'phone_number'
+        'phone_number',
     ];
 
     protected $casts = [

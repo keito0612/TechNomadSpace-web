@@ -1,0 +1,331 @@
+{
+    "北海道地方": {
+        "北海道": {
+            "BIZcomfort札幌": "https://bizcomfort.jp/hokkaido/sapporo.html?utm_source=google&utm_medium=meo&utm_campaign=sapporo",
+            "さっぽろ大通コワーキングスペース ドリノキ": "https://sapporo-odori.jp/dorinoki/dropinn/index.php",
+            "BIZcomfort札幌すすきの": "https://bizcomfort.jp/hokkaido/sapporo-susukino.html",
+            "コワーキングスペース 旭川37": "https://www.asahikawa-37.com/"
+        }
+    },
+    "東北地方": {
+        "青森県": {
+            "コワーキングスペースSANNOHE": "https://www.town.sannohe.aomori.jp/soshiki/machidukuri/1_1/3281.html",
+            "サンバスタンド": "https://sanba-stand.com/coworking-cafe"
+        },
+        "岩手県": {
+            "二戸のコワーキングスペースtricolabo": "https://nanyato-sisetu.com/#space",
+            "co-ba hanamaki(コーバ花巻)": "https://co-ba.net/hanamaki/",
+            "大船渡テレワークセンター": "https://www.ofunato-tc.com/"
+        },
+        "福島県": {
+            "コワーキングスペース一富士": "https://www.fukushima-iju.jp/facility/detail_72.html",
+            "シェアベースあいづ": "https://aizu.sharebase.jp/co-working-space/",
+            "福島コトひらく": "https://costar-npo.org/?page_id=12",
+            "co-ba koriyama": "https://co-ba.net/koriyama/",
+            "テレワークセンター テラス石森": "https://switch-terrace.com/service/coworking/share",
+            "桑折シェアオフィスHatch（ハッチ）": "https://koori-hatch.work/",
+            "アオスバシ": "https://aosubashi.space/workspace",
+            "個室コワーキング＆チル「MIHAKO」": "https://furutakiya-mihako.my.canva.site/",
+            "いわき産業創造館": "https://iwaki-sansoukan.com/shared_office/"
+        },
+        "秋田県": {
+            "阿仁比立内がっこステーション": "https://common3.pref.akita.lg.jp/kigyo-rich/satellite-office/index.html?article_id=541",
+            "コワーキングスペースかま蔵": "https://select-type.com/p/workspace-kamakura/"
+        },
+        "山形県": {
+            "コワーキングスペースなれあい": "https://www.nareai.jp/",
+            "コワーキングスペース スタジオ八百萬": "https://studio800man.com/%e6%96%99%e9%87%91%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0/",
+            "米沢駅コワーキングスペース": "https://www.city.yonezawa.yamagata.jp/category/kanko_iju/1/5224.html",
+            "PROJECT PORT TRY&": "https: //tryand.dano.co.jp/tryand_service"
+        },
+        "宮城県": {
+            "ソシラボ": "http://socilabo.com/",
+            "ステージライン仙台駅前": "https://coistage.com/coworking-space-price",
+            "BIZcomfort 仙台クリスロード": "https://bizcomfort.jp/miyagi/sendai-clisroad.html?utm_source=google&utm_medium=meo&utm_campaign=sendai-clisroad&gad_source=6&gad_campaignid=1758125004&gbraid=0AAAAACzWu-DtRVa6b9X5hl1oV7ndmCzul&gclid=Cj0KCQjw_IXQBhCkARIsADqELbJ65T1M8VUlJqf67fuBHaSwQ_floPIw-OuttPc3kBSICY6tqHshM58aAlXCEALw_wcB"
+        }
+    },
+    "関東地方": {
+        "東京都": {
+            "都庁 展望室 特設スペース": "https://www.yokoso.metro.tokyo.lg.jp/tenbou/",
+            "武蔵野プレイス": "https://www.library.musashino.tokyo.jp/place",
+            "BasisPoint": "https://basispoint.tokyo/",
+            "AWS Loft Tokyo": "https://aws.amazon.com/jp/loft/tokyo/",
+            "いいオフィス": "https://e-office.space/"
+        },
+        "神奈川県": {
+            "Ginnovation Hub": "https://ginnovation.city.yokohama.lg.jp/",
+            "G-SHELTER": "https://g-shelter.net/",
+            "湘南ラウンジ": "https://store.tsite.jp/shonan/floor/shop/shonan-lounge/",
+            "massmass": "https://massmass.jp/"
+        },
+        "千葉県": {
+            "柏の浜 KOIL": "https://www.koil.jp/facility/lounge/",
+            "まるも": "https://marumo.net/",
+            "SHI TSU RA E": "https://shitsurae.com/"
+        },
+        "埼玉県": {
+            "コワーキングスペース7F": "https://office7f.com/",
+            "ソニド": "https://sonido.jp/",
+            "エムズひろば": "https://ms-hiroba.com/"
+        },
+        "茨城県": {
+            "つくばスタートアップパーク": "https://tsukuba-stapa.jp/",
+            "いいオフィス下館 by 晴天": "https://e-office.space/shimonate-by-seiten/",
+            "AnyWorking": "https://anyworking.jp/"
+        },
+        "栃木県": {
+            "サカサライト": "https://sakasalight.com/",
+            "宇都宮市まちづくりセンター": "https://www.it-yitc.jp/city-machidukuri/",
+            "nasu lab.": "https://nasulab.io/"
+        },
+        "群馬県": {
+            "NETSUGEN": "https://netsugen.jp/",
+            "前橋まちなかエージェンシー": "https://M-M-A.jp/",
+            "コワーキングスペース 糸": "https://ito-coworking.com/"
+        }
+    },
+    "中部地方": {
+        "愛知県": {
+            "MIKOSHIYA": "https://mikoshi-ya.com/",
+            "sharebase.InC": "https://sites.google.com/view/sharebase-inc/system",
+            "なごのキャンパス": "https://nagono-campus.jp/office/",
+            "ベースキャンプ名古屋": "https://basecamp-nagoya.jp/"
+        },
+        "岐阜県": {
+            "むすぶテラス": "https://www.town.anpachi.lg.jp/musubuterasu/index.html",
+            "ドロップイン岐阜": "https://dropin-gifu.com/",
+            "Neo work-Gifu": "https://www.city.gifu.lg.jp/sangyo/koyou/1005214/1009180.html"
+        },
+        "静岡県": {
+            "イトリエ": "https://coworking-hamakita.com/page-660/",
+            "コワーキングスペース C-BASE": "https://c-base-shimada.jimdofree.com/",
+            "コワーキング＆シェアオフィス cocode": "https://cocode.space/plan/#price",
+            "飲食持ち込み自由な自習室 space.ibasho": "https://flat-goto-3035.pupu.jp/",
+            "三島クロケット": "https://www.crqt.work/"
+        },
+        "長野県": {
+            "TERMINAL51°": "https://terminal51.jp/price",
+            "CREEKS NAGANO": "https://creeks-coworking.com/coworking/",
+            "GEEKLAB.NAGANO": "https://geeklab-nagano.com/"
+        },
+        "山梨県": {
+            "TO-CHI | トーチ": "https://www.porta-y.jp/133570",
+            "山梨県立やまなし地域づくり交流センター": "https://www.yamanashi-cc.jp/coworking.php",
+            "CROSS BE": "https://crossbe.co.jp/service.html",
+            "長坂コワーキングスペース": "https://www.city.hokuto.yamanashi.jp/s-office/facility/coworking-nagasaka.html"
+        },
+        "新潟県": {
+            "MOYORe:": "https://www.moyore-niigata.jp/",
+            "Sea Point NIIGATA": "https://seapoint.info/",
+            "三条ものづくり学校": "https://sanjo-school.jp/"
+        },
+        "富山県": {
+            "MARUUTSU": "https://maruutsu.com/",
+            "SCOP TOYAMA": "https://scop-toyama.jp/facility/",
+            "HATCH": "https://hatch-toyama.com/"
+        },
+        "石川県": {
+            "100BANCH Kanazawa": "https://100banch.com/kanazawa/",
+            "ITビジネスプラザ武蔵": "https://www.it-biz.jp/facility/exchange.html",
+            "金沢学生のまち市民交流館": "https://www.kanazawa-gakusei.jp/"
+        },
+        "福井県": {
+            "ラサンテ": "https://lasante-fukui.com/",
+            "ふくい創生・交流拠点": "https://www.pref.fukui.lg.jp/doc/wakamonoseisaku/kouryuten.html",
+            "新幹線開通で注目の「越前市 創生シンボル『てんぐりもん』」": "https://tengurimon.jp/"
+        }
+    },
+    "近畿地方": {
+        "兵庫県": {
+            "コワーキングスペースSHARES（シェアーズ）": "https://shares-lab.jp/price/",
+            "moccoハナレ": "https://moccomocco.net/",
+            "OFFICE CAMPUS": "https://office-campus.life",
+            "BASE宝塚": "https://base-takarazuka.com/price/",
+            "Worldwide KOBE": "https://worldwidekobe.com/price-guide/#coworking",
+            "WAY OUT": "https://wayout.bz/price/",
+            "にしのみやCoworking コワクラ": "https://www.kowakura.info/coworkingspace/",
+            "コワーキングスペースSARASA": "https://sarasa-cowork.com/"
+        },
+        "大阪府": {
+            "BIZcomfortなんば御堂筋": "https://bizcomfort.jp/osakafu/namba-midosuji.html?utm_source=google&utm_medium=meo&utm_campaign=namba-midosuji",
+            "Reqree Vellenord": "https://reqree.co.jp/vellenord/plan/",
+            "LiveCoals": "https://izumi-livecoals.com/",
+            "COMMUNE": "https://commune-rinku.com/use/"
+        },
+        "京都府": {
+            "コモンルーム四条烏丸": "https://common-room.jp/shijokarasuma/coworking/",
+            "Co-nnect京都": "https://co-nnect.kyoto/",
+            "GROVING BASE": "https://groving-base.jp/service/coworkingspace/"
+        },
+        "奈良県": {
+            "イコマド": "https://ikoma-do.studio.site/open-space"
+        },
+        "滋賀県": {
+            "今プラス 元歯医者さん店": "https://start-now.link/",
+            "COWORKING TORKS": "https://torks.jp/",
+            "グランアート・コワーキングスペース": "https://granart-coworkingspace.com/system/"
+        },
+        "和歌山県": {
+            "Park Biz WAKAYAMA": "https://parkbiz-wakayama.atomica.co.jp/blog/aloa63u8"
+        },
+        "三重県": {
+            "SKYGARDEN": "https://www.platon-hotel.co.jp/coworking/",
+            "しごとば油屋 ii むすび目 Co-working事務所": "https://kii3.com/musubime/#cowork",
+            "Coworking Cafe CC": "https://coworking-team-y.com/charge.php",
+            "コワーキングスペースSHINYU(シンユウ)": "https://shinyu.work/plan/coworking/",
+            "コワーキングスペース・アスピア": "https://www.nabari.or.jp/coworking/ryokin/index.html#dropin"
+        }
+    },
+    "四国地方": {
+        "愛媛県": {
+            "KIKUKO": "https://kikuko-setouchi.com/coworkingspace/",
+            "サカエマチHOLIC": "https://sakaemachi-holic.com/",
+            "コワーキングスペース新居浜びず": "https://niihama.biz/coworkingspace/"
+        },
+        "高知県": {
+            "四万十町コワーキングスペース": "https://www.town.shimanto.lg.jp/life/detail.php?hdnKey=10584"
+        },
+        "香川県": {
+            "Kotori Coworking & Hostel Takamatsu": "https://www.kotori-japan.com/takamatsu/coworking.html"
+        },
+        "徳島県": {
+            "cocoatta": "https://cocoatta.com/drop-in/",
+            "くらまち": "https: //kuramachi.jp/plan/",
+            "交流スペースkocolo": "https://komatsushima-kocolo.info/",
+            "NuuN | CAFE&BAR": "https://nuun-anan.com/co-working-space/",
+            "うずコワーク": "https://uzuco.work/"
+        }
+    },
+    "中国地方": {
+        "山口県": {
+            "JOIN083 大丸下関店": "https://www.join083.net/",
+            "EN-biz": "https://en-biz.com/plan/",
+            "nido": "https://sites.google.com/view/nido-ubenosu",
+            "Megriba": "https://megriba.jp/overview/coworking/",
+            "mirai365 やまぐち創業応援スペース": "https://mirai365.jp/coworking/",
+            "Work＆Community Space もっくのもり": "https://moc-mori.jp/price",
+            "CROSS SPACE 紡 -クロススペースつむぎ-": "https://www.tsumugi971.com/",
+            "岩国しごと交流・創業スペース Class Biz.": "https://iwakuni-classbiz.com/facility/coworking/"
+        },
+        "島根県": {
+            "岩国しごと交流・創業スペース Class Biz.": "https://okiplaza.com/iroiro/",
+            "三日市ラボ": "https://www.hokkori-unnan.jp/mikkaichi-labo/how.html",
+            "suomi COWORKING 24h": "https://suomi.blue/suomi-coworking/",
+            "コワーキングスペース enun 縁雲 松江": "https://enun.jp/plan/#service",
+            "コワーキングスペース松江天神": "https://www.kankou-shimane.com/uruoi-workation/workspot/coworking-space_matsuetenjin/"
+        },
+        "広島県": {
+            "port.cloud": "https://www.port-cloud.jp/",
+            "co-ba hiroshima": "https://co-ba.net/hiroshima/",
+            "コワーキングスペースShakeHands": "https://www.shakehands.jp/",
+            "Hiromalab ヒロマラボ": "https://www.hiromalab.jp/",
+            "いいオフィス広島byLIG": "https://e-office.space/spaces/chugoku-shikoku/hiroshima/hiroshimashi/hiroshima-by-lig"
+        },
+        "岡山県": {
+            "コワーキングスペースUffice": "https://cocomaniwa.com/local20220519/",
+            "コトヤド": "https://tsuyama-telework.jp/cotoyado/rate-plan/",
+            "HASHTAG岡山": "https://oka-kitanagase.hashtags.biz/facility/nav",
+            "Samurai Square": "https://www.samurai-square.com/plan/",
+            "コワーキングスペース うのベース": "https://uno-base.com/"
+        },
+        "鳥取県": {
+            "サインインコワーキングオフィス": "https: //co-working-sanin.com/",
+            "HARI": "https://hari-yonago.com/",
+            "スイコーワークキャンプ": "https://suikoworkcamp.jp/",
+            "ホテルレッシュ鳥取駅前 コワーキングスペース ": "https://www.resh.jp/",
+            "COWORKING SALON ToBelmo": "https://tobelmo.estate-center.co.jp/"
+        }
+    },
+    "九州地方": {
+        "鹿児島県": {
+            "かごゆいテラス": "https://kagoyui-co.jp/",
+            "Q-Lounge KAGOSHIMA": "https://q.jrkyushu.co.jp/q-lounge-kagoshima/",
+            "ライカワークラウンジ": "https://li-ka-worklounge.com/worklounge",
+            "いいオフィス加治屋町 by動画編集CAMP": "https://e-office.space/spaces/kyushu/kagoshima/kagoshimashi/kajiyacho-by-camp",
+            "アクセアカフェ鹿児島中央店": "https://cafe.accea.co.jp/map/kagoshima_chuo.php",
+            "日日nova［ひびのば］": "https://hibinova.com/workspace/",
+            "マークメイザン": "https://mark-meizan.io/communication-space/",
+            "Buzul C＆C": "https: //buzul.space/"
+        },
+        "宮崎県": {
+            "延岡市コワーキングスペース": "https://nobeoka-coworking.jp/nobeoka/p_plan/#coworking",
+            "ATOMica宮崎 ( アトミカ )": "https://atomica-miyazaki.jp/office",
+            "KIW BRUNCH02 アミュプラザみやざき": "https://kyushuisland-work.com/workplace/amyu-brunch02/",
+            "ヒュウガベース - HYUGA BASE - 日向ベース": "https://hyugabase.jp/",
+            "TENOSSE": "https://tenosse.com/",
+            "高千穂コワーキング・スペース４５２": "https://iju.pref.miyazaki.lg.jp/workation/workspace/workspace-306/?doing_wp_cron=1777827841.6665179729461669921875",
+            "SURF CITY 宮崎 +ワークプレイス": "https://iju.pref.miyazaki.lg.jp/workation/workspace/workspace-1667/?doing_wp_cron=1777827980.090120077133178710937",
+            "未来創造ステーション": "https://www.machidukuri-miyakonojo-city.jp/mirai-co-sp/",
+            "ベッセルホテル都城 ワークプレイス": "https://kyushuisland-work.com/workplace/vessel-workplace/"
+        },
+        "沖縄県": {
+            "勉強カフェ 那覇ラーニングスタジオ": "https://benkyo-cafe-okinawa.com/",
+            "docomo howlive Urasoe": "https://docomo-howlive.jp/",
+            "https://www.koza.rocks/ksa-works": "コワーキングスペース KSA Works",
+            "コワーキングスペース howlive 名護宮里店": "https://howlive.jp/plan-and-price",
+            "co-working space seeds": "https://team-place.com/space/921"
+        },
+        "熊本県": {
+            "コワーキングスペース 未来づくり拠点MOG": "https://e-office.space/spaces/kyushu/kumamoto/asogun/minamioguni-by-mog",
+            "Connet（益城のコワーキングスペース）": "https://connet-mashiki.com/",
+            "はなたてコワーキングスペース": "https://www.hanatate-cws.com/space#anchors-m3pab06r4"
+        },
+        "福岡県": {
+            "マークシェア天神赤坂": "https://mark-share.com/",
+            "the from 赤坂駅前店": "https://the-from.com/",
+            "Zero-Ten Park": "https://thecompany.jp/multi-location/daimyo/",
+            "ヨカラボ天神": "https://yokalab.jp/price/",
+            "URBANG TABLE ": "https://www.ur-net.go.jp/kyusyu/v8klms000000751y.html",
+            "MILL SPACE 福岡": "https://millgym.jp/coworking-space/",
+            "iGrowth Ship": "https://igrowthship.jp/",
+            "勉強カフェ博多プレース": "https://benkyo-cafe-hakata.com/",
+            "エンジニアカフェ": "https://engineercafe.jp/ja/",
+            "Garrawayf": "https://garrawayf.com/",
+            "Q-Works FUKUMA｜福間駅ナカのレンタルオフィス・コワーキングスペース": "https://q.jrkyushu.co.jp/q-works-fukuma/",
+            "ATOMica北九州": "https://atomica-kitakyushu.jp/office#plan-ojpy6s2f",
+            "里山のシェアスペース ツノオンド": "https://tsuno-ond.localinfo.jp/pages/7074800/collection"
+        },
+        "佐賀県": {
+            "コワーキングスペースPORTO3316": "https://peraichi.com/landing_pages/view/porto3316imari",
+            "MEME KARATSU": "https://memekaratsu.com/",
+            "音無てらす": "https://otonashi-terrace.localinfo.jp/",
+            "ノギ「コーヒー無料の作業場」": "https://nogi-saga.com/coworking.html",
+            "マチノシゴトバ COTOCO215": "https://co-cotoco.jp/cotoco215/facilities/",
+            "AMCCビジネスラウンジ": "https://amcc.work/",
+            "NesXt TOSU(ネストトス) -コワーキングスペース-": "https://nesxt-tosu.com/",
+            "1/3rd Life(ワンサードライフ)鳥栖店": "https://www.life.1-3rdfitness-tosu.com/",
+            "コワーキングスペース｜BOTANYA -ぼたんや-": "https://violet924681.studio.site/"
+        },
+        "長崎県": {
+            "WORK@NAGASAKI （ワークアットナガサキ）コワーキング": "https://www.nagasakistadiumcity.com/work-at/",
+            "NewWork 長崎": "https://www.newwork109.com/post/store/6375",
+            "ほっとHOTスクエア長崎駅前（ほっとスクエア）": "https://takahira.net/hotsquare/",
+            "コワーキングスペースミナト": "https://minato-space.com/",
+            "ツナグバサンカク": "https://tsunaguba.com/wp",
+            "コワーキングスペースAGORA出島": "https://agora-cowork.jp/",
+            "ダイアゴナルラン長崎": "https://agora-cowork.jp/",
+            "コワーキング喫茶 ヒゲとハゲ": "https://higehage.com/"
+        },
+        "大分県": {
+            "大分オーパ まちのコワークpowered by ATOMica（コワーキング）": "https://oitaopa-machino-cowork.com/",
+            "いいオフィス大分 by動画編集CAMP": "https://e-office.space/spaces/kyushu/oita/oitashi/oita-by-camp",
+            "ONE SPACE": "https://www.instagram.com/onespace.11111/",
+            "H.W.L cafe&works／コワーキングスペース": "https://hcowo.com/h/",
+            "Oita Co.Lab Lounge（おおいたコラボラウンジ）": "https://oita-colab.com/?utm_source=google&utm_medium=maps",
+            "リージャス大分駅北口ビジネスセンター": "https://www.regus-office.jp/area-serch/oita-area/oitaeki-kitaguchi/?utm_source=google&utm_medium=map&campaign=office_promotio",
+            "KATETE（カテテ・コワーキング・イベントスペース）": "https://katete-oita.studio.site",
+            "大分銀行 コワーキングスペース ビジカム": "https://pkg.navitime.co.jp/oitabank/spot/detail?code=0000000283",
+            "イノベーションスペース 別府 かめや": "https://beppu-kameya.studio.site",
+            "a side-満寿屋-": "https://1side.jp",
+            "コワーキングスペースLink": "https://link-coworking.com/",
+            "https://hood-oita.com/officehood/": "オフィスHOOD",
+            "コモールカフェ": "https://beppu.comall.space/",
+            "communityspace 026": "https://026coworking.com/coworking",
+            "由布院サテライトオフィス": "https://www.satellite-yufuin.com/",
+            "コワーキングスペース 秘密基地中津": "https://himitsukichi-nakatsu.com/about-coworking/",
+            "くにさきサテライトオフィス スポークネット": "https://www.city.kunisaki.oita.jp/site/shinko/kunisaki-satellite-office.html",
+            "姫島ITアイランドセンター": "https://www.himeshima-it.jp/workspace/#art2",
+            "MO Re:tune（モリチューン）": "https://mo-retune.studio.site"
+        }
+    }
+}
