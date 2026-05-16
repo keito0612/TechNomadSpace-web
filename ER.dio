@@ -1,9 +1,10 @@
 <mxfile host="65bd71144e">
     <diagram name="TechNomadSpace ER Diagram" id="er-diagram">
-        <mxGraphModel dx="1059" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1400" math="0" shadow="0">
+        <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
+                <!-- users テーブル (左上) -->
                 <mxCell id="users" value="users" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
                     <mxGeometry x="40" y="40" width="260" height="340" as="geometry"/>
                 </mxCell>
@@ -52,8 +53,34 @@
                 <mxCell id="users-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="users" vertex="1">
                     <mxGeometry y="320" width="260" height="22" as="geometry"/>
                 </mxCell>
+                <!-- user_reviews テーブル (中央上) -->
+                <mxCell id="user_reviews" value="user_reviews" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="40" width="240" height="166" as="geometry"/>
+                </mxCell>
+                <mxCell id="reviews-pk" value="id : bigint (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="user_reviews" vertex="1">
+                    <mxGeometry y="26" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="reviews-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="user_reviews" vertex="1">
+                    <mxGeometry y="48" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="reviews-user" value="user_id : bigint (FK -> users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="user_reviews" vertex="1">
+                    <mxGeometry y="56" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="reviews-location" value="location_id : bigint (FK -> locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="user_reviews" vertex="1">
+                    <mxGeometry y="78" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="reviews-rating" value="rating : int (0-5)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="user_reviews" vertex="1">
+                    <mxGeometry y="100" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="reviews-comment" value="comment : text" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="user_reviews" vertex="1">
+                    <mxGeometry y="122" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="reviews-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="user_reviews" vertex="1">
+                    <mxGeometry y="144" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <!-- locations テーブル (右上) -->
                 <mxCell id="locations" value="locations" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-                    <mxGeometry x="680" y="40" width="260" height="340" as="geometry"/>
+                    <mxGeometry x="820" y="40" width="260" height="340" as="geometry"/>
                 </mxCell>
                 <mxCell id="locations-pk" value="id : bigint (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="locations" vertex="1">
                     <mxGeometry y="26" width="260" height="22" as="geometry"/>
@@ -97,37 +124,14 @@
                 <mxCell id="locations-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="locations" vertex="1">
                     <mxGeometry y="298" width="260" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="user_reviews" value="user_reviews" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-                    <mxGeometry x="360" y="460" width="240" height="166" as="geometry"/>
-                </mxCell>
-                <mxCell id="reviews-pk" value="id : bigint (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="user_reviews" vertex="1">
-                    <mxGeometry y="26" width="240" height="22" as="geometry"/>
-                </mxCell>
-                <mxCell id="reviews-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="user_reviews" vertex="1">
-                    <mxGeometry y="48" width="240" height="8" as="geometry"/>
-                </mxCell>
-                <mxCell id="reviews-user" value="user_id : bigint (FK -&gt; users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="user_reviews" vertex="1">
-                    <mxGeometry y="56" width="240" height="22" as="geometry"/>
-                </mxCell>
-                <mxCell id="reviews-location" value="location_id : bigint (FK -&gt; locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="user_reviews" vertex="1">
-                    <mxGeometry y="78" width="240" height="22" as="geometry"/>
-                </mxCell>
-                <mxCell id="reviews-rating" value="rating : int (0-5)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="user_reviews" vertex="1">
-                    <mxGeometry y="100" width="240" height="22" as="geometry"/>
-                </mxCell>
-                <mxCell id="reviews-comment" value="comment : text" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="user_reviews" vertex="1">
-                    <mxGeometry y="122" width="240" height="22" as="geometry"/>
-                </mxCell>
-                <mxCell id="reviews-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="user_reviews" vertex="1">
-                    <mxGeometry y="144" width="240" height="22" as="geometry"/>
-                </mxCell>
+                <!-- likes テーブル (user_reviews の下) -->
                 <mxCell id="likes" value="likes" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
-                    <mxGeometry x="40" y="500" width="240" height="120" as="geometry"/>
+                    <mxGeometry x="440" y="260" width="240" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="likes-pk" value="user_id : bigint (PK, FK -&gt; users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=3;" parent="likes" vertex="1">
+                <mxCell id="likes-pk" value="user_id : bigint (PK, FK -> users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=3;" parent="likes" vertex="1">
                     <mxGeometry y="26" width="240" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="likes-pk2" value="user_review_id : bigint (PK, FK -&gt; user_reviews)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=3;" parent="likes" vertex="1">
+                <mxCell id="likes-pk2" value="user_review_id : bigint (PK, FK -> user_reviews)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=3;" parent="likes" vertex="1">
                     <mxGeometry y="48" width="240" height="22" as="geometry"/>
                 </mxCell>
                 <mxCell id="likes-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="likes" vertex="1">
@@ -136,8 +140,9 @@
                 <mxCell id="likes-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="likes" vertex="1">
                     <mxGeometry y="78" width="240" height="22" as="geometry"/>
                 </mxCell>
+                <!-- review_images テーブル (likes の下) -->
                 <mxCell id="review_images" value="review_images" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-                    <mxGeometry x="680" y="460" width="260" height="164" as="geometry"/>
+                    <mxGeometry x="440" y="430" width="260" height="164" as="geometry"/>
                 </mxCell>
                 <mxCell id="ri-pk" value="id : bigint (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="review_images" vertex="1">
                     <mxGeometry y="26" width="260" height="22" as="geometry"/>
@@ -145,10 +150,10 @@
                 <mxCell id="ri-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="review_images" vertex="1">
                     <mxGeometry y="48" width="260" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="ri-review" value="user_review_id : bigint (FK -&gt; user_reviews)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="review_images" vertex="1">
+                <mxCell id="ri-review" value="user_review_id : bigint (FK -> user_reviews)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="review_images" vertex="1">
                     <mxGeometry y="56" width="260" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="ri-location" value="location_id : bigint (FK -&gt; locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="review_images" vertex="1">
+                <mxCell id="ri-location" value="location_id : bigint (FK -> locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="review_images" vertex="1">
                     <mxGeometry y="78" width="260" height="22" as="geometry"/>
                 </mxCell>
                 <mxCell id="ri-name" value="image_name : text" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="review_images" vertex="1">
@@ -160,8 +165,9 @@
                 <mxCell id="ri-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="review_images" vertex="1">
                     <mxGeometry y="142" width="260" height="22" as="geometry"/>
                 </mxCell>
+                <!-- amenities テーブル (locations の右) -->
                 <mxCell id="amenities" value="amenities" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
-                    <mxGeometry x="1020" y="40" width="260" height="230" as="geometry"/>
+                    <mxGeometry x="1160" y="40" width="260" height="230" as="geometry"/>
                 </mxCell>
                 <mxCell id="amenities-pk" value="id : bigint (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="amenities" vertex="1">
                     <mxGeometry y="26" width="260" height="22" as="geometry"/>
@@ -169,7 +175,7 @@
                 <mxCell id="amenities-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="amenities" vertex="1">
                     <mxGeometry y="48" width="260" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="amenities-location" value="location_id : bigint (FK -&gt; locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="amenities" vertex="1">
+                <mxCell id="amenities-location" value="location_id : bigint (FK -> locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="amenities" vertex="1">
                     <mxGeometry y="56" width="260" height="22" as="geometry"/>
                 </mxCell>
                 <mxCell id="amenities-wifi" value="has_wifi : boolean (default: false)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="amenities" vertex="1">
@@ -193,8 +199,9 @@
                 <mxCell id="amenities-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="amenities" vertex="1">
                     <mxGeometry y="210" width="260" height="22" as="geometry"/>
                 </mxCell>
+                <!-- opening_hours テーブル (amenities の下) -->
                 <mxCell id="opening_hours" value="opening_hours" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
-                    <mxGeometry x="1020" y="300" width="260" height="164" as="geometry"/>
+                    <mxGeometry x="1160" y="300" width="260" height="164" as="geometry"/>
                 </mxCell>
                 <mxCell id="oh-pk" value="id : bigint (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="opening_hours" vertex="1">
                     <mxGeometry y="26" width="260" height="22" as="geometry"/>
@@ -202,7 +209,7 @@
                 <mxCell id="oh-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="opening_hours" vertex="1">
                     <mxGeometry y="48" width="260" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="oh-location" value="location_id : bigint (FK -&gt; locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="opening_hours" vertex="1">
+                <mxCell id="oh-location" value="location_id : bigint (FK -> locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="opening_hours" vertex="1">
                     <mxGeometry y="56" width="260" height="22" as="geometry"/>
                 </mxCell>
                 <mxCell id="oh-day" value="day_of_week : tinyint (0-6)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="opening_hours" vertex="1">
@@ -217,23 +224,9 @@
                 <mxCell id="oh-closed" value="is_closed : boolean (default: false)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="opening_hours" vertex="1">
                     <mxGeometry y="144" width="260" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="location_favorites" value="location_favorites" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
-                    <mxGeometry x="360" y="680" width="240" height="120" as="geometry"/>
-                </mxCell>
-                <mxCell id="lf-pk" value="user_id : bigint (PK, FK -&gt; users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=3;" parent="location_favorites" vertex="1">
-                    <mxGeometry y="26" width="240" height="22" as="geometry"/>
-                </mxCell>
-                <mxCell id="lf-pk2" value="location_id : bigint (PK, FK -&gt; locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=3;" parent="location_favorites" vertex="1">
-                    <mxGeometry y="48" width="240" height="22" as="geometry"/>
-                </mxCell>
-                <mxCell id="lf-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="location_favorites" vertex="1">
-                    <mxGeometry y="70" width="240" height="8" as="geometry"/>
-                </mxCell>
-                <mxCell id="lf-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="location_favorites" vertex="1">
-                    <mxGeometry y="78" width="240" height="22" as="geometry"/>
-                </mxCell>
+                <!-- user_settings テーブル (users の下) -->
                 <mxCell id="user_settings" value="user_settings" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-                    <mxGeometry x="40" y="680" width="240" height="142" as="geometry"/>
+                    <mxGeometry x="40" y="430" width="240" height="142" as="geometry"/>
                 </mxCell>
                 <mxCell id="us-pk" value="id : bigint (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="user_settings" vertex="1">
                     <mxGeometry y="26" width="240" height="22" as="geometry"/>
@@ -241,7 +234,7 @@
                 <mxCell id="us-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="user_settings" vertex="1">
                     <mxGeometry y="48" width="240" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="us-user" value="user_id : bigint (FK -&gt; users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="user_settings" vertex="1">
+                <mxCell id="us-user" value="user_id : bigint (FK -> users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="user_settings" vertex="1">
                     <mxGeometry y="56" width="240" height="22" as="geometry"/>
                 </mxCell>
                 <mxCell id="us-email" value="is_email : boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="user_settings" vertex="1">
@@ -253,8 +246,9 @@
                 <mxCell id="us-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="user_settings" vertex="1">
                     <mxGeometry y="122" width="240" height="22" as="geometry"/>
                 </mxCell>
+                <!-- notifications テーブル (users の下) -->
                 <mxCell id="notifications" value="notifications" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-                    <mxGeometry x="680" y="680" width="260" height="230" as="geometry"/>
+                    <mxGeometry x="40" y="620" width="260" height="230" as="geometry"/>
                 </mxCell>
                 <mxCell id="notif-pk" value="id : bigint (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="notifications" vertex="1">
                     <mxGeometry y="26" width="260" height="22" as="geometry"/>
@@ -262,7 +256,7 @@
                 <mxCell id="notif-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="notifications" vertex="1">
                     <mxGeometry y="48" width="260" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="notif-user" value="user_id : bigint (FK -&gt; users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="notifications" vertex="1">
+                <mxCell id="notif-user" value="user_id : bigint (FK -> users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="notifications" vertex="1">
                     <mxGeometry y="56" width="260" height="22" as="geometry"/>
                 </mxCell>
                 <mxCell id="notif-type" value="type : varchar (like, post, notice)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="notifications" vertex="1">
@@ -274,7 +268,7 @@
                 <mxCell id="notif-content" value="content : text" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="notifications" vertex="1">
                     <mxGeometry y="122" width="260" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="notif-from" value="from_user_id : bigint (FK -&gt; users, NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="notifications" vertex="1">
+                <mxCell id="notif-from" value="from_user_id : bigint (FK -> users, NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="notifications" vertex="1">
                     <mxGeometry y="144" width="260" height="22" as="geometry"/>
                 </mxCell>
                 <mxCell id="notif-review" value="review_id : bigint (NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="notifications" vertex="1">
@@ -286,8 +280,25 @@
                 <mxCell id="notif-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="notifications" vertex="1">
                     <mxGeometry y="210" width="260" height="22" as="geometry"/>
                 </mxCell>
+                <!-- location_favorites テーブル (中央下) -->
+                <mxCell id="location_favorites" value="location_favorites" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="650" width="240" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="lf-pk" value="user_id : bigint (PK, FK -> users)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=3;" parent="location_favorites" vertex="1">
+                    <mxGeometry y="26" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="lf-pk2" value="location_id : bigint (PK, FK -> locations)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=3;" parent="location_favorites" vertex="1">
+                    <mxGeometry y="48" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="lf-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="location_favorites" vertex="1">
+                    <mxGeometry y="70" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="lf-timestamps" value="created_at, updated_at : timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="location_favorites" vertex="1">
+                    <mxGeometry y="78" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <!-- sessions テーブル (右下) -->
                 <mxCell id="sessions" value="sessions" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
-                    <mxGeometry x="1020" y="500" width="260" height="164" as="geometry"/>
+                    <mxGeometry x="820" y="430" width="260" height="164" as="geometry"/>
                 </mxCell>
                 <mxCell id="sessions-pk" value="id : varchar (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="sessions" vertex="1">
                     <mxGeometry y="26" width="260" height="22" as="geometry"/>
@@ -295,7 +306,7 @@
                 <mxCell id="sessions-sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="sessions" vertex="1">
                     <mxGeometry y="48" width="260" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="sessions-user" value="user_id : bigint (FK -&gt; users, NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="sessions" vertex="1">
+                <mxCell id="sessions-user" value="user_id : bigint (FK -> users, NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2;" parent="sessions" vertex="1">
                     <mxGeometry y="56" width="260" height="22" as="geometry"/>
                 </mxCell>
                 <mxCell id="sessions-ip" value="ip_address : varchar(45) (NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="sessions" vertex="1">
@@ -310,8 +321,9 @@
                 <mxCell id="sessions-activity" value="last_activity : int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="sessions" vertex="1">
                     <mxGeometry y="144" width="260" height="22" as="geometry"/>
                 </mxCell>
+                <!-- password_reset_tokens テーブル (右下) -->
                 <mxCell id="password_reset_tokens" value="password_reset_tokens" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
-                    <mxGeometry x="1020" y="700" width="260" height="98" as="geometry"/>
+                    <mxGeometry x="820" y="650" width="260" height="98" as="geometry"/>
                 </mxCell>
                 <mxCell id="prt-pk" value="email : varchar (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" parent="password_reset_tokens" vertex="1">
                     <mxGeometry y="26" width="260" height="22" as="geometry"/>
@@ -325,44 +337,102 @@
                 <mxCell id="prt-created" value="created_at : timestamp (NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="password_reset_tokens" vertex="1">
                     <mxGeometry y="78" width="260" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="rel1" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="users" target="user_reviews" edge="1">
+                <!-- ========== リレーション線 ========== -->
+                <!-- users -> user_reviews (1:N) - 右に出て下へ -->
+                <mxCell id="rel1" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="users-pk" target="reviews-user" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="rel2" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="locations" target="user_reviews" edge="1">
+                <!-- locations -> user_reviews (1:N) - 左に出て下へ -->
+                <mxCell id="rel2" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="locations-pk" target="reviews-location" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="rel3" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="users" target="likes" edge="1">
+                <!-- users -> likes (1:N) - 右下へ -->
+                <mxCell id="rel3" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="users-name" target="likes-pk" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="350" y="109"/>
+                            <mxPoint x="350" y="299"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <!-- user_reviews -> likes (1:N) - 下へ -->
+                <mxCell id="rel4" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="user_reviews" target="likes" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="rel4" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="user_reviews" target="likes" edge="1">
+                <!-- user_reviews -> review_images (1:N) - 下へ -->
+                <mxCell id="rel5" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="user_reviews" target="review_images" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="620" y="230"/>
+                            <mxPoint x="570" y="230"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <!-- locations -> review_images (1:N) - 左下へ -->
+                <mxCell id="rel6" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="locations-name" target="ri-location" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="760" y="109"/>
+                            <mxPoint x="760" y="521"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <!-- locations -> amenities (1:1) - 右へ -->
+                <mxCell id="rel7" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmandOne;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="locations-pk" target="amenities-location" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="rel5" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="user_reviews" target="review_images" edge="1">
+                <!-- locations -> opening_hours (1:N) - 右下へ -->
+                <mxCell id="rel8" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="locations-address" target="oh-location" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1120" y="131"/>
+                            <mxPoint x="1120" y="369"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <!-- users -> location_favorites (1:N) - 下へ右へ -->
+                <mxCell id="rel9" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="users-email" target="lf-pk" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="330" y="131"/>
+                            <mxPoint x="330" y="689"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <!-- locations -> location_favorites (1:N) - 下へ左へ -->
+                <mxCell id="rel10" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="locations-address" target="lf-pk2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="780" y="131"/>
+                            <mxPoint x="780" y="711"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <!-- users -> user_settings (1:1) - 下へ -->
+                <mxCell id="rel11" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmandOne;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="users" target="user_settings" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="rel6" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="locations" target="review_images" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <!-- users -> notifications (1:N) - 下へ -->
+                <mxCell id="rel12" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="users" target="notifications" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="105" y="400"/>
+                            <mxPoint x="10" y="400"/>
+                            <mxPoint x="10" y="600"/>
+                            <mxPoint x="170" y="600"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="rel7" value="1:1" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERone;startArrow=ERone;rounded=0;" parent="1" source="locations" target="amenities" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="rel8" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="locations" target="opening_hours" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="rel9" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="users" target="location_favorites" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="rel10" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="locations" target="location_favorites" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="rel11" value="1:1" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERone;startArrow=ERone;rounded=0;" parent="1" source="users" target="user_settings" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="rel12" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="users" target="notifications" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="rel13" value="1:N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmanyToMany;startArrow=ERone;rounded=0;" parent="1" source="users" target="sessions" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <!-- users -> sessions (1:N) - 右下へ -->
+                <mxCell id="rel13" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;strokeWidth=2;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="users-image" target="sessions-user" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="370" y="153"/>
+                            <mxPoint x="370" y="400"/>
+                            <mxPoint x="790" y="400"/>
+                            <mxPoint x="790" y="499"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
