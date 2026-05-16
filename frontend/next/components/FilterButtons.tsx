@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Star, Coffee, Zap } from 'lucide-react';
+import { Star, Coffee, JapaneseYen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { PriceType } from '@/types/types';
 
@@ -70,7 +70,7 @@ export default function FilterButtons({ onFilterChange, className }: FilterButto
                         : 'border-white/20 bg-white/10 hover:bg-[#01C4FF]/20 hover:text-[#01C4FF] hover:border-[#01C4FF]'
                 )}
             >
-                <Zap className="mr-1.5 h-4 w-4 fill-current" />
+                <JapaneseYen className="mr-1.5 h-4 w-4 fill-current" />
                 ドロップイン
             </Button>
         </div >

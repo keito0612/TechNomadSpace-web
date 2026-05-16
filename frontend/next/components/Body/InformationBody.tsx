@@ -25,15 +25,29 @@ const ImageSection = ({
     location: LocationData;
     onImageClick: () => void;
 }) => {
-    const firstPhoto = location.photos[0];
+    const imageUrl = location.thumbnailImagePath;
+    const imageAlt = location.name;
+
+    if (!imageUrl) {
+        return (
+            <div className="relative h-48 w-full shrink-0 bg-gray-800 flex items-center justify-center">
+                <span className="text-gray-500">画像なし</span>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent p-4">
+                    <h2 className="text-xl font-bold text-white">{location.name}</h2>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div
             className="relative h-48 w-full shrink-0 cursor-pointer"
             onClick={onImageClick}
         >
             <Image
-                src={firstPhoto.photoUrl}
-                alt={firstPhoto.name}
+                src={imageUrl}
+                alt={imageAlt}
+                unoptimized
                 fill
                 className="object-cover"
             />

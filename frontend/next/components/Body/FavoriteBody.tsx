@@ -53,8 +53,8 @@ const FavoriteItem = ({ location }: { location: LocationData }) => {
     return (
         <Link href={`/locations/${location.id}`}>
             <div className="flex gap-3 p-3 bg-gray-900 rounded-xl hover:bg-gray-800 transition-colors">
-                {location.image ? (
-                    <FavoriteItemImage imagePath={location.image} name={location.name} />
+                {location.thumbnailImagePath ? (
+                    <FavoriteItemImage imagePath={location.thumbnailImagePath} name={location.name} />
                 ) : (
                     <div className="w-24 h-24 shrink-0 rounded-lg bg-gray-700 flex items-center justify-center">
                         <MapPin className="w-8 h-8 text-gray-500" />

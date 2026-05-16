@@ -18,12 +18,18 @@ class LocationFactory extends Factory
 
     public function definition(): array
     {
+        $priceType = $this->faker->randomElement(PriceType::cases());
+
         return [
             'name' => $this->faker->company() . 'カフェ',
             'address' => $this->faker->address(),
+            'thumbnail_image_path' => $this->faker->imageUrl(640, 480, 'business', true, 'coworking'),
             'lat' => $this->faker->latitude(),
             'lng' => $this->faker->longitude(),
-            'price_type' => $this->faker->randomElement(PriceType::cases())->value,
+            'price_type' => $priceType->value,
+            'hourly_price' => $priceType === PriceType::Paid ? $this->faker->randomElement([300, 500, 800, 1000]) : null,
+            'daily_price' => $priceType === PriceType::Paid ? $this->faker->randomElement([1000, 1500, 2000, 3000]) : null,
+            'minimum_price' => $priceType === PriceType::DrinkOnly ? $this->faker->randomElement([300, 500, 600]) : null,
             'phone_number' => $this->faker->phoneNumber(),
             'website_url' => $this->faker->url(),
         ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Services\PriceFormatterService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -16,14 +17,16 @@ class LocationResource extends JsonResource
     public function toArray(Request $request): array
     {
         $userId = $this->getUserIdFromRequest($request);
-
+        $location = $this->resource;
         return [
             'id' => $this->id,
             'name' => $this->name,
             'address' => $this->address,
             'phoneNumber' => $this->phone_number,
             'priceType' => $this->price_type?->value,
+            'price' => PriceFormatterService::format($location),
             'websiteUrl' => $this->website_url,
+            'thumbnailImagePath' => $this->thumbnail_image_path,
             'photos' => ReviewImageResource::collection($this->images),
             'rating' => $this->reviews->avg('rating') ?? 0,
             'openingHours' => OpeningHourResource::collection($this->openingHours),

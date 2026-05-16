@@ -7,6 +7,7 @@ export interface LocationData {
     phoneNumber: string;
     priceType: PriceType;
     websiteUrl: string | null;
+    thumbnailImagePath: string | null;
     photos: Photo[];
     rating: number;
     openingHours: OpeningHour[];
@@ -14,6 +15,5 @@ export interface LocationData {
     reviews: Review[];
     position: [number, number];
     isFavorited: boolean;
-    image?: string;
     price?: string;
 }

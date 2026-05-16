@@ -3,7 +3,7 @@ import { UtilApi } from "@/lib/utilApi";
 import { CookieServise } from "./cookieServise";
 
 
-const TOKEN_EXPIRY_DAYS = 7;
+const TOKEN_EXPIRY_DAYS = 1;
 
 export class AuthService {
     static TOKEN_KEY = 'token';
