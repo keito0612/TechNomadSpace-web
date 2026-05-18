@@ -22,7 +22,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('locations', [LocationController::class, 'index']);
 Route::get('location/{id}', [LocationController::class, 'location']);
 
-
+Route::post('/password/email', [AuthController::class, 'sendPasswordResetEmail']);
+Route::post('/password/reset', [AuthController::class, 'resetPassword']);
 
 Route::prefix('auth')->group(function () {
     Route::get('/{provider}/redirect', [SocialAuthController::class, 'redirect']);

@@ -26,6 +26,16 @@ const SinInLink = () => {
     );
 }
 
+const ForgotPasswordLink = () => {
+    return (
+        <div className="text-left">
+            <Link href="/forgot-password" className="text-sm text-blue-400 hover:underline">
+                パスワードをお忘れの方
+            </Link>
+        </div>
+    );
+}
+
 
 export default function LoginPage() {
     const router = useRouter();
@@ -106,7 +116,7 @@ export default function LoginPage() {
                             }
                         })
                     } errorMessage={errors.password?.message} />
-
+                    <ForgotPasswordLink />
                     <Button
                         type="submit"
                         disabled={isLoading}
