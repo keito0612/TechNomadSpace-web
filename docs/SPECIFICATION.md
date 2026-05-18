@@ -201,7 +201,6 @@ TechNomadSpaceは、ノマドワーカーや旅行をしながら働く人と気
 | minimum_price | INT | YES | 最低利用料金（円） |
 | website_url | VARCHAR(255) | YES | Webサイト URL |
 | phone_number | VARCHAR(20) | YES | 電話番号 |
-| thumbnail_image_path | VARCHAR(255) | YES | サムネイル画像パス |
 | created_at | TIMESTAMP | NO | 作成日時 |
 | updated_at | TIMESTAMP | NO | 更新日時 |
 

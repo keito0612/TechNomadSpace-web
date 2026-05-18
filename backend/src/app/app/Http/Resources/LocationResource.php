@@ -26,7 +26,6 @@ class LocationResource extends JsonResource
             'priceType' => $this->price_type?->value,
             'price' => PriceFormatterService::format($location),
             'websiteUrl' => $this->website_url,
-            'thumbnailImagePath' => $this->thumbnail_image_path,
             'photos' => ReviewImageResource::collection($this->images),
             'rating' => $this->reviews->avg('rating') ?? 0,
             'openingHours' => OpeningHourResource::collection($this->openingHours),
