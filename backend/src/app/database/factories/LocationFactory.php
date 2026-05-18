@@ -23,7 +23,6 @@ class LocationFactory extends Factory
         return [
             'name' => $this->faker->company() . 'カフェ',
             'address' => $this->faker->address(),
-            'thumbnail_image_path' => $this->faker->imageUrl(640, 480, 'business', true, 'coworking'),
             'lat' => $this->faker->latitude(),
             'lng' => $this->faker->longitude(),
             'price_type' => $priceType->value,

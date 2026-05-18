@@ -7,7 +7,6 @@ export interface LocationData {
     phoneNumber: string;
     priceType: PriceType;
     websiteUrl: string | null;
-    thumbnailImagePath: string | null;
     photos: Photo[];
     rating: number;
     openingHours: OpeningHour[];

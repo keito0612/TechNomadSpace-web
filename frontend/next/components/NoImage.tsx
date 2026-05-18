@@ -7,14 +7,14 @@ interface NoImageProps {
 export const NoImage = ({ width, height, className = "" }: NoImageProps) => {
     return (
         <div
-            className={`flex items-center justify-center bg-gray-200 ${className}`}
+            className={`flex items-center justify-center bg-gray-700 ${className}`}
             style={{
                 width: width ? `${width}px` : "100%",
                 height: height ? `${height}px` : "100%",
             }}
         >
             <svg
-                className="w-12 h-12 text-gray-400"
+                className="w-12 h-12 text-gray-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

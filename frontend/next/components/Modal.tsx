@@ -100,7 +100,7 @@ export default function Modal({
                     )}
                 </DialogHeader>
 
-                <DialogFooter className="justify-center sm:justify-center gap-4 border-none bg-transparent">
+                <DialogFooter className="justify-center sm:justify-center flex-col gap-4 border-none bg-transparent">
                     {(type === 'Warning' || type === 'Normal') && onConfirm ? (
                         <>
                             <Button

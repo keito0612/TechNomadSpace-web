@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Heart, MapPin, Loader2 } from 'lucide-react';
 import { LocationData } from '@/types/location';
 import StarsRatings from '../StarsRating';
+import NoImage from '../NoImage';
 import SearchBar from '../SearchBar';
 import { useRouter } from 'next/navigation';
 import FavoriteButton from '../FavoriteButton';
@@ -50,15 +51,14 @@ const FavoriteItemImage = ({ imagePath, name }: { imagePath: string; name: strin
     );
 };
 const FavoriteItem = ({ location }: { location: LocationData }) => {
+    const thumbnailUrl = location.photos[0]?.photoUrl;
     return (
         <Link href={`/locations/${location.id}`}>
             <div className="flex gap-3 p-3 bg-gray-900 rounded-xl hover:bg-gray-800 transition-colors">
-                {location.thumbnailImagePath ? (
-                    <FavoriteItemImage imagePath={location.thumbnailImagePath} name={location.name} />
+                {thumbnailUrl ? (
+                    <FavoriteItemImage imagePath={thumbnailUrl} name={location.name} />
                 ) : (
-                    <div className="w-24 h-24 shrink-0 rounded-lg bg-gray-700 flex items-center justify-center">
-                        <MapPin className="w-8 h-8 text-gray-500" />
-                    </div>
+                    <NoImage width={96} height={96} className="shrink-0 rounded-lg" />
                 )}
                 <div className="flex flex-col justify-center gap-1 min-w-0 flex-1">
                     <h3 className="font-bold text-white text-base truncate">

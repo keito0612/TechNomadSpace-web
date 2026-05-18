@@ -8,6 +8,7 @@ import { Amenity, OpeningHour } from '@/types/types';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp, Coffee, DoorClosed, LucideProps, Monitor, Plug, Wifi } from 'lucide-react';
 import StarsRatings from '../StarsRating';
+import NoImage from '../NoImage';
 import Link from 'next/link';
 import { getAllHours } from '@/utils/openingHour';
 import ImageModal from '../Image/ImagesModal';
@@ -25,13 +26,13 @@ const ImageSection = ({
     location: LocationData;
     onImageClick: () => void;
 }) => {
-    const imageUrl = location.thumbnailImagePath;
+    const imageUrl = location.photos[0]?.photoUrl;
     const imageAlt = location.name;
 
     if (!imageUrl) {
         return (
-            <div className="relative h-48 w-full shrink-0 bg-gray-800 flex items-center justify-center">
-                <span className="text-gray-500">画像なし</span>
+            <div className="relative h-48 w-full shrink-0">
+                <NoImage className="h-full w-full" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent p-4">
                     <h2 className="text-xl font-bold text-white">{location.name}</h2>
                 </div>
