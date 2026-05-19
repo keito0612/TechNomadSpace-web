@@ -32,11 +32,20 @@ TechNomadSpaceは、**契約不要・予約不要**で今すぐ使えるコワ�
 - Laravel Sanctum（認証）
 - Laravel Socialite（Google OAuth）
 
-### インフラ
+### インフラ（開発環境）
 - Docker / Docker Compose
 - MySQL 8.0
 - Nginx
-- Firebase Cloud Messaging（プッシュ通知）
+
+### インフラ（本番環境）
+- **Cloudflare Pages** - フロントエンド（Next.js）のホスティング
+- **Cloudflare R2** - 画像ストレージ（S3互換）
+- **Google Cloud Run** - バックエンド（Laravel API）のホスティング
+- **Turso** - SQLite互換のエッジデータベース
+- **Firebase Cloud Messaging** - プッシュ通知
+- **Resend** - メール送信サービス
+
+インフラ構成図は `docs/infrastructure.dio` ファイルを [draw.io](https://app.diagrams.net/) で開いて確認できます。
 
 ## セットアップ
 
@@ -121,7 +130,8 @@ TechNomadSpace/
 │           └── routes/
 ├── docker/                # Docker設定
 ├── docs/                  # ドキュメント
-│   └── SPECIFICATION.md   # 仕様書
+│   ├── SPECIFICATION.md   # 仕様書
+│   └── infrastructure.dio # インフラ構成図（draw.io形式）
 ├── ER.dio                 # ER図（draw.io形式）
 └── docker-compose.yml
 ```
