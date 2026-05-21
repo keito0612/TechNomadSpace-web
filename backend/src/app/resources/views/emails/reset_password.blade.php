@@ -76,11 +76,11 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>TechNomad</h1>
+            <h1>TechNomadSpace</h1>
         </div>
 
         <div class="content">
-            <p>TechNomadをご利用いただきありがとうございます。</p>
+            <p>TechNomadSpaceをご利用いただきありがとうございます。</p>
 
             <p>パスワード再設定のリクエストを受け付けました。下のボタンをクリックして、新しいパスワードを設定してください。</p>
 
@@ -99,7 +99,7 @@
         </div>
 
         <div class="footer">
-            <p>&copy; {{ date('Y') }} TechNomad. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} TechNomadSpace. All rights reserved.</p>
         </div>
     </div>
 </body>
