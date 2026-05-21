@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechNomadへようこそ</title>
+    <title>TechNomadSpaceへようこそ</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -55,13 +55,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>TechNomad</h1>
+            <h1>TechNomadSpace</h1>
         </div>
 
         <div class="content">
             <p>{{ $user->name }} 様</p>
 
-            <p>TechNomadへのご登録ありがとうございます。</p>
+            <p>TechNomadSpaceへのご登録ありがとうございます。</p>
 
             <div class="highlight">
                 <p><strong>登録情報</strong></p>
@@ -69,13 +69,13 @@
                 <p>メールアドレス: {{ $user->email }}</p>
             </div>
 
-            <p>TechNomadでは、世界中のノマドワーカー向けのスポット情報を共有できます。お気に入りの場所を見つけたり、レビューを投稿したりしてコミュニティに参加しましょう。</p>
+            <p>TechNomadSpaceでは、世界中のノマドワーカー向けのスポット情報を共有できます。お気に入りの場所を見つけたり、レビューを投稿したりしてコミュニティに参加しましょう。</p>
 
             <p>ご不明な点がございましたら、お気軽にお問い合わせください。</p>
         </div>
 
         <div class="footer">
-            <p>&copy; {{ date('Y') }} TechNomad. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} TechNomadSpace. All rights reserved.</p>
         </div>
     </div>
 </body>
