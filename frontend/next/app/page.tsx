@@ -1,6 +1,4 @@
-import Layout from "@/components/Layout/Layout";
-import NavBar from "@/components/Navbar";
-import MapClientWrapper from "@/components/Map/MapClientWrapper";
+import HomePageClient from "@/components/HomePageClient";
 import { LocationData } from "@/types/location";
 import { cookies } from "next/dist/server/request/cookies";
 import { AuthService } from "@/services/AuthService";
@@ -30,10 +28,6 @@ export default async function Home() {
   const cookieStore = await cookies();
   const token = cookieStore.get(AuthService.TOKEN_KEY)?.value;
   const locations = await getLocations(token);
-  return (
-    <Layout className="relative">
-      <NavBar />
-      <MapClientWrapper locations={locations} />
-    </Layout>
-  );
+
+  return <HomePageClient locations={locations} />;
 }
