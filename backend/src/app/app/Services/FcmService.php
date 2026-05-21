@@ -60,9 +60,12 @@ class FcmService
     protected function sendToToken(string $token, string $title, string $body, array $data = []): bool
     {
         try {
+            $iconUrl = config('app.frontend_url') . '/TechNomadSpaceIcon.png';
+
             $notification = Fcm::withTitle($title)
                 ->withBody($body)
-                ->withSound('default');
+                ->withSound('default')
+                ->withIcon($iconUrl);
 
             if (!empty($data)) {
                 $notification->withAdditionalData($data);
