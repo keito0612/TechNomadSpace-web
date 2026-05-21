@@ -83,7 +83,7 @@ class NotificationController extends Controller
 
         return response()->json([
             'notification' => $notification
-        ]);
+        ], Response::HTTP_OK);
     }
 
 
