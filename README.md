@@ -45,7 +45,9 @@ TechNomadSpaceは、**契約不要・予約不要**で今すぐ使えるコワ�
 - **Firebase Cloud Messaging** - プッシュ通知
 - **Resend** - メール送信サービス
 
-インフラ構成図は `docs/infrastructure.dio` ファイルを [draw.io](https://app.diagrams.net/) で開いて確認できます。
+#### インフラ構成図
+
+![インフラ構成図](docs/images/infrastructure.png)
 
 ## セットアップ
 

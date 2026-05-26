@@ -120,55 +120,8 @@ TechNomadSpaceは、ノマドワーカーや旅行をしながら働く人と気
 ## 3. データベース設計
 
 ### 3.1 ER図
-```
-┌──────────────┐       ┌──────────────┐       ┌──────────────┐
-│    users     │       │  locations   │       │  amenities   │
-├──────────────┤       ├──────────────┤       ├──────────────┤
-│ id           │       │ id           │◀──────│ location_id  │
-│ name         │       │ name         │       │ has_wifi     │
-│ email        │       │ address      │       │ has_power    │
-│ password     │       │ lat          │       │ has_monitor  │
-│ image_path   │       │ lng          │       │ has_private_ │
-│ background_  │       │ price_type   │       │   booth      │
-│   image_path │       │ hourly_price │       │ has_free_    │
-│ provider     │       │ daily_price  │       │   drink      │
-│ provider_id  │       │ minimum_price│       │ wifi_speed_  │
-│ fcm_token    │       │ website_url  │       │   avg        │
-└──────────────┘       │ phone_number │       └──────────────┘
-       │               │ thumbnail_   │
-       │               │   image_path │       ┌──────────────┐
-       │               └──────────────┘       │opening_hours │
-       │                      │               ├──────────────┤
-       │                      │               │ location_id  │
-       ▼                      ▼               │ day_of_week  │
-┌──────────────┐       ┌──────────────┐       │ open_time    │
-│ user_reviews │       │review_images │       │ close_time   │
-├──────────────┤       ├──────────────┤       │ is_closed    │
-│ id           │◀──────│ user_review_ │       └──────────────┘
-│ user_id      │       │   id         │              ▲
-│ location_id  │       │ location_id  │              │
-│ rating       │       │ image_path   │              │
-│ comment      │       └──────────────┘       ┌──────┴───────┐
-└──────────────┘                              │  locations   │
-       │                                      └──────────────┘
-       │
-       ▼
-┌──────────────┐       ┌──────────────┐       ┌──────────────┐
-│    likes     │       │notifications │       │location_     │
-├──────────────┤       ├──────────────┤       │ favorites    │
-│ user_id      │       │ user_id      │       ├──────────────┤
-│ user_review_ │       │ type         │       │ user_id      │
-│   id         │       │ title        │       │ location_id  │
-└──────────────┘       │ content      │       └──────────────┘
-                       │ from_user_id │
-                       │ review_id    │       ┌──────────────┐
-                       │ is_read      │       │user_settings │
-                       └──────────────┘       ├──────────────┤
-                                              │ user_id      │
-                                              │ email_       │
-                                              │  notification│
-                                              └──────────────┘
-```
+
+![ER図](./images/ER.png)
 
 ### 3.2 テーブル定義
 
@@ -180,7 +133,6 @@ TechNomadSpaceは、ノマドワーカーや旅行をしながら働く人と気
 | email | VARCHAR(255) | NO | メールアドレス（一意） |
 | password | VARCHAR(255) | YES | ハッシュ化パスワード |
 | image_path | VARCHAR(255) | YES | プロフィール画像パス |
-| background_image_path | VARCHAR(255) | YES | 背景画像パス |
 | provider | VARCHAR(255) | YES | OAuth プロバイダー名 |
 | provider_id | VARCHAR(255) | YES | OAuth プロバイダーID |
 | fcm_token | VARCHAR(255) | YES | Firebase Cloud Messaging トークン |
