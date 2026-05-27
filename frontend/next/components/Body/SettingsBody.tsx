@@ -25,14 +25,12 @@ const Toggle = ({ enabled, onChange, disabled }: ToggleProps) => {
             type="button"
             onClick={() => !disabled && onChange(!enabled)}
             disabled={disabled}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                enabled ? 'bg-blue-600' : 'bg-gray-600'
-            } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${enabled ? 'bg-blue-600' : 'bg-gray-600'
+                } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
             <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    enabled ? 'translate-x-6' : 'translate-x-1'
-                }`}
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${enabled ? 'translate-x-6' : 'translate-x-1'
+                    }`}
             />
         </button>
     );
@@ -219,7 +217,7 @@ const SettingsBody = ({ initialSetting, isLoggedIn }: SettingsBodyProps) => {
                             icon={<MessageCircle className="w-5 h-5 text-blue-400" />}
                             title="お問い合わせ"
                             description="ご質問・ご要望はこちら"
-                            href="/contact"
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSeMiC9dGE05aiSqvbFShjVH7g95W9e6Fd6Pa6IrKBDvg8S0rQ/viewform?usp=publish-editor"
                         />
                     </div>
                 </div>
