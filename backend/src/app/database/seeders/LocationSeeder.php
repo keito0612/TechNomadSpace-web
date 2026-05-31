@@ -5545,13 +5545,26 @@ class LocationSeeder extends Seeder
             unset($locationData['opening_hours'], $locationData['amenity']);
 
             // Locationを作成
-            $location = Location::factory()->create($locationData);
+            $location = Location::create($locationData);
 
             // Amenityを作成
             if (!empty($amenityData)) {
                 Amenity::create(array_merge(['location_id' => $location->id], $amenityData));
             } else {
-                Amenity::factory()->create(['location_id' => $location->id]);
+                // デフォルト値でAmenityを作成
+                if (app()->environment('local', 'development')) {
+                    Amenity::factory()->create(['location_id' => $location->id]);
+                }else{
+                    Amenity::create([
+                        'location_id' => $location->id,
+                        'has_wifi' => false,
+                        'has_power' => false,
+                        'has_monitor' => false,
+                        'has_private_booth' => false,
+                        'has_free_drink' => false,
+                        'wifi_speed_avg' => null,
+                    ]);
+                }
             }
 
             // OpeningHoursを作成

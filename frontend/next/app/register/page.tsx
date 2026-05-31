@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -30,7 +30,7 @@ const SinUpLink = () => {
     );
 }
 
-export default function RegisterPage() {
+function RegisterPageContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const isSocialSuccess = searchParams.get('social_success') === 'true';
@@ -140,5 +140,22 @@ export default function RegisterPage() {
             </AuthBodyConteiner>
             <Modal isOpen={isModal} onClose={onClose} title={titleModal} message={messageModal} type={modalType} />
         </Layout >
+    );
+}
+
+export default function RegisterPage() {
+    return (
+        <Suspense
+            fallback={
+                <Layout className="relative">
+                    <NavBar />
+                    <div className="min-h-screen flex items-center justify-center">
+                        <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                </Layout>
+            }
+        >
+            <RegisterPageContent />
+        </Suspense>
     );
 }

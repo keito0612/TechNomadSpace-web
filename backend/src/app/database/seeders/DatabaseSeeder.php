@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // 開発環境のみダミーユーザーを作成
+        if (app()->environment('local', 'development')) {
+            User::factory(10)->create();
+        }
+
         $this->call([
             LocationSeeder::class
         ]);

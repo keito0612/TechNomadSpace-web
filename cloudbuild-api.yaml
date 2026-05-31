@@ -1,0 +1,76 @@
+# ===========================================
+# Cloud Build configuration for Laravel API
+# ===========================================
+# Deploy command:
+# gcloud builds submit --config cloudbuild-api.yaml
+#
+# After deployment, set environment variables in Cloud Run console or via:
+# gcloud run services update technomadspace-api --region asia-northeast1 \
+#   --set-env-vars "APP_KEY=base64:xxx,DB_HOST=db.xxx.supabase.co,..."
+#
+# Required environment variables:
+# - APP_KEY: Laravel application key
+# - DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD: Supabase PostgreSQL credentials
+# - CLOUDFLARE_R2_*: Cloudflare R2 storage credentials
+# - RESEND_API_KEY: Resend email API key
+# - GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET: Google OAuth
+# - FIREBASE_PROJECT_ID: Firebase Cloud Messaging
+# - FRONTEND_URL: Next.js frontend URL
+
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/technomadspace-api:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/technomadspace-api:latest'
+      - '-f'
+      - 'docker/php/Dockerfile.prod'
+      - '.'
+
+  # Push the Docker image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/technomadspace-api:$BUILD_ID'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/technomadspace-api:latest'
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'technomadspace-api'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/technomadspace-api:$BUILD_ID'
+      - '--region'
+      - 'asia-northeast1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '1Gi'
+      - '--cpu'
+      - '1'
+      - '--min-instances'
+      - '0'
+      - '--max-instances'
+      - '2'
+      - '--port'
+      - '8080'
+      - '--set-env-vars'
+      - 'APP_ENV=production,APP_DEBUG=false,LOG_CHANNEL=stderr,TRUSTED_PROXIES=*'
+
+images:
+  - 'gcr.io/$PROJECT_ID/technomadspace-api:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/technomadspace-api:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AuthService } from '@/services/AuthService';
 
-export default function AuthCallbackPage() {
+function AuthCallbackContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [error, setError] = useState<string | null>(null);
@@ -113,4 +113,21 @@ export default function AuthCallbackPage() {
     }
 
     return null;
+}
+
+export default function AuthCallbackPage() {
+    return (
+        <Suspense
+            fallback={
+                <div className="min-h-screen flex items-center justify-center bg-blue-950">
+                    <div className="text-center">
+                        <div className="w-12 h-12 mx-auto mb-4 border-4 border-white border-t-transparent rounded-full animate-spin" />
+                        <p className="text-white">認証中...</p>
+                    </div>
+                </div>
+            }
+        >
+            <AuthCallbackContent />
+        </Suspense>
+    );
 }

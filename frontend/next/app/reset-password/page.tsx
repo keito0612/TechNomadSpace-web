@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -27,7 +27,7 @@ const BackToLoginLink = () => {
     );
 }
 
-export default function ResetPasswordPage() {
+function ResetPasswordPageContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
@@ -186,5 +186,22 @@ export default function ResetPasswordPage() {
                 type={modalType}
             />
         </Layout>
+    );
+}
+
+export default function ResetPasswordPage() {
+    return (
+        <Suspense
+            fallback={
+                <Layout className="relative">
+                    <NavBar title={"新しいパスワード設定"} />
+                    <div className="min-h-screen flex items-center justify-center">
+                        <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                </Layout>
+            }
+        >
+            <ResetPasswordPageContent />
+        </Suspense>
     );
 }

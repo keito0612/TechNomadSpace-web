@@ -1,0 +1,52 @@
+FROM php:8.3-fpm-alpine
+
+# 必要なパッケージをインストール（PostgreSQL対応）
+RUN apk add --no-cache \
+    nginx \
+    supervisor \
+    git \
+    zip \
+    unzip \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libzip-dev \
+    oniguruma-dev \
+    postgresql-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd zip
+
+# Composerをインストール
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 作業ディレクトリ
+WORKDIR /var/www/html
+
+# アプリケーションコードをコピー
+COPY ./backend/src/app/ .
+
+# 依存関係をインストール（本番用）
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# パーミッション設定
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# ログディレクトリを作成
+RUN mkdir -p /var/log/supervisor /var/log/nginx /run/nginx
+
+# Nginx設定
+COPY ./docker/php/prod/nginx.conf /etc/nginx/nginx.conf
+
+# Supervisor設定
+COPY ./docker/php/prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# 起動スクリプト
+COPY ./docker/php/prod/start.sh /start.sh
+RUN chmod +x /start.sh
+
+# ポート公開（Cloud Runは8080を使用）
+EXPOSE 8080
+
+# 起動コマンド
+CMD ["/start.sh"]
