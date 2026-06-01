@@ -8,6 +8,9 @@ TechNomadSpaceは、**契約不要・予約不要**で今すぐ使えるコワ�
 
 ドロップイン（時間課金）、ワンドリンク制、完全無料の施設のみを厳選。地図から簡単に検索でき、ユーザーレビューで施設の雰囲気を事前に確認できます。
 
+## URL
+https://technomadspace.com
+
 ## 特徴
 
 - **すぐ使える施設だけ** - 月額契約が必要な施設は掲載対象外
@@ -34,14 +37,14 @@ TechNomadSpaceは、**契約不要・予約不要**で今すぐ使えるコワ�
 
 ### インフラ（開発環境）
 - Docker / Docker Compose
-- MySQL 8.0
+- Mysql
 - Nginx
 
 ### インフラ（本番環境）
 - **Cloudflare Pages** - フロントエンド（Next.js）のホスティング
 - **Cloudflare R2** - 画像ストレージ（S3互換）
 - **Google Cloud Run** - バックエンド（Laravel API）のホスティング
-- **Turso** - SQLite互換のエッジデータベース
+- **Supabase PostgreSQL** - データベース
 - **Firebase Cloud Messaging** - プッシュ通知
 - **Resend** - メール送信サービス
 
