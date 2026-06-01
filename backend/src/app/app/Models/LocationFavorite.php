@@ -8,6 +8,9 @@ class LocationFavorite extends Model
 {
     protected $table = "location_favorites";
 
+    // 複合主キーを使用するため、自動インクリメントを無効化
+    public $incrementing = false;
+
     protected $fillable = [
         'user_id',
         'location_id',
