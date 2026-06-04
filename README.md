@@ -142,7 +142,7 @@ TechNomadSpace/
 ```
 
 ## データベース設計
-ER図は `ER.dio` ファイルを [draw.io](https://app.diagrams.net/) で開いて確認できます。
+![ER図](docs/images/ER.png)
 
 ## API
 
