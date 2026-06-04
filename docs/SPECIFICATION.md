@@ -441,15 +441,15 @@ TechNomadSpaceは、ノマドワーカーや旅行をしながら働く人と気
 
 ---
 
-## 9. 開発環境
+## 7. 開発環境
 
-### 9.1 必要ソフトウェア
+### 7.1 必要ソフトウェア
 - Docker Desktop
 - Node.js 23+
 - PHP 8.2+
 - Composer
 
-### 9.2 セットアップ手順
+### 7.2 セットアップ手順
 ```bash
 # リポジトリのクローン
 git clone [repository-url]
@@ -474,7 +474,7 @@ docker-compose exec bash api php artisan db:seed
 docker-compose exec next sh && npm install
 ```
 
-### 9.3 開発サーバー
+### 7.3 開発サーバー
 | サービス | URL | 説明 |
 |---------|-----|------|
 | フロントエンド | http://localhost:3000 | Next.js開発サーバー |
@@ -484,7 +484,7 @@ docker-compose exec next sh && npm install
 
 ---
 
-## 10. ディレクトリ構成
+## 8. ディレクトリ構成
 
 ```
 TechNomadSpace/
@@ -528,9 +528,9 @@ TechNomadSpace/
 
 ---
 
-## 11. 今後の開発予定
+## 9. 今後の開発予定
 
-### 11.1 実装済み機能
+### 9.1 実装済み機能
 - [x] ユーザー認証（メール/パスワード）
 - [x] ソーシャルログイン（Google）
 - [x] 施設検索・詳細表示
@@ -542,13 +542,13 @@ TechNomadSpace/
 - [x] 通知管理
 - [x] プロフィール機能
 
-### 11.2 検討中の機能
+### 9.2 検討中の機能
 - [ ] 施設の絞り込み検索（設備、料金等）
 - [ ] レビューへのコメント機能
 - [ ] 施設情報の編集リクエスト
 ---
 
-## 12. 変更履歴
+## 10. 変更履歴
 
 | バージョン | 日付 | 変更内容 |
 |-----------|------|----------|
@@ -556,21 +556,21 @@ TechNomadSpace/
 
 ---
 
-## 13. 付録
+## 11. 付録
 
-### 13.1 PriceType 定数
+### 11.1 PriceType 定数
 | 値 | 名称 | 説明 |
 |----|------|------|
 | 0 | TotallyFree | 完全無料 |
 | 1 | DrinkOnly | 飲料代のみ |
 | 2 | Paid | 有料 |
 
-### 13.2 NotificationType 定数
+### 11.2 NotificationType 定数
 | 値 | 説明 |
 |----|------|
 | like | レビューいいね通知 |
 
-### 13.3 day_of_week 定数
+### 11.3 day_of_week 定数
 | 値 | 曜日 |
 |----|------|
 | 0 | 日曜日 |
