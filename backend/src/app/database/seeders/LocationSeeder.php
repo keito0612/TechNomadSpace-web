@@ -5573,18 +5573,19 @@ class LocationSeeder extends Seeder
                     OpeningHour::create(array_merge(['location_id' => $location->id], $hourData));
                 }
             }
+                // 開発環境のみレビューと画像を作成
+            if (app()->environment('local', 'development')) {
+                $reviews = UserReview::factory(3)->create([
+                    'location_id' => $location->id,
+                ]);
 
-            // // レビューと画像を作成
-            // $reviews = UserReview::factory(3)->create([
-            //     'location_id' => $location->id,
-            // ]);
-
-            // foreach ($reviews as $review) {
-            //     ReviewImage::factory(3)->create([
-            //         'user_review_id' => $review->id,
-            //         'location_id' => $location->id,
-            //     ]);
-            // }
+                foreach ($reviews as $review) {
+                    ReviewImage::factory(3)->create([
+                        'user_review_id' => $review->id,
+                        'location_id' => $location->id,
+                    ]);
+                }
+            }
         }
     }
 }
